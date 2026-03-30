@@ -13,9 +13,9 @@
         content="SustainAI is a local-first AI systems company building practical intelligence for agriculture and field environments.">
     <meta name="theme-color" content="#030604">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="SustainAI — local-first AI for agriculture">
+    <meta property="og:title" content="SustainAI. Local-first AI for agriculture">
     <meta property="og:description"
-        content="Private AI infrastructure for farms. Turning fragmented data into clear, timely decisions — built for the people who need it most.">
+        content="Private AI infrastructure for farms. Turning fragmented data into clear, timely decisions. Built for the people who need it most.">
     <meta property="og:url" content="https://sustain-ai.net">
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050a06'/%3E%3Cpath d='M16 6v20M9 13c3-4 7-4 7-4s4 0 7 4M11 19c2-3 5-3 5-3s3 0 5 3' stroke='%234db866' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
@@ -56,7 +56,8 @@
         <div class="hc">
             <div class="ht sr d1">Local-First AI for Agriculture</div>
             <h1 class="sr d2">AI that works where <em>your farm</em> does</h1>
-            <p class="hs sr d3">Turn sensor noise into clear decisions — on-site, offline-ready, and built for the people who grow our food.</p>
+            <p class="hs sr d3">Turn sensor noise into clear decisions. On-site, offline ready, and built for the people
+                who grow our food.</p>
             <div class="hc-actions sr d4">
                 <a href="#cta" class="btn-primary">Request a Pilot</a>
                 <a href="#sol" class="btn-secondary">See How It Works</a>
@@ -68,30 +69,109 @@
                 <span class="proof-dot"></span>
                 <span>Born at NC State</span>
             </div>
-            <svg class="sr d5 parallax" data-speed="0.08" width="400" height="180" viewBox="0 0 400 180" fill="none"
-                style="display:block;margin:48px auto 0;opacity:0.8">
-                <!-- Data Nodes -->
-                <circle cx="80" cy="90" r="14" fill="none" stroke="var(--lg)" stroke-width="1.2" opacity="0.6" />
-                <circle cx="80" cy="90" r="4" fill="var(--lg)" />
-                <circle cx="320" cy="60" r="20" fill="none" stroke="var(--is)" stroke-width="1.2" />
-                <circle cx="320" cy="60" r="6" fill="var(--is)" />
-                <circle cx="280" cy="140" r="10" fill="none" stroke="var(--im)" stroke-width="1.2" />
-                <circle cx="280" cy="140" r="3" fill="var(--im)" />
+            <svg class="sr d5 parallax" data-speed="0.08" width="680" height="260" viewBox="0 0 520 200" fill="none"
+                style="display:block;margin:48px auto 0;opacity:0.85;max-width:100%">
 
-                <!-- Center Core Node -->
-                <rect x="180" y="70" width="40" height="40" rx="8" fill="rgba(77,184,102,0.15)" stroke="var(--lg)"
-                    stroke-width="1.5" />
-                <circle cx="200" cy="90" r="4" fill="var(--lg)" />
+                <!-- SENSE: Left cluster (sensors) -->
+                <circle cx="60" cy="70" r="18" fill="rgba(77,184,102,0.08)" stroke="var(--lg)" stroke-width="1.2" />
+                <text x="60" y="74" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
+                    fill="var(--lg)" font-weight="500">H₂O</text>
+                <circle cx="45" cy="130" r="14" fill="rgba(77,184,102,0.06)" stroke="var(--lg)" stroke-width="1" />
+                <text x="45" y="134" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
+                    fill="var(--lg)">pH</text>
+                <circle cx="100" cy="145" r="12" fill="rgba(77,184,102,0.06)" stroke="var(--gm)" stroke-width="1" />
+                <text x="100" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7"
+                    fill="var(--gm)">SOIL</text>
+                <text x="70" y="26" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
+                    fill="var(--im)" letter-spacing="0.08em" font-weight="500">SENSE</text>
+                <line x1="70" y1="32" x2="70" y2="48" stroke="var(--lg)" stroke-width="0.8" opacity="0.3" />
 
-                <!-- Connecting Lines -->
-                <line x1="94" y1="90" x2="180" y2="90" stroke="var(--lg)" stroke-width="1" stroke-dasharray="4"
+                <!-- Animated data lines: Sense → Hub -->
+                <line x1="78" y1="72" x2="195" y2="88" stroke="var(--lg)" stroke-width="1" stroke-dasharray="5,4"
                     opacity="0.5">
-                    <animate attributeName="stroke-dashoffset" values="40;0" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="stroke-dashoffset" values="36;0" dur="2.5s" repeatCount="indefinite" />
                 </line>
-                <line x1="300" y1="65" x2="220" y2="85" stroke="var(--is)" stroke-width="1.5" opacity="0.6" />
-                <line x1="270" y1="130" x2="215" y2="100" stroke="var(--im)" stroke-width="1" opacity="0.4" />
-                <path d="M120 40 Q 160 20 200 70" fill="none" stroke="var(--lg)" stroke-width="1" opacity="0.2" />
+                <line x1="59" y1="118" x2="195" y2="95" stroke="var(--lg)" stroke-width="0.8" stroke-dasharray="4,4"
+                    opacity="0.35">
+                    <animate attributeName="stroke-dashoffset" values="32;0" dur="3s" repeatCount="indefinite" />
+                </line>
+                <line x1="110" y1="138" x2="195" y2="100" stroke="var(--gm)" stroke-width="0.8" stroke-dasharray="4,4"
+                    opacity="0.3">
+                    <animate attributeName="stroke-dashoffset" values="28;0" dur="2.8s" repeatCount="indefinite" />
+                </line>
+
+                <!-- HUB: Center box (intelligence) -->
+                <rect x="195" y="62" width="130" height="70" rx="14" fill="rgba(77,184,102,0.1)" stroke="var(--lg)"
+                    stroke-width="1.5" />
+                <text x="260" y="88" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10"
+                    fill="var(--gd)" font-weight="600" letter-spacing="0.1em">LOCAL HUB</text>
+                <text x="260" y="105" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="9"
+                    fill="var(--im)">On-site AI reasoning</text>
+                <text x="260" y="118" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="8"
+                    fill="var(--il)">LLM + ML + Knowledge Graph</text>
+                <text x="260" y="42" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
+                    fill="var(--im)" letter-spacing="0.08em" font-weight="500">HUB</text>
+                <line x1="260" y1="48" x2="260" y2="60" stroke="var(--lg)" stroke-width="0.8" opacity="0.3" />
+
+                <!-- Animated data line: Hub → Edge -->
+                <line x1="325" y1="92" x2="400" y2="80" stroke="var(--gd)" stroke-width="1.2" stroke-dasharray="6,4"
+                    opacity="0.5">
+                    <animate attributeName="stroke-dashoffset" values="0;-40" dur="2s" repeatCount="indefinite" />
+                </line>
+                <line x1="325" y1="100" x2="400" y2="130" stroke="var(--gd)" stroke-width="1" stroke-dasharray="5,4"
+                    opacity="0.35">
+                    <animate attributeName="stroke-dashoffset" values="0;-36" dur="2.2s" repeatCount="indefinite" />
+                </line>
+
+                <!-- EDGE: Right output nodes -->
+                <rect x="400" y="60" width="90" height="36" rx="10" fill="rgba(27,58,35,0.08)" stroke="var(--gd)"
+                    stroke-width="1.2" />
+                <text x="445" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
+                    fill="var(--gd)" font-weight="500">ALERT SENT</text>
+                <text x="445" y="88" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="7.5"
+                    fill="var(--im)">Phone / Display</text>
+
+                <rect x="405" y="118" width="85" height="32" rx="10" fill="rgba(27,58,35,0.06)" stroke="var(--gd)"
+                    stroke-width="1" />
+                <text x="447" y="133" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5"
+                    fill="var(--gd)" font-weight="500">REPORT FILED</text>
+                <text x="447" y="144" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="7"
+                    fill="var(--im)">Auto compliance</text>
+
+                <text x="445" y="42" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
+                    fill="var(--im)" letter-spacing="0.08em" font-weight="500">EDGE</text>
+                <line x1="445" y1="48" x2="445" y2="58" stroke="var(--gd)" stroke-width="0.8" opacity="0.3" />
+
+                <!-- Bottom story line -->
+                <text x="260" y="185" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
+                    fill="var(--il)" font-weight="300" font-style="italic">Sensor to decision. No cloud required.</text>
             </svg>
+        </div>
+    </section>
+
+    <!-- About & Origin Story -->
+    <section class="about" id="about">
+        <div class="aboutc">
+            <div class="about-info">
+                <div class="plbl sr-left">Our Mission</div>
+                <h2 class="sr-left d1"
+                    style="font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;color:var(--ik);margin-bottom:20px;">
+                    Field operations need small, powerful AI. Not disconnected cloud models.</h2>
+                <p class="about-p sr-left d2">We combine on-site sensor data, private documents, and domain knowledge
+                    into one modular system that helps teams decide faster. Local-first, explainable, built for
+                    environments where connectivity is inconsistent and action cannot wait.</p>
+            </div>
+            <div class="about-quote sr-right d1 glass-panel" style="padding: 40px; border-radius: 20px;">
+                <div class="about-q">My father is a farmer. I grew up watching him walk the fields before sunrise,
+                    checking soil by feel. He didn't have sensors or software. He had experience. And most of the time,
+                    that was enough. But when it was not, the cost was real. <span
+                        style="display:block;margin-top:20px;font-size:0.85rem;color:var(--lg);font-family:var(--fm);text-transform:uppercase;font-style:normal;letter-spacing:0.04em;">—
+                        Deepak Sai Pendyala, CEO</span></div>
+                <p style="font-size:1.05rem;font-weight:300;color:var(--is);line-height:1.75;margin-top:20px;">SustainAI
+                    comes from direct exposure to the realities of agriculture. In many field environments, important
+                    decisions rely on fragmented information and tools that don't fit the conditions on the ground. We
+                    built SustainAI to close that gap.</p>
+            </div>
         </div>
     </section>
 
@@ -100,47 +180,65 @@
         <div class="pc">
             <div class="plbl sr">The Problem</div>
             <h2 class="sr d1">Your farm generates data. But data is <em>not</em> a decision.</h2>
-            <p class="pb sr d2">Sensors, weather reports, lab results, and compliance files — all siloed, hard to interpret, and useless without timely action.</p>
+            <p class="pb sr d2">Sensors, weather reports, lab results, and compliance files. All siloed, hard to
+                interpret, and useless without timely action.</p>
 
             <div class="pcs">
                 <div class="pcd glass-panel sr d1">
-                    <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                        <circle cx="12" cy="24" r="6" stroke="var(--lg)" stroke-width="1.5" />
-                        <circle cx="36" cy="14" r="6" stroke="var(--im)" stroke-width="1.5" />
-                        <circle cx="36" cy="34" r="6" stroke="var(--im)" stroke-width="1.5" />
-                        <line x1="18" y1="24" x2="30" y2="14" stroke="var(--is)" stroke-width="1.5" stroke-dasharray="3" />
-                        <line x1="18" y1="24" x2="30" y2="34" stroke="var(--is)" stroke-width="1.5" stroke-dasharray="3" />
-                    </svg>
-                    <h3>Fragmented Data</h3>
-                    <p>Sensors, lab reports, and compliance docs scattered across systems. Signals exist, but they're disconnected.</p>
+                    <div class="pcd-header">
+                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                            <circle cx="12" cy="24" r="6" stroke="var(--lg)" stroke-width="1.5" />
+                            <circle cx="36" cy="14" r="6" stroke="var(--im)" stroke-width="1.5" />
+                            <circle cx="36" cy="34" r="6" stroke="var(--im)" stroke-width="1.5" />
+                            <line x1="18" y1="24" x2="30" y2="14" stroke="var(--is)" stroke-width="1.5"
+                                stroke-dasharray="3" />
+                            <line x1="18" y1="24" x2="30" y2="34" stroke="var(--is)" stroke-width="1.5"
+                                stroke-dasharray="3" />
+                        </svg>
+                        <h3>Fragmented Data</h3>
+                    </div>
+                    <p>Sensors, lab reports, and compliance docs scattered across systems. Signals exist, but they're
+                        disconnected.</p>
                 </div>
                 <div class="pcd glass-panel sr d2">
-                    <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                        <rect x="6" y="10" width="36" height="28" rx="4" stroke="var(--lg)" stroke-width="1.5" />
-                        <path d="M12 30 L 20 20 L 28 26 L 36 14" stroke="var(--im)" stroke-width="1.5" fill="none" />
-                        <circle cx="28" cy="18" r="3" fill="var(--is)" />
-                    </svg>
-                    <h3>Hard to Interpret</h3>
-                    <p>Raw readings and convoluted dashboards force specialists to decode data before anyone can act.</p>
+                    <div class="pcd-header">
+                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                            <rect x="6" y="10" width="36" height="28" rx="4" stroke="var(--lg)" stroke-width="1.5" />
+                            <path d="M12 30 L 20 20 L 28 26 L 36 14" stroke="var(--im)" stroke-width="1.5"
+                                fill="none" />
+                            <circle cx="28" cy="18" r="3" fill="var(--is)" />
+                        </svg>
+                        <h3>Hard to Interpret</h3>
+                    </div>
+                    <p>Raw readings and convoluted dashboards force specialists to decode data before anyone can act.
+                    </p>
                 </div>
                 <div class="pcd glass-panel sr d3">
-                    <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                        <path d="M12 24 A 18 18 0 0 1 36 24" stroke="var(--is)" stroke-width="1.5" stroke-dasharray="4" />
-                        <path d="M18 30 A 10 10 0 0 1 30 30" stroke="var(--im)" stroke-width="1.5" stroke-dasharray="4" />
-                        <circle cx="24" cy="36" r="3" fill="var(--lg)" />
-                        <line x1="10" y1="10" x2="38" y2="38" stroke="var(--lg)" stroke-width="1.5" />
-                    </svg>
-                    <h3>Unreliable Connectivity</h3>
-                    <p>Cloud tools assume stable internet. Farms and rural field environments rarely have that luxury.</p>
+                    <div class="pcd-header">
+                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                            <path d="M12 24 A 18 18 0 0 1 36 24" stroke="var(--is)" stroke-width="1.5"
+                                stroke-dasharray="4" />
+                            <path d="M18 30 A 10 10 0 0 1 30 30" stroke="var(--im)" stroke-width="1.5"
+                                stroke-dasharray="4" />
+                            <circle cx="24" cy="36" r="3" fill="var(--lg)" />
+                            <line x1="10" y1="10" x2="38" y2="38" stroke="var(--lg)" stroke-width="1.5" />
+                        </svg>
+                        <h3>Unreliable Connectivity</h3>
+                    </div>
+                    <p>Cloud tools assume stable internet. Farms and rural field environments rarely have that luxury.
+                    </p>
                 </div>
                 <div class="pcd glass-panel sr d4">
-                    <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                        <circle cx="24" cy="24" r="16" stroke="var(--lg)" stroke-width="1.5" />
-                        <polyline points="24,12 24,24 32,24" stroke="var(--lg)" stroke-width="1.5" fill="none" />
-                        <line x1="24" y1="4" x2="24" y2="8" stroke="var(--im)" stroke-width="1.5" />
-                    </svg>
-                    <h3>Time-Critical Decisions</h3>
-                    <p>Water quality shifts and disease risks become expensive when guidance arrives an hour too late.</p>
+                    <div class="pcd-header">
+                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="16" stroke="var(--lg)" stroke-width="1.5" />
+                            <polyline points="24,12 24,24 32,24" stroke="var(--lg)" stroke-width="1.5" fill="none" />
+                            <line x1="24" y1="4" x2="24" y2="8" stroke="var(--im)" stroke-width="1.5" />
+                        </svg>
+                        <h3>Time Critical Decisions</h3>
+                    </div>
+                    <p>Water quality shifts and disease risks become expensive when guidance arrives an hour too late.
+                    </p>
                 </div>
             </div>
         </div>
@@ -167,7 +265,8 @@
                     <div class="ssn">01</div>
                     <h3>SustainAI Sense</h3>
                     <div class="sss">Ingestion Layer</div>
-                    <p>Connects to existing field hardware — water monitors, soil sensors, weather stations — and normalizes fragmented signals into usable data.</p>
+                    <p>Connects to existing field hardware. Water monitors, soil sensors, weather stations. Normalizes
+                        fragmented signals into usable data.</p>
                 </div>
                 <div class="ss glass-panel sr-scale d2">
                     <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
@@ -181,7 +280,8 @@
                     <div class="ssn">02</div>
                     <h3>SustainAI Hub</h3>
                     <div class="sss">On-site Intelligence Layer</div>
-                    <p>Runs fine-tuned language models, retrieval pipelines, and knowledge graph generation — entirely on-site, entirely private.</p>
+                    <p>Runs fine-tuned language models, retrieval pipelines, and knowledge graph generation. Entirely on
+                        site, entirely private.</p>
                 </div>
                 <div class="ss glass-panel sr-scale d3">
                     <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
@@ -193,7 +293,8 @@
                     <div class="ssn">03</div>
                     <h3>SustainAI Edge</h3>
                     <div class="sss">Operator Interface</div>
-                    <p>Turns complexity into simple, explainable outputs — decision-ready alerts sent directly to a phone or barn display.</p>
+                    <p>Turns complexity into simple, explainable outputs. Decision ready alerts sent directly to a phone
+                        or barn display.</p>
                 </div>
             </div>
         </div>
@@ -208,24 +309,60 @@
             </div>
             <div class="uc-grid">
                 <div class="uc-card sr d1">
-                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v6l3 3"/><path d="M6.34 17.66A8 8 0 1 1 20 12"/><path d="M2 12a10 10 0 0 0 4 8"/></svg>
-                    <h3>Water Quality Monitoring</h3>
-                    <p>Proactive anomaly detection across private wells to prevent contamination before safety thresholds are breached.</p>
+                    <div class="uc-header">
+                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                        </svg>
+                        <h3>Water Quality Monitoring</h3>
+                    </div>
+                    <p>Proactive anomaly detection across wells and distribution points. 80% of Safe Drinking Water Act
+                        violations come from small systems. We catch the shift before it becomes a penalty.</p>
                 </div>
                 <div class="uc-card sr d2">
-                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/><path d="M12 10v4"/><path d="M10 12h4"/></svg>
-                    <h3>Nutrient &amp; Runoff Risk</h3>
-                    <p>Combines soil, weather, and sensor data to identify fertilization imbalances or runoff warnings in real time.</p>
+                    <div class="uc-header">
+                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z" />
+                            <path d="M12 10v4" />
+                            <path d="M10 12h4" />
+                        </svg>
+                        <h3>Nutrient &amp; Runoff Risk</h3>
+                    </div>
+                    <p>Combines soil, weather, and sensor data to flag fertilization imbalances and runoff risk before
+                        they reach waterways. Field specific recommendations with water savings measurable from the
+                        first irrigation cycle.</p>
                 </div>
                 <div class="uc-card sr d3">
-                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <h3>Environmental Condition Alerts</h3>
-                    <p>Alerts teams to disease risks or hazardous spikes via multi-sensor synthesis — even during internet outages.</p>
+                    <div class="uc-header">
+                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        <h3>Livestock Health Monitoring</h3>
+                    </div>
+                    <p>Detects early disease indicators from activity, rumination, and temperature signals on site,
+                        without cloud dependency. Livestock disease costs U.S. operations over $300 billion annually.
+                        Catching a case 24 to 48 hours earlier saves $200 to $500 per animal in treatment costs and
+                        improves cure rates.</p>
                 </div>
                 <div class="uc-card sr d4">
-                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    <h3>Compliance &amp; Reporting</h3>
-                    <p>Reasons over county regulations and operational data to deliver immediate, grounded answers on safety protocols.</p>
+                    <div class="uc-header">
+                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                        </svg>
+                        <h3>Compliance &amp; Reporting</h3>
+                    </div>
+                    <p>Reasons over EPA thresholds, county regulations, and your operational data to flag compliance
+                        risks before they escalate. Violations under the Safe Drinking Water Act can run $25,000 or more
+                        per day. We give you the answer before the question becomes urgent.</p>
                 </div>
             </div>
         </div>
@@ -236,34 +373,162 @@
         <div class="ec">
             <div class="et sr">The Operator Experience</div>
             <h2 class="sr d1">It is 5:30 in the morning. Your phone buzzes. Once.</h2>
-            <div class="en sr d3">
-                <p>The SustainAI system flagged an overnight shift in water conductivity at the south well. Based on your soil type and recent weather, it suggests possible contamination from field runoff.</p>
-                <p>Because the system had a connection last night, it already pulled the latest county advisory and cross-referenced your readings. It's showing you <strong>two recommended actions in three sentences</strong>.</p>
-                <p>You didn't open a dashboard. You didn't call a consultant. You didn't wait for a cloud server. <strong>The answer was already there</strong> — generated on your property, by a system that understands your farm.</p>
-            </div>
-        </div>
-    </section>
+            <div class="env-grid">
+                <div class="en sr d3">
+                    <p>The SustainAI system flagged an overnight shift in water conductivity at the south well. Based on
+                        your soil type and recent weather, it suggests possible contamination from field runoff.</p>
+                    <p>Because the system had a connection last night, it already pulled the latest county advisory and
+                        cross-referenced your readings. It's showing you <strong>two recommended actions in three
+                            sentences</strong>.</p>
+                    <p>You didn't open a dashboard. You didn't call a consultant. You didn't wait for a cloud server.
+                        <strong>The answer was already there.</strong> Generated on your property, by a system that
+                        understands your farm.</p>
+                </div>
+                <div class="env-visual sr d4"
+                    style="position:relative; width:100%; height:440px; display:flex; justify-content:center;">
+                    <!-- Phone 2 (Background - Irrigation) -->
+                    <svg class="p2" width="260" height="440" viewBox="0 0 260 440" fill="none"
+                        style="position:absolute; right: -25px; top: 30px; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.05)); z-index: 1; transform: scale(0.97) rotate(2deg); opacity: 0.95;">
+                        <!-- Phone body -->
+                        <rect x="10" y="10" width="240" height="420" rx="32" fill="#fcfdf8" stroke="var(--lg)"
+                            stroke-width="1.5" />
+                        <rect x="10" y="10" width="240" height="420" rx="32" fill="url(#phoneGrad2)" opacity="0.4" />
+                        <!-- Notch -->
+                        <rect x="90" y="14" width="80" height="6" rx="3" fill="var(--lg)" opacity="0.2" />
+                        <!-- Status bar -->
+                        <text x="30" y="42" font-family="'JetBrains Mono',monospace" font-size="10" fill="var(--im)"
+                            font-weight="500">2:15 PM</text>
+                        <!-- Alert card -->
+                        <g class="sim-step-1">
+                        <rect x="24" y="60" width="212" height="110" rx="16" fill="rgba(65,105,225,0.06)"
+                            stroke="rgba(65,105,225,0.15)" stroke-width="1" />
+                        <circle cx="44" cy="82" r="10" fill="rgba(65,105,225,0.1)" stroke="#4169e1" stroke-width="1" />
+                        <text x="44" y="86" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
+                            fill="#4169e1" font-weight="600">i</text>
+                        <text x="62" y="86" font-family="'Outfit',sans-serif" font-size="11" fill="#4169e1"
+                            font-weight="500">Irrigation Optimizer</text>
+                        <text x="36" y="108" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Soil
+                            moisture: 85% (Optimal)</text>
+                        <text x="36" y="124" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Rain
+                            forecast: 0.5in in 12hrs</text>
+                        <rect x="36" y="138" width="56" height="20" rx="6" fill="rgba(65,105,225,0.08)"
+                            stroke="rgba(65,105,225,0.2)" stroke-width="0.8" />
+                        <text x="64" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
+                            fill="#4169e1" font-weight="500">SAVINGS</text>
+                        <rect x="100" y="138" width="56" height="20" rx="6" fill="rgba(77,184,102,0.08)"
+                            stroke="rgba(77,184,102,0.2)" stroke-width="0.8" />
+                        <text x="128" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace"
+                            font-size="8" fill="var(--gm)" font-weight="500">ON-SITE AI</text>
+                        </g>
+                        <!-- AI reasoning card -->
+                        <g class="sim-step-2">
+                        <rect x="24" y="184" width="212" height="140" rx="16" fill="rgba(77,184,102,0.04)"
+                            stroke="rgba(77,184,102,0.12)" stroke-width="1" />
+                        <text x="36" y="206" font-family="'JetBrains Mono',monospace" font-size="9" fill="var(--gm)"
+                            font-weight="500" letter-spacing="0.06em">AI ANALYSIS</text>
+                        <text x="36" y="226" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Action:
+                            Delay Sector 4 watering</text>
+                        <text x="36" y="242" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Reason:
+                            Approaching saturation point</text>
+                        <text x="36" y="258" font-family="'Outfit',sans-serif" font-size="9.5"
+                            fill="var(--im)">Projected saving: 12,000 gallons</text>
+                        <line x1="36" y1="270" x2="224" y2="270" stroke="var(--lg)" stroke-width="0.5" opacity="0.3" />
+                        <text x="36" y="288" font-family="'Outfit',sans-serif" font-size="9" fill="var(--gd)"
+                            font-weight="500">Recommended: Pause schedule</text>
+                        </g>
+                        <!-- Action buttons -->
+                        <g class="sim-step-3">
+                        <rect x="24" y="338" width="104" height="36" rx="12" fill="var(--gm)" />
+                        <text x="76" y="361" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
+                            fill="#fff" font-weight="500">Apply Savings</text>
+                        </g>
+                        <!-- Bottom bar -->
+                        <rect x="100" y="410" width="60" height="5" rx="2.5" fill="var(--lg)" opacity="0.2" />
+                        <defs>
+                            <linearGradient id="phoneGrad2" x1="130" y1="10" x2="130" y2="430"
+                                gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="rgba(65,105,225,0.05)" />
+                                <stop offset="1" stop-color="rgba(65,105,225,0)" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
 
-    <!-- About & Origin Story -->
-    <section class="about" id="about">
-        <div class="aboutc">
-            <div class="about-info">
-                <div class="plbl sr-left">Our Mission</div>
-                <h2 class="sr-left d1"
-                    style="font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;color:var(--ik);margin-bottom:20px;">
-                    Field operations need small, powerful AI — not disconnected cloud models.</h2>
-                <p class="about-p sr-left d2">We combine on-site sensor data, private documents, and domain knowledge into one modular system that helps teams decide faster. Local-first, explainable, built for environments where connectivity is inconsistent and action cannot wait.</p>
-            </div>
-            <div class="about-quote sr-right d1 glass-panel" style="padding: 40px; border-radius: 20px;">
-                <div class="about-q">My father is a farmer. I grew up watching him walk the fields before sunrise,
-                    checking soil by feel. He didn't have sensors or software. He had experience. And most of the time,
-                    that was enough. But when it was not, the cost was real. <span
-                        style="display:block;margin-top:20px;font-size:0.85rem;color:var(--lg);font-family:var(--fm);text-transform:uppercase;font-style:normal;letter-spacing:0.04em;">—
-                        Deepak Sai Pendyala, CEO</span></div>
-                <p style="font-size:1.05rem;font-weight:300;color:var(--is);line-height:1.75;margin-top:20px;">SustainAI
-                    comes from direct exposure to the realities of agriculture. In many field environments, important
-                    decisions rely on fragmented information and tools that don't fit the conditions on the ground. We
-                    built SustainAI to close that gap.</p>
+                    <!-- Phone 1 (Foreground - Water Alert) -->
+                    <svg class="p1" width="260" height="440" viewBox="0 0 260 440" fill="none"
+                        style="position:absolute; left: 0; top: 0; filter:drop-shadow(0 20px 40px rgba(0,0,0,0.12)); z-index: 2; transform: rotate(-1deg);">
+                        <!-- Phone body -->
+                        <rect x="10" y="10" width="240" height="420" rx="32" fill="#fcfdf8" stroke="var(--lg)"
+                            stroke-width="1.5" />
+                        <rect x="10" y="10" width="240" height="420" rx="32" fill="url(#phoneGrad1)" opacity="0.4" />
+                        <!-- Notch -->
+                        <rect x="90" y="14" width="80" height="6" rx="3" fill="var(--lg)" opacity="0.2" />
+                        <!-- Status bar -->
+                        <text x="30" y="42" font-family="'JetBrains Mono',monospace" font-size="10" fill="var(--im)"
+                            font-weight="500">5:30 AM</text>
+                        <circle cx="220" cy="38" r="4" fill="none" stroke="var(--lg)" stroke-width="1.2" />
+                        <line x1="224" y1="38" x2="228" y2="38" stroke="var(--lg)" stroke-width="1.2" />
+                        <!-- Alert card -->
+                        <g class="sim-step-1">
+                        <rect x="24" y="60" width="212" height="110" rx="16" fill="rgba(200,50,50,0.06)"
+                            stroke="rgba(200,50,50,0.15)" stroke-width="1" />
+                        <circle cx="44" cy="82" r="10" fill="rgba(200,50,50,0.1)" stroke="#c83232" stroke-width="1" />
+                        <text x="44" y="86" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
+                            fill="#c83232" font-weight="600">!</text>
+                        <text x="62" y="86" font-family="'Outfit',sans-serif" font-size="11" fill="#c83232"
+                            font-weight="500">Water Quality Alert</text>
+                        <text x="36" y="108" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">South
+                            Well conductivity: 1180 µS/cm</text>
+                        <text x="36" y="124" font-family="'Outfit',sans-serif" font-size="9.5"
+                            fill="var(--im)">Threshold: 900 µS/cm</text>
+                        <rect x="36" y="138" width="56" height="20" rx="6" fill="rgba(200,50,50,0.08)"
+                            stroke="rgba(200,50,50,0.2)" stroke-width="0.8" />
+                        <text x="64" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
+                            fill="#c83232" font-weight="500">HIGH RISK</text>
+                        <rect x="100" y="138" width="56" height="20" rx="6" fill="rgba(77,184,102,0.08)"
+                            stroke="rgba(77,184,102,0.2)" stroke-width="0.8" />
+                        <text x="128" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace"
+                            font-size="8" fill="var(--gm)" font-weight="500">ON-SITE AI</text>
+                        </g>
+                        <!-- AI reasoning card -->
+                        <g class="sim-step-2">
+                        <rect x="24" y="184" width="212" height="140" rx="16" fill="rgba(77,184,102,0.04)"
+                            stroke="rgba(77,184,102,0.12)" stroke-width="1" />
+                        <text x="36" y="206" font-family="'JetBrains Mono',monospace" font-size="9" fill="var(--gm)"
+                            font-weight="500" letter-spacing="0.06em">AI ANALYSIS</text>
+                        <text x="36" y="226" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Probable
+                            cause: fertilizer runoff</text>
+                        <text x="36" y="242" font-family="'Outfit',sans-serif" font-size="9.5"
+                            fill="var(--im)">Correlated with 1.2in rainfall</text>
+                        <text x="36" y="258" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">pH
+                            shifted from 7.2 to 6.4</text>
+                        <line x1="36" y1="270" x2="224" y2="270" stroke="var(--lg)" stroke-width="0.5" opacity="0.3" />
+                        <text x="36" y="288" font-family="'Outfit',sans-serif" font-size="9" fill="var(--gd)"
+                            font-weight="500">Recommended: Valve shutoff</text>
+                        <text x="36" y="304" font-family="'Outfit',sans-serif" font-size="9" fill="var(--gd)"
+                            font-weight="500">Recommended: File runoff report</text>
+                        </g>
+                        <!-- Action buttons -->
+                        <g class="sim-step-3">
+                        <rect x="24" y="338" width="104" height="36" rx="12" fill="var(--gm)" />
+                        <text x="76" y="361" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
+                            fill="#fff" font-weight="500">Take Action</text>
+                        <rect x="132" y="338" width="104" height="36" rx="12" fill="none" stroke="var(--lg)"
+                            stroke-width="1" />
+                        <text x="184" y="361" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
+                            fill="var(--gd)" font-weight="500">Dismiss</text>
+                        </g>
+                        <!-- Bottom bar -->
+                        <rect x="100" y="410" width="60" height="5" rx="2.5" fill="var(--lg)" opacity="0.2" />
+                        <!-- Gradient def -->
+                        <defs>
+                            <linearGradient id="phoneGrad1" x1="130" y1="10" x2="130" y2="430"
+                                gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="rgba(77,184,102,0.05)" />
+                                <stop offset="1" stop-color="rgba(77,184,102,0)" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
@@ -274,7 +539,9 @@
             <div>
                 <div class="prfl sr">Technical Foundation</div>
                 <h2 class="sr">Not theoretical. Proven.</h2>
-                <p class="prfb sr d1">PASTOR, our first working system, integrated thousands of scientific papers into a citation-grounded knowledge base. That exact architecture now powers SustainAI for agriculture — proving massive data can be unified rapidly with trust and traceability.</p>
+                <p class="prfb sr d1">PASTOR, our first working system, integrated thousands of scientific papers into a
+                    citation grounded knowledge base. That exact architecture now powers SustainAI for agriculture.
+                    Proving massive data can be unified rapidly with trust and traceability.</p>
             </div>
             <div class="prfsg">
                 <div class="prfs sr d1">
@@ -291,7 +558,7 @@
                 </div>
                 <div class="prfs sr d4">
                     <div class="prfsn" data-count="99.7">99.7%</div>
-                    <div class="prfsl">Faster than manual</div>
+                    <div class="prfsl">50 hrs reduced to 10 min</div>
                 </div>
             </div>
         </div>
@@ -306,24 +573,51 @@
             </div>
             <div class="difg">
                 <div class="di sr d1">
-                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M2 12h4l3-9 6 18 3-9h4"/></svg>
-                    <h3>Local-first, not offline-only</h3>
-                    <p>Core reasoning happens on site. The system doesn't fail when the internet drops.</p>
+                    <div class="di-header">
+                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                        <h3>Decision first design</h3>
+                    </div>
+                    <p>Most tools stop at analytics. We help you decide what to do next.</p>
                 </div>
                 <div class="di sr d2">
-                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
-                    <h3>Right-sized AI</h3>
-                    <p>No oversized general-purpose models. Smaller, efficient, domain-tuned models built for the task.</p>
+                    <div class="di-header">
+                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <path d="M2 12h4l3-9 6 18 3-9h4" />
+                        </svg>
+                        <h3>Local first, not offline only</h3>
+                    </div>
+                    <p>Core reasoning happens on site. The system doesn't fail when the internet drops.</p>
                 </div>
                 <div class="di sr d3">
-                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    <h3>Domain-grounded reasoning</h3>
-                    <p>Combines models with operational context, scientific input, and real-world field signals.</p>
+                    <div class="di-header">
+                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <rect x="4" y="4" width="16" height="16" rx="2" />
+                            <path d="M9 9h6v6H9z" />
+                        </svg>
+                        <h3>Right sized AI</h3>
+                    </div>
+                    <p>No oversized general purpose models. Smaller, efficient, domain tuned models built for the task.
+                    </p>
                 </div>
                 <div class="di sr d4">
-                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                    <h3>Decision-first design</h3>
-                    <p>Most tools stop at analytics. We help you decide what to do next.</p>
+                    <div class="di-header">
+                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
+                            stroke-width="1.5" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M2 12h20" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        <h3>Domain grounded reasoning</h3>
+                    </div>
+                    <p>Combines models with operational context, scientific input, and real world field signals.</p>
                 </div>
             </div>
         </div>
@@ -451,11 +745,15 @@
                 <line x1="38" y1="34" x2="38" y2="70" stroke="var(--lg)" stroke-width="2" />
                 <circle cx="82" cy="24" r="10" fill="none" stroke="var(--lg)" stroke-width="2" />
                 <line x1="82" y1="34" x2="82" y2="70" stroke="var(--lg)" stroke-width="2" />
-                <path d="M38 70L24 100M38 70L52 100M82 70L68 100M82 70L96 100" fill="none" stroke="var(--lg)" stroke-width="2" />
-                <ellipse cx="60" cy="55" rx="14" ry="7" fill="rgba(77,184,102,0.15)" stroke="var(--is)" stroke-width="2" />
+                <path d="M38 70L24 100M38 70L52 100M82 70L68 100M82 70L96 100" fill="none" stroke="var(--lg)"
+                    stroke-width="2" />
+                <ellipse cx="60" cy="55" rx="14" ry="7" fill="rgba(77,184,102,0.15)" stroke="var(--is)"
+                    stroke-width="2" />
             </svg>
             <h2 class="sr d1">Let's build this together.</h2>
-            <p class="ctab sr d2">We're piloting with 3–5 farms and water utilities. If you have sensors, field challenges, and a desire to move faster — we want to talk.</p>
+            <p class="ctab sr d2">We are piloting with 3 to 5 farms and water utilities. If you have sensors, field
+                challenges, and a desire to move faster, we want to talk. Our pilot runs 90 days and produces a
+                documented report on what was caught, what was saved, and what comes next.</p>
             <button class="btn-primary sr d3" id="ctaBtn" type="button">Start a Conversation</button>
             <div class="cn sr d4">Tell us about your sensor mix and field conditions.</div>
         </div>
@@ -509,19 +807,24 @@
     <div class="modal-overlay" id="demoModal">
         <div class="modal" style="position:relative">
             <button class="modal-close" id="demoModalClose" aria-label="Close form">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
             </button>
             <h3>Join the Demo Waitlist</h3>
             <p class="modal-sub">Complete this form to access the interactive demo.</p>
             <form id="demoForm" novalidate>
                 <div class="cf-group">
                     <label for="df-name">Full Name <span style="color:#c83232">*</span></label>
-                    <input type="text" id="df-name" name="name" required minlength="2" maxlength="200" placeholder="e.g. John Carter" autocomplete="name">
+                    <input type="text" id="df-name" name="name" required minlength="2" maxlength="200"
+                        placeholder="e.g. John Carter" autocomplete="name">
                     <div class="cf-error" id="df-name-err"></div>
                 </div>
                 <div class="cf-group">
                     <label for="df-email">Email Address <span style="color:#c83232">*</span></label>
-                    <input type="email" id="df-email" name="email" required placeholder="john@example.com" autocomplete="email">
+                    <input type="email" id="df-email" name="email" required placeholder="john@example.com"
+                        autocomplete="email">
                     <div class="cf-error" id="df-email-err"></div>
                 </div>
                 <div class="cf-group">
@@ -530,7 +833,8 @@
                 </div>
                 <div class="cf-group">
                     <label for="df-msg">What are you looking to explore? <span style="color:#c83232">*</span></label>
-                    <textarea id="df-msg" name="message" required minlength="10" maxlength="5000" placeholder="e.g., I'd like to see how sensor anomaly detection works for water quality..."></textarea>
+                    <textarea id="df-msg" name="message" required minlength="10" maxlength="5000"
+                        placeholder="e.g., I'd like to see how sensor anomaly detection works for water quality..."></textarea>
                     <div class="cf-error" id="df-msg-err"></div>
                 </div>
                 <button type="submit" class="cf-submit" id="df-submit">Submit &amp; Access Demo</button>
