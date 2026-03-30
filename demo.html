@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SustainAI | Hub Dashboard Demo</title>
+    <meta name="description" content="Interactive product demo of the SustainAI Local Hub — live sensor monitoring, ML anomaly detection, and on-site LLM reasoning.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- DO NOT load styles.css — demo has its own complete stylesheet -->
+    <link rel="stylesheet" href="/css/demo.css">
+</head>
+<body class="demo-body">
+
+    <!-- ─── Fixed Sidebar ───────────────────────────────── -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            SustainAI
+            <span>Local Hub</span>
+        </div>
+
+        <!-- Use div, NOT nav — styles.css applies position:fixed to nav globally -->
+        <div class="side-nav" id="sideNav">
+            <a href="#" class="active" data-target="view-operations">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Operations
+            </a>
+            <a href="#" data-target="view-hardware">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                Hardware Nodes
+            </a>
+            <a href="#" data-target="view-intelligence">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Intelligence Logs
+            </a>
+            <a href="#" data-target="view-compliance">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Compliance
+            </a>
+        </div>
+
+        <div class="bot-nav">
+            <a href="/index.html" class="return-btn">← Back to Website</a>
+        </div>
+    </aside>
+
+    <!-- ─── Scrollable Main ──────────────────────────────── -->
+    <main class="dash-main">
+
+        <!-- ════ VIEW: Operations ════════════════════════ -->
+        <div id="view-operations" class="view-panel active">
+            <header class="dash-header">
+                <div>
+                    <div class="breadcrumb">Hub 01 / Dashboard</div>
+                    <h1>South Tract Overview</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="net-status">
+                        <div class="pulse-dot"></div>
+                        Local Network Active
+                    </div>
+                    <button class="dbtn-primary" id="simAnomalyBtn">Simulate Spike</button>
+                </div>
+            </header>
+
+            <div class="dash-grid">
+
+                <!-- Sense Layer -->
+                <div class="widget">
+                    <div class="w-top">
+                        <h3>Sense Layer</h3>
+                        <div class="dbadge success">3 Online</div>
+                    </div>
+                    <p class="w-sub">Real-time local hardware ingestion.</p>
+                    <div class="sensor-list">
+                        <div class="sensor-item">
+                            <div class="s-icon">≈</div>
+                            <div class="s-info">
+                                <div class="s-name">South Well Cond.</div>
+                                <div class="s-val" id="cond-val">840 µS/cm</div>
+                            </div>
+                            <div class="s-trend neutral" id="cond-trend">—</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="s-icon">⚲</div>
+                            <div class="s-info">
+                                <div class="s-name">Tract B Soil Moist.</div>
+                                <div class="s-val" id="soil-val">28%</div>
+                            </div>
+                            <div class="s-trend down">↓</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="s-icon">⚡</div>
+                            <div class="s-info">
+                                <div class="s-name">Main Line Flow</div>
+                                <div class="s-val" id="flow-val">120 GPM</div>
+                            </div>
+                            <div class="s-trend up">↑</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ML Ops -->
+                <div class="widget span-2">
+                    <div class="w-top">
+                        <h3>ML Ops: Anomaly Detection</h3>
+                        <div class="dbadge" id="mlStatusBadge">Monitoring</div>
+                    </div>
+                    <p class="w-sub">Isolation Forest Model · Water Quality Pipeline</p>
+                    <div class="chart-container">
+                        <div class="chart-y">
+                            <span>1200</span><span>1000</span><span>800</span><span>600</span>
+                        </div>
+                        <div class="chart-bars" id="barChart"></div>
+                    </div>
+                    <div class="ml-meta">
+                        <div class="meta-item">
+                            <span>Model Confidence</span>
+                            <strong id="mlConf">97% (Normal)</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Inference</span>
+                            <strong>Edge · On-Site</strong>
+                        </div>
+                        <div class="meta-item">
+                            <span>Last Sync</span>
+                            <strong>Live</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LLM -->
+                <div class="widget span-3 llm-widget">
+                    <div class="w-top">
+                        <h3>Intelligence Reasoning</h3>
+                        <div class="dbadge llm-badge">LLM · On-Site</div>
+                    </div>
+                    <div class="llm-log" id="llmLog">
+                        <div class="llm-msg system">
+                            <div class="msg-ts">04:22 AM (Local)</div>
+                            <div class="msg-body">System nominal. All sensor inputs within historical bounds based on 60-day moving average.</div>
+                        </div>
+                    </div>
+                    <div id="llmActions" style="opacity:0.3;pointer-events:none;transition:opacity 0.4s;">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#486950;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.08em;">Recommended Actions</div>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                            <button class="dbtn-primary" id="actProtocol">Initiate Valve Shutoff</button>
+                            <button class="dbtn-secondary" id="actDismiss">Acknowledge &amp; Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ════ VIEW: Hardware Nodes ════════════════════ -->
+        <div id="view-hardware" class="view-panel">
+            <header class="dash-header">
+                <div>
+                    <div class="breadcrumb">Hub 01 / Sense Layer</div>
+                    <h1>Hardware Nodes</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="net-status"><div class="pulse-dot"></div>Edge Mesh Active</div>
+                </div>
+            </header>
+            <div class="hw-grid">
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 1A</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">Main Line Flowmeter</div>
+                    <div class="hw-card-model">SustainAI xT-900</div>
+                    <div class="hw-card-bot"><span>🔋 84%</span><span>Ping: 12 ms</span></div>
+                </div>
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 1B</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">South Well Conductivity</div>
+                    <div class="hw-card-model">Generic RS-485 Probe</div>
+                    <div class="hw-card-bot"><span>🔌 Wired</span><span>Ping: 14 ms</span></div>
+                </div>
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 2A</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">Tract B Soil Array</div>
+                    <div class="hw-card-model">SustainAI M-Series</div>
+                    <div class="hw-card-bot"><span>🔋 92%</span><span>Ping: 45 ms</span></div>
+                </div>
+                <div class="hw-card" style="opacity:0.55;">
+                    <div class="hw-card-top"><span>Node 4C</span><div class="dbadge danger">Offline</div></div>
+                    <div class="hw-card-name">Tract C Moisture</div>
+                    <div class="hw-card-model">SustainAI M-Series</div>
+                    <div class="hw-card-bot"><span>🔋 —</span><span>Last: 2h ago</span></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ════ VIEW: Intelligence Logs ═════════════════ -->
+        <div id="view-intelligence" class="view-panel">
+            <header class="dash-header">
+                <div>
+                    <div class="breadcrumb">Hub 01 / AI Reasoning</div>
+                    <h1>Intelligence Logs</h1>
+                </div>
+            </header>
+            <div class="log-list">
+                <div class="log-item alert">
+                    <div>
+                        <div class="log-meta">Today · 04:30 AM</div>
+                        <div class="log-title" style="color:#c83232;">Conductivity Anomaly Detected</div>
+                        <div class="log-desc">Auto-shutoff protocol requested. Pending operator acknowledgment.</div>
+                    </div>
+                    <button class="dbtn-secondary" style="white-space:nowrap;">View Trace</button>
+                </div>
+                <div class="log-item resolved">
+                    <div>
+                        <div class="log-meta">Yesterday · 14:12 PM</div>
+                        <div class="log-title">LLM Query — Soil Nitrogen Levels</div>
+                        <div class="log-desc">Operator 'J. Carter' requested N-status. Context retrieved in 0.8s.</div>
+                    </div>
+                    <button class="dbtn-secondary" style="white-space:nowrap;">View Trace</button>
+                </div>
+                <div class="log-item">
+                    <div>
+                        <div class="log-meta">Oct 12 · 09:00 AM</div>
+                        <div class="log-title">Model Weights Updated</div>
+                        <div class="log-desc">Local Isolation Forest retrained on 30 days of site-specific data.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ════ VIEW: Compliance ═════════════════════════ -->
+        <div id="view-compliance" class="view-panel">
+            <header class="dash-header">
+                <div>
+                    <div class="breadcrumb">Hub 01 / Export</div>
+                    <h1>Compliance Reports</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="dbtn-secondary">+ Generate Report</button>
+                </div>
+            </header>
+            <div class="doc-grid">
+                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Water Q1 Audit</div><div class="doc-date">Mar 30, 2025</div></div>
+                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">County Soil Log</div><div class="doc-date">Mar 15, 2025</div></div>
+                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Runoff Event Mar-12</div><div class="doc-date">Mar 13, 2025</div></div>
+                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Annual Hardware Audit</div><div class="doc-date">Jan 1, 2025</div></div>
+                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Fertilizer Runoff Q4</div><div class="doc-date">Dec 31, 2024</div></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/js/demo.js"></script>
+</body>
+</html>
