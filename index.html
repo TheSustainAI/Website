@@ -37,29 +37,39 @@
         <button class="hb" id="menuBtn" aria-label="Open menu" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
-        <div class="nr" id="navMenu">
-            <a href="#prob" class="nk">Problem</a>
-            <a href="#sol" class="nk">Platform</a>
-            <a href="#usecases" class="nk">Use Cases</a>
-            <a href="#about" class="nk">About</a>
-            <a href="#prfs" class="nk">Evidence</a>
-            <a href="#team" class="nk">Team</a>
-            <a href="#cta" class="nc">Request a Pilot</a>
-        </div>
     </nav>
+
+    <!-- Mobile nav overlay — OUTSIDE <nav> to escape backdrop-filter stacking context -->
+    <div class="nr" id="navMenu">
+        <a href="#prob" class="nk">Problem</a>
+        <a href="#sol" class="nk">Platform</a>
+        <a href="#usecases" class="nk">Use Cases</a>
+        <a href="#about" class="nk">About</a>
+        <a href="#prfs" class="nk">Evidence</a>
+        <a href="#team" class="nk">Team</a>
+        <a href="#" class="nk demo-nav-link" id="demoNavBtn">Try Demo</a>
+        <a href="#cta" class="nc">Request a Pilot</a>
+    </div>
+
 
     <section class="hero" id="main">
         <div class="hc">
-            <div class="ht sr d1">Building Private, On-Site & Sustainable AI</div>
+            <div class="ht sr d1">Local-First AI for Agriculture</div>
             <h1 class="sr d2">AI that works where <em>your farm</em> does</h1>
-            <p class="hs sr d3">SustainAI is a local-first AI systems company building practical intelligence for
-                agriculture and field environments. We turn fragmented data into clear, grounded action.</p>
+            <p class="hs sr d3">Turn sensor noise into clear decisions — on-site, offline-ready, and built for the people who grow our food.</p>
             <div class="hc-actions sr d4">
                 <a href="#cta" class="btn-primary">Request a Pilot</a>
-                <a href="#sol" class="btn-secondary">Explore the Platform</a>
+                <a href="#sol" class="btn-secondary">See How It Works</a>
+            </div>
+            <div class="hero-proof sr d5">
+                <span>On-site inference</span>
+                <span class="proof-dot"></span>
+                <span>Your data never leaves your farm</span>
+                <span class="proof-dot"></span>
+                <span>Born at NC State</span>
             </div>
             <svg class="sr d5 parallax" data-speed="0.08" width="400" height="180" viewBox="0 0 400 180" fill="none"
-                style="display:block;margin:60px auto 0;opacity:0.8">
+                style="display:block;margin:48px auto 0;opacity:0.8">
                 <!-- Data Nodes -->
                 <circle cx="80" cy="90" r="14" fill="none" stroke="var(--lg)" stroke-width="1.2" opacity="0.6" />
                 <circle cx="80" cy="90" r="4" fill="var(--lg)" />
@@ -85,68 +95,52 @@
         </div>
     </section>
 
-    <!-- The Problem Framework -->
+    <!-- The Problem -->
     <section class="prob" id="prob">
         <div class="pc">
-            <div class="plbl sr">The Core Problem</div>
-            <h2 class="sr d1">Farms generate extreme signals, but data is <em>not the same</em> as a decision.</h2>
-            <p class="pb sr d2">Agricultural and field operations generate significant data spanning sensors, weather
-                reports, lab inputs, and compliance files. But that data does not automatically support a timely
-                decision.</p>
+            <div class="plbl sr">The Problem</div>
+            <h2 class="sr d1">Your farm generates data. But data is <em>not</em> a decision.</h2>
+            <p class="pb sr d2">Sensors, weather reports, lab results, and compliance files — all siloed, hard to interpret, and useless without timely action.</p>
 
             <div class="pcs">
-                <!-- Prob 1: Fragmented -->
                 <div class="pcd glass-panel sr d1">
                     <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                         <circle cx="12" cy="24" r="6" stroke="var(--lg)" stroke-width="1.5" />
                         <circle cx="36" cy="14" r="6" stroke="var(--im)" stroke-width="1.5" />
                         <circle cx="36" cy="34" r="6" stroke="var(--im)" stroke-width="1.5" />
-                        <line x1="18" y1="24" x2="30" y2="14" stroke="var(--is)" stroke-width="1.5"
-                            stroke-dasharray="3" />
-                        <line x1="18" y1="24" x2="30" y2="34" stroke="var(--is)" stroke-width="1.5"
-                            stroke-dasharray="3" />
+                        <line x1="18" y1="24" x2="30" y2="14" stroke="var(--is)" stroke-width="1.5" stroke-dasharray="3" />
+                        <line x1="18" y1="24" x2="30" y2="34" stroke="var(--is)" stroke-width="1.5" stroke-dasharray="3" />
                     </svg>
-                    <h3>Data is Fragmented</h3>
-                    <p>Sensors, lab reports, compliance docs, and environment readings rarely exist in one usable flow.
-                        You have the signals, but they're disconnected.</p>
+                    <h3>Fragmented Data</h3>
+                    <p>Sensors, lab reports, and compliance docs scattered across systems. Signals exist, but they're disconnected.</p>
                 </div>
-                <!-- Prob 2: Difficult to interpret -->
                 <div class="pcd glass-panel sr d2">
                     <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                         <rect x="6" y="10" width="36" height="28" rx="4" stroke="var(--lg)" stroke-width="1.5" />
                         <path d="M12 30 L 20 20 L 28 26 L 36 14" stroke="var(--im)" stroke-width="1.5" fill="none" />
                         <circle cx="28" cy="18" r="3" fill="var(--is)" />
-                        <path d="M26 14 L 30 14" stroke="var(--is)" stroke-width="1.5" />
                     </svg>
-                    <h3>Difficult to Interpret</h3>
-                    <p>Raw readings, noisy inputs, and convoluted dashboards force specialists to decode logs before
-                        anyone knows what action to take.</p>
+                    <h3>Hard to Interpret</h3>
+                    <p>Raw readings and convoluted dashboards force specialists to decode data before anyone can act.</p>
                 </div>
-                <!-- Prob 3: Connectivity -->
                 <div class="pcd glass-panel sr d3">
                     <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-                        <path d="M12 24 A 18 18 0 0 1 36 24" stroke="var(--is)" stroke-width="1.5"
-                            stroke-dasharray="4" />
-                        <path d="M18 30 A 10 10 0 0 1 30 30" stroke="var(--im)" stroke-width="1.5"
-                            stroke-dasharray="4" />
+                        <path d="M12 24 A 18 18 0 0 1 36 24" stroke="var(--is)" stroke-width="1.5" stroke-dasharray="4" />
+                        <path d="M18 30 A 10 10 0 0 1 30 30" stroke="var(--im)" stroke-width="1.5" stroke-dasharray="4" />
                         <circle cx="24" cy="36" r="3" fill="var(--lg)" />
                         <line x1="10" y1="10" x2="38" y2="38" stroke="var(--lg)" stroke-width="1.5" />
                     </svg>
-                    <h3>Inconsistent Connectivity</h3>
-                    <p>Many standard cloud tools assume stable internet access. Farms and rural field environments
-                        rarely have that luxury.</p>
+                    <h3>Unreliable Connectivity</h3>
+                    <p>Cloud tools assume stable internet. Farms and rural field environments rarely have that luxury.</p>
                 </div>
-                <!-- Prob 4: Time Sensitive -->
                 <div class="pcd glass-panel sr d4">
                     <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
                         <circle cx="24" cy="24" r="16" stroke="var(--lg)" stroke-width="1.5" />
                         <polyline points="24,12 24,24 32,24" stroke="var(--lg)" stroke-width="1.5" fill="none" />
                         <line x1="24" y1="4" x2="24" y2="8" stroke="var(--im)" stroke-width="1.5" />
-                        <line x1="40" y1="24" x2="44" y2="24" stroke="var(--im)" stroke-width="1.5" />
                     </svg>
-                    <h3>Time-Sensitive Decisions</h3>
-                    <p>Water quality shifts and disease risks quickly become expensive if the proper guidance arrives an
-                        hour too late.</p>
+                    <h3>Time-Critical Decisions</h3>
+                    <p>Water quality shifts and disease risks become expensive when guidance arrives an hour too late.</p>
                 </div>
             </div>
         </div>
@@ -157,7 +151,7 @@
         <div class="solc">
             <div class="solh">
                 <div class="plbl sr">Product Architecture</div>
-                <h2 class="sr d1">Three layers. One clear outcome.</h2>
+                <h2 class="sr d1">Three layers. One clear decision.</h2>
             </div>
             <div class="sst">
                 <div class="ss glass-panel sr-scale d1">
@@ -173,8 +167,7 @@
                     <div class="ssn">01</div>
                     <h3>SustainAI Sense</h3>
                     <div class="sss">Ingestion Layer</div>
-                    <p>Connects directly to existing field hardware—water monitors, soil sensors, weather stations, and
-                        farm devices. It normalizes fragmented, real-world signals into usable data.</p>
+                    <p>Connects to existing field hardware — water monitors, soil sensors, weather stations — and normalizes fragmented signals into usable data.</p>
                 </div>
                 <div class="ss glass-panel sr-scale d2">
                     <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
@@ -188,8 +181,7 @@
                     <div class="ssn">02</div>
                     <h3>SustainAI Hub</h3>
                     <div class="sss">On-site Intelligence Layer</div>
-                    <p>Runs the local reasoning stack: fine-tuned small language models, retrieval pipelines across
-                        private documents, and dynamic knowledge graph generation for compliance.</p>
+                    <p>Runs fine-tuned language models, retrieval pipelines, and knowledge graph generation — entirely on-site, entirely private.</p>
                 </div>
                 <div class="ss glass-panel sr-scale d3">
                     <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
@@ -201,8 +193,7 @@
                     <div class="ssn">03</div>
                     <h3>SustainAI Edge</h3>
                     <div class="sss">Operator Interface</div>
-                    <p>Turns system complexity into simple outputs for operators. Generates explainable, decision-ready
-                        alerts and action items directly to a phone or barn display.</p>
+                    <p>Turns complexity into simple, explainable outputs — decision-ready alerts sent directly to a phone or barn display.</p>
                 </div>
             </div>
         </div>
@@ -217,24 +208,24 @@
             </div>
             <div class="uc-grid">
                 <div class="uc-card sr d1">
+                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v6l3 3"/><path d="M6.34 17.66A8 8 0 1 1 20 12"/><path d="M2 12a10 10 0 0 0 4 8"/></svg>
                     <h3>Water Quality Monitoring</h3>
-                    <p>Proactive anomaly detection across private wells and environmental water systems to prevent
-                        contamination before safety thresholds are breached.</p>
+                    <p>Proactive anomaly detection across private wells to prevent contamination before safety thresholds are breached.</p>
                 </div>
                 <div class="uc-card sr d2">
+                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/><path d="M12 10v4"/><path d="M10 12h4"/></svg>
                     <h3>Nutrient &amp; Runoff Risk</h3>
-                    <p>Combining soil conditions, weather advisories, and sensor records to identify fertilization
-                        imbalances or runoff warnings in real time.</p>
+                    <p>Combines soil, weather, and sensor data to identify fertilization imbalances or runoff warnings in real time.</p>
                 </div>
                 <div class="uc-card sr d3">
-                    <h3>Environmental Condition Warning</h3>
-                    <p>Alerting teams to disease risk factors or hazardous environmental spikes driven by multi-sensor
-                        synthesis, even during internet outages.</p>
+                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <h3>Environmental Condition Alerts</h3>
+                    <p>Alerts teams to disease risks or hazardous spikes via multi-sensor synthesis — even during internet outages.</p>
                 </div>
                 <div class="uc-card sr d4">
+                    <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                     <h3>Compliance &amp; Reporting</h3>
-                    <p>Reasoning over county regulations and private operational data to offer immediate, grounded
-                        answers on compliance tasks and field safety protocols.</p>
+                    <p>Reasons over county regulations and operational data to deliver immediate, grounded answers on safety protocols.</p>
                 </div>
             </div>
         </div>
@@ -244,16 +235,11 @@
     <section class="env">
         <div class="ec">
             <div class="et sr">The Operator Experience</div>
-            <h2 class="sr d1">It is 5:30 in the morning. Your phone buzzes once.</h2>
+            <h2 class="sr d1">It is 5:30 in the morning. Your phone buzzes. Once.</h2>
             <div class="en sr d3">
-                <p>The SustainAI system flagged an overnight shift in water conductivity at the south well. The reading
-                    crossed a threshold that, based on your soil type and recent weather, suggests possible
-                    contamination from field runoff.</p>
-                <p>Because the system had a connection last night, it already pulled the latest county water advisory
-                    and cross-referenced your readings against it. It is showing you <strong>two recommended actions in
-                        three sentences</strong>.</p>
-                <p>You did not open a dashboard. You did not call a consultant. You did not wait for a cloud server. The
-                    answer was already there, generated on your property, by a system that understands your farm.</p>
+                <p>The SustainAI system flagged an overnight shift in water conductivity at the south well. Based on your soil type and recent weather, it suggests possible contamination from field runoff.</p>
+                <p>Because the system had a connection last night, it already pulled the latest county advisory and cross-referenced your readings. It's showing you <strong>two recommended actions in three sentences</strong>.</p>
+                <p>You didn't open a dashboard. You didn't call a consultant. You didn't wait for a cloud server. <strong>The answer was already there</strong> — generated on your property, by a system that understands your farm.</p>
             </div>
         </div>
     </section>
@@ -265,16 +251,13 @@
                 <div class="plbl sr-left">Our Mission</div>
                 <h2 class="sr-left d1"
                     style="font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;color:var(--ik);margin-bottom:20px;">
-                    We believe field operations need practical AI, not disconnected cloud giants.</h2>
-                <p class="about-p sr-left d2">SustainAI is building the intelligence layer for agriculture and field
-                    operations. We combine on-site sensor data, private documents, domain knowledge, and optional web
-                    intelligence into one modular system that helps teams make faster, clearer, and more trustworthy
-                    decisions. Our approach is local-first, explainable, and built for environments where connectivity
-                    is inconsistent and action cannot wait.</p>
+                    Field operations need small, powerful AI — not disconnected cloud models.</h2>
+                <p class="about-p sr-left d2">We combine on-site sensor data, private documents, and domain knowledge into one modular system that helps teams decide faster. Local-first, explainable, built for environments where connectivity is inconsistent and action cannot wait.</p>
             </div>
             <div class="about-quote sr-right d1 glass-panel" style="padding: 40px; border-radius: 20px;">
                 <div class="about-q">My father is a farmer. I grew up watching him walk the fields before sunrise,
-                    checking soil by feel. He didn't have sensors or software. He had experience... <span
+                    checking soil by feel. He didn't have sensors or software. He had experience. And most of the time,
+                    that was enough. But when it was not, the cost was real. <span
                         style="display:block;margin-top:20px;font-size:0.85rem;color:var(--lg);font-family:var(--fm);text-transform:uppercase;font-style:normal;letter-spacing:0.04em;">—
                         Deepak Sai Pendyala, CEO</span></div>
                 <p style="font-size:1.05rem;font-weight:300;color:var(--is);line-height:1.75;margin-top:20px;">SustainAI
@@ -286,23 +269,20 @@
     </section>
 
     <!-- Proof (PASTOR) -->
-    <section class="prf" id="prf">
+    <section class="prf" id="prfs">
         <div class="prfc">
             <div>
                 <div class="prfl sr">Technical Foundation</div>
-                <h2 class="sr">The architecture is not theoretical. It is proven.</h2>
-                <p class="prfb sr d1">PASTOR, our first working system, was built for phosphorus sustainability
-                    research. It integrated thousands of scientific papers into a connected knowledge base with
-                    citation-grounded AI assistants. That exact core architecture now powers SustainAI for agriculture,
-                    proving massive data can be unified rapidly with uncompromising trust and traceability.</p>
+                <h2 class="sr">Not theoretical. Proven.</h2>
+                <p class="prfb sr d1">PASTOR, our first working system, integrated thousands of scientific papers into a citation-grounded knowledge base. That exact architecture now powers SustainAI for agriculture — proving massive data can be unified rapidly with trust and traceability.</p>
             </div>
             <div class="prfsg">
                 <div class="prfs sr d1">
-                    <div class="prfsn">5,000+</div>
+                    <div class="prfsn" data-count="5000">5,000+</div>
                     <div class="prfsl">Papers integrated</div>
                 </div>
                 <div class="prfs sr d2">
-                    <div class="prfsn">98%</div>
+                    <div class="prfsn" data-count="98">98%</div>
                     <div class="prfsl">Citation precision</div>
                 </div>
                 <div class="prfs sr d3">
@@ -310,8 +290,8 @@
                     <div class="prfsl">Response time</div>
                 </div>
                 <div class="prfs sr d4">
-                    <div class="prfsn">99.7%</div>
-                    <div class="prfsl">Time reduction vs. manual</div>
+                    <div class="prfsn" data-count="99.7">99.7%</div>
+                    <div class="prfsl">Faster than manual</div>
                 </div>
             </div>
         </div>
@@ -322,25 +302,28 @@
         <div class="difc">
             <div class="difh">
                 <div class="plbl sr">Why SustainAI</div>
-                <h2 class="sr d1">Built different, on purpose.</h2>
+                <h2 class="sr d1">Built different. On purpose.</h2>
             </div>
             <div class="difg">
                 <div class="di sr d1">
+                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><path d="M2 12h4l3-9 6 18 3-9h4"/></svg>
                     <h3>Local-first, not offline-only</h3>
-                    <p>Core reasoning happens on site. The system doesn't fail just because the internet drops.</p>
+                    <p>Core reasoning happens on site. The system doesn't fail when the internet drops.</p>
                 </div>
                 <div class="di sr d2">
+                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
                     <h3>Right-sized AI</h3>
-                    <p>No oversized general-purpose models for narrow tasks. Smaller, efficient, domain-tuned models.
-                    </p>
+                    <p>No oversized general-purpose models. Smaller, efficient, domain-tuned models built for the task.</p>
                 </div>
                 <div class="di sr d3">
+                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     <h3>Domain-grounded reasoning</h3>
                     <p>Combines models with operational context, scientific input, and real-world field signals.</p>
                 </div>
                 <div class="di sr d4">
+                    <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                     <h3>Decision-first design</h3>
-                    <p>Most tools stop at analytics. We go one step further and help you decide what to do next.</p>
+                    <p>Most tools stop at analytics. We help you decide what to do next.</p>
                 </div>
             </div>
         </div>
@@ -358,13 +341,7 @@
             <div class="ts">
                 <div class="tm sr">
                     <div class="tp">
-                        <!-- Abstract placeholder avatar to replace default photo mapping -->
-                        <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-                            <circle cx="90" cy="90" r="80" fill="rgba(77,184,102,0.05)" stroke="var(--lg)"
-                                stroke-width="1" stroke-dasharray="4 4" />
-                            <circle cx="90" cy="90" r="40" fill="rgba(77,184,102,0.1)" />
-                            <circle cx="90" cy="90" r="8" fill="var(--lg)" />
-                        </svg>
+                        <img src="/images/yingling.jpg" alt="Dr. Yaroslava G. Yingling" class="team-photo">
                     </div>
                     <div class="tinfo">
                         <div class="tn">Dr. Yaroslava G. Yingling</div>
@@ -374,7 +351,8 @@
                         <p class="tbio">University Faculty Scholar and Director of Undergraduate Programs in Materials
                             Science &amp; Engineering. She brings deep scientific rigor and applied AI
                             expertise to the foundation.</p>
-                        <a href="#" class="tli"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <a href="https://www.linkedin.com/in/yaroslava-yingling/" class="tli" target="_blank"
+                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
                                 <rect x="2" y="9" width="4" height="12" />
                                 <circle cx="4" cy="4" r="2" />
@@ -384,13 +362,7 @@
 
                 <div class="tm sr">
                     <div class="tp">
-                        <!-- Headshot Placeholder 2 -->
-                        <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-                            <circle cx="90" cy="90" r="80" fill="rgba(77,184,102,0.05)" stroke="var(--lg)"
-                                stroke-width="1" stroke-dasharray="4 4" />
-                            <rect x="50" y="50" width="80" height="80" rx="40" fill="rgba(77,184,102,0.1)" />
-                            <circle cx="90" cy="90" r="8" fill="var(--lg)" />
-                        </svg>
+                        <img src="/images/Deepak.jpeg" alt="Deepak Sai Pendyala" class="team-photo">
                     </div>
                     <div class="tinfo">
                         <div class="tn">Deepak Sai Pendyala</div>
@@ -409,12 +381,7 @@
 
                 <div class="tm sr">
                     <div class="tp">
-                        <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-                            <circle cx="90" cy="90" r="80" fill="rgba(77,184,102,0.05)" stroke="var(--lg)"
-                                stroke-width="1" stroke-dasharray="4 4" />
-                            <polygon points="90,40 130,120 50,120" fill="rgba(77,184,102,0.1)" />
-                            <circle cx="90" cy="90" r="8" fill="var(--lg)" />
-                        </svg>
+                        <img src="/images/nahed.jpg" alt="Nahed Abu Zaid" class="team-photo">
                     </div>
                     <div class="tinfo">
                         <div class="tn">Nahed Abu Zaid</div>
@@ -423,7 +390,8 @@
                         <p class="tbio">Leads the knowledge graph architecture, citation-grounded retrieval, and
                             multi-agent systems giving SustainAI its ability to reason across fragmented sources
                             securely.</p>
-                        <a href="#" class="tli"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <a href="https://www.linkedin.com/in/nahedabuzaidcsc/" class="tli" target="_blank"
+                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
                                 <rect x="2" y="9" width="4" height="12" />
                                 <circle cx="4" cy="4" r="2" />
@@ -433,12 +401,7 @@
 
                 <div class="tm sr">
                     <div class="tp">
-                        <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-                            <circle cx="90" cy="90" r="80" fill="rgba(77,184,102,0.05)" stroke="var(--lg)"
-                                stroke-width="1" stroke-dasharray="4 4" />
-                            <rect x="50" y="70" width="80" height="40" rx="10" fill="rgba(77,184,102,0.1)" />
-                            <circle cx="90" cy="90" r="8" fill="var(--lg)" />
-                        </svg>
+                        <img src="/images/alexey.jpg" alt="Dr. Alexey Gulyuk" class="team-photo">
                     </div>
                     <div class="tinfo">
                         <div class="tn">Dr. Alexey Gulyuk</div>
@@ -446,7 +409,8 @@
                         <div class="td">Ph.D. Materials Science &amp; Engineering</div>
                         <p class="tbio">Faculty at NC State bringing deep materials science expertise to ground
                             SustainAI's sensor and hardware integration in validated physical science methodologies.</p>
-                        <a href="#" class="tli"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <a href="https://www.linkedin.com/in/alexey-gulyuk/" class="tli" target="_blank"
+                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
                                 <rect x="2" y="9" width="4" height="12" />
                                 <circle cx="4" cy="4" r="2" />
@@ -456,20 +420,16 @@
 
                 <div class="tm sr">
                     <div class="tp">
-                        <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-                            <circle cx="90" cy="90" r="80" fill="rgba(77,184,102,0.05)" stroke="var(--lg)"
-                                stroke-width="1" stroke-dasharray="4 4" />
-                            <ellipse cx="90" cy="90" rx="60" ry="20" fill="rgba(77,184,102,0.1)" />
-                            <circle cx="90" cy="90" r="8" fill="var(--lg)" />
-                        </svg>
+                        <img src="/images/ramesh.webp" alt="Dr. Ramesh Lakshmi Ratan" class="team-photo">
                     </div>
                     <div class="tinfo">
                         <div class="tn">Dr. Ramesh Lakshmi Ratan</div>
-                        <div class="tr">Board Member · Founding Team</div>
+                        <div class="tr">Board Advisor · Founding Team</div>
                         <div class="td">Board Director · Retired PE CEO</div>
                         <p class="tbio">Decades of leadership in digital and quantitative technology, bringing immense
                             commercialization strategy and scaling expertise to the architectural foundation.</p>
-                        <a href="#" class="tli"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <a href="https://www.linkedin.com/in/rameshratan/" class="tli" target="_blank"
+                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
                                 <rect x="2" y="9" width="4" height="12" />
                                 <circle cx="4" cy="4" r="2" />
@@ -491,17 +451,13 @@
                 <line x1="38" y1="34" x2="38" y2="70" stroke="var(--lg)" stroke-width="2" />
                 <circle cx="82" cy="24" r="10" fill="none" stroke="var(--lg)" stroke-width="2" />
                 <line x1="82" y1="34" x2="82" y2="70" stroke="var(--lg)" stroke-width="2" />
-                <path d="M38 70L24 100M38 70L52 100M82 70L68 100M82 70L96 100" fill="none" stroke="var(--lg)"
-                    stroke-width="2" />
-                <ellipse cx="60" cy="55" rx="14" ry="7" fill="rgba(77,184,102,0.15)" stroke="var(--is)"
-                    stroke-width="2" />
+                <path d="M38 70L24 100M38 70L52 100M82 70L68 100M82 70L96 100" fill="none" stroke="var(--lg)" stroke-width="2" />
+                <ellipse cx="60" cy="55" rx="14" ry="7" fill="rgba(77,184,102,0.15)" stroke="var(--is)" stroke-width="2" />
             </svg>
-            <h2 class="sr d1">Looking for farms that want to build this with us.</h2>
-            <p class="ctab sr d2">We are actively preparing to pilot with 3 to 5 farms and water utilities. We want
-                operational partners who can help test the system in real conditions, validate the workflows, and
-                measure whether it prevents losses and earns trust.</p>
-            <button class="btn-primary sr d3" id="ctaBtn" type="button">Apply for a Pilot</button>
-            <div class="cn sr d4">Let's discuss your sensor mix and field challenges.</div>
+            <h2 class="sr d1">Let's build this together.</h2>
+            <p class="ctab sr d2">We're piloting with 3–5 farms and water utilities. If you have sensors, field challenges, and a desire to move faster — we want to talk.</p>
+            <button class="btn-primary sr d3" id="ctaBtn" type="button">Start a Conversation</button>
+            <div class="cn sr d4">Tell us about your sensor mix and field conditions.</div>
         </div>
     </section>
 
@@ -510,11 +466,12 @@
         <div class="fi">
             <div>
                 <div class="fb" style="font-family: var(--fm); letter-spacing: 0.1em; color: var(--lg);">SustainAI</div>
-                <div class="fsu">Practical AI infrastructure for field and scientific environments.</div>
+                <div class="fsu">Practical AI infrastructure for agriculture and field environments.</div>
+                <div class="fgeo">Built in Raleigh, NC</div>
             </div>
             <div class="fl">
                 <a href="mailto:team@sustain-ai.net">Contact</a>
-                <a href="#">LinkedIn</a>
+                <a href="https://www.linkedin.com/company/sustainai/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
         </div>
         <div class="fc" id="copyright"></div>
@@ -544,6 +501,40 @@
                 </div>
                 <button type="submit" class="cf-submit" id="cf-submit">Submit Request</button>
                 <div class="cf-status" id="cf-status"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Demo Waitlist Modal -->
+    <div class="modal-overlay" id="demoModal">
+        <div class="modal" style="position:relative">
+            <button class="modal-close" id="demoModalClose" aria-label="Close form">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <h3>Join the Demo Waitlist</h3>
+            <p class="modal-sub">Complete this form to access the interactive demo.</p>
+            <form id="demoForm" novalidate>
+                <div class="cf-group">
+                    <label for="df-name">Full Name <span style="color:#c83232">*</span></label>
+                    <input type="text" id="df-name" name="name" required minlength="2" maxlength="200" placeholder="e.g. John Carter" autocomplete="name">
+                    <div class="cf-error" id="df-name-err"></div>
+                </div>
+                <div class="cf-group">
+                    <label for="df-email">Email Address <span style="color:#c83232">*</span></label>
+                    <input type="email" id="df-email" name="email" required placeholder="john@example.com" autocomplete="email">
+                    <div class="cf-error" id="df-email-err"></div>
+                </div>
+                <div class="cf-group">
+                    <label for="df-org">Farm / Organization</label>
+                    <input type="text" id="df-org" name="organization" maxlength="300" placeholder="Carter Family Farm">
+                </div>
+                <div class="cf-group">
+                    <label for="df-msg">What are you looking to explore? <span style="color:#c83232">*</span></label>
+                    <textarea id="df-msg" name="message" required minlength="10" maxlength="5000" placeholder="e.g., I'd like to see how sensor anomaly detection works for water quality..."></textarea>
+                    <div class="cf-error" id="df-msg-err"></div>
+                </div>
+                <button type="submit" class="cf-submit" id="df-submit">Submit &amp; Access Demo</button>
+                <div class="cf-status" id="df-status"></div>
             </form>
         </div>
     </div>

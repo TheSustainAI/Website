@@ -7,20 +7,18 @@
     <meta name="description" content="Interactive product demo of the SustainAI Local Hub — live sensor monitoring, ML anomaly detection, and on-site LLM reasoning.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <!-- DO NOT load styles.css — demo has its own complete stylesheet -->
     <link rel="stylesheet" href="/css/demo.css">
 </head>
 <body class="demo-body">
 
-    <!-- ─── Fixed Sidebar ───────────────────────────────── -->
+    <!-- ─── Desktop Fixed Sidebar ─────────────────────── -->
     <aside class="sidebar">
         <div class="sidebar-logo">
             SustainAI
             <span>Local Hub</span>
         </div>
 
-        <!-- Use div, NOT nav — styles.css applies position:fixed to nav globally -->
-        <div class="side-nav" id="sideNav">
+        <div class="side-nav desktop-nav" id="desktopNav">
             <a href="#" class="active" data-target="view-operations">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 Operations
@@ -39,10 +37,39 @@
             </a>
         </div>
 
-        <div class="bot-nav">
+        <div class="bot-nav desktop-back">
             <a href="/index.html" class="return-btn">← Back to Website</a>
         </div>
+
+        <button class="demo-menu-btn" id="demoMenuBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
     </aside>
+
+    <!-- ─── Mobile Nav Drawer ───────────── -->
+    <div class="demo-nav-drawer" id="demoNavDrawer">
+        <div class="side-nav" id="mobileNav">
+            <a href="#" class="active" data-target="view-operations">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Operations
+            </a>
+            <a href="#" data-target="view-hardware">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                Hardware Nodes
+            </a>
+            <a href="#" data-target="view-intelligence">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Intelligence Logs
+            </a>
+            <a href="#" data-target="view-compliance">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Compliance
+            </a>
+        </div>
+        <div class="bot-nav" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--d-border);width:100%;max-width:300px;text-align:center;">
+            <a href="/index.html" class="return-btn">← Back to Website</a>
+        </div>
+    </div>
 
     <!-- ─── Scrollable Main ──────────────────────────────── -->
     <main class="dash-main">
@@ -63,39 +90,79 @@
                 </div>
             </header>
 
+            <!-- System KPIs -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-label">Uptime</div>
+                    <div class="kpi-value">99.8%</div>
+                    <div class="kpi-sub">Last 30 days</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Active Sensors</div>
+                    <div class="kpi-value" id="kpi-sensors">7 / 8</div>
+                    <div class="kpi-sub">1 offline</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Alerts Today</div>
+                    <div class="kpi-value" id="kpi-alerts">0</div>
+                    <div class="kpi-sub">All clear</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Inference</div>
+                    <div class="kpi-value">Edge</div>
+                    <div class="kpi-sub">On-site · Private</div>
+                </div>
+            </div>
+
             <div class="dash-grid">
 
                 <!-- Sense Layer -->
                 <div class="widget">
                     <div class="w-top">
                         <h3>Sense Layer</h3>
-                        <div class="dbadge success">3 Online</div>
+                        <div class="dbadge success">5 Online</div>
                     </div>
                     <p class="w-sub">Real-time local hardware ingestion.</p>
                     <div class="sensor-list">
                         <div class="sensor-item">
-                            <div class="s-icon">≈</div>
+                            <div class="s-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--d-green2)" stroke-width="2" stroke-linecap="round"><path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2z"/></svg></div>
                             <div class="s-info">
-                                <div class="s-name">South Well Cond.</div>
+                                <div class="s-name">South Well Conductivity</div>
                                 <div class="s-val" id="cond-val">840 µS/cm</div>
                             </div>
                             <div class="s-trend neutral" id="cond-trend">—</div>
                         </div>
                         <div class="sensor-item">
-                            <div class="s-icon">⚲</div>
+                            <div class="s-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--d-green2)" stroke-width="2" stroke-linecap="round"><path d="M7 20.2C7 17 9 14 12 12"/><path d="M17 3.3C17 3.3 22 8 22 12c0 3-2 5-5 5H7"/></svg></div>
                             <div class="s-info">
-                                <div class="s-name">Tract B Soil Moist.</div>
+                                <div class="s-name">Tract B Soil Moisture</div>
                                 <div class="s-val" id="soil-val">28%</div>
                             </div>
                             <div class="s-trend down">↓</div>
                         </div>
                         <div class="sensor-item">
-                            <div class="s-icon">⚡</div>
+                            <div class="s-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--d-green2)" stroke-width="2" stroke-linecap="round"><path d="M2 12h4l3-9 6 18 3-9h4"/></svg></div>
                             <div class="s-info">
-                                <div class="s-name">Main Line Flow</div>
+                                <div class="s-name">Main Line Flow Rate</div>
                                 <div class="s-val" id="flow-val">120 GPM</div>
                             </div>
                             <div class="s-trend up">↑</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="s-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--d-green2)" stroke-width="2" stroke-linecap="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+                            <div class="s-info">
+                                <div class="s-name">Ambient Temperature</div>
+                                <div class="s-val" id="temp-val">68°F</div>
+                            </div>
+                            <div class="s-trend neutral">—</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="s-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--d-green2)" stroke-width="2" stroke-linecap="round"><path d="M9 3h6v8l4 9H5l4-9V3z"/><line x1="9" y1="3" x2="15" y2="3"/></svg></div>
+                            <div class="s-info">
+                                <div class="s-name">pH Level — South Well</div>
+                                <div class="s-val" id="ph-val">7.2</div>
+                            </div>
+                            <div class="s-trend neutral">—</div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +173,7 @@
                         <h3>ML Ops: Anomaly Detection</h3>
                         <div class="dbadge" id="mlStatusBadge">Monitoring</div>
                     </div>
-                    <p class="w-sub">Isolation Forest Model · Water Quality Pipeline</p>
+                    <p class="w-sub">Isolation Forest Model · Water Quality Pipeline · 60-day rolling window</p>
                     <div class="chart-container">
                         <div class="chart-y">
                             <span>1200</span><span>1000</span><span>800</span><span>600</span>
@@ -126,6 +193,10 @@
                             <span>Last Sync</span>
                             <strong>Live</strong>
                         </div>
+                        <div class="meta-item">
+                            <span>Training Data</span>
+                            <strong>2,847 samples</strong>
+                        </div>
                     </div>
                 </div>
 
@@ -138,7 +209,11 @@
                     <div class="llm-log" id="llmLog">
                         <div class="llm-msg system">
                             <div class="msg-ts">04:22 AM (Local)</div>
-                            <div class="msg-body">System nominal. All sensor inputs within historical bounds based on 60-day moving average.</div>
+                            <div class="msg-body">System nominal. All sensor inputs within historical bounds based on 60-day moving average. Knowledge graph sync complete — 127 entities mapped.</div>
+                        </div>
+                        <div class="llm-msg system">
+                            <div class="msg-ts">04:30 AM (Local)</div>
+                            <div class="msg-body">Scheduled retrieval check: county water advisory CA-2026-031 downloaded and indexed. No action items generated.</div>
                         </div>
                     </div>
                     <div id="llmActions" style="opacity:0.3;pointer-events:none;transition:opacity 0.4s;">
@@ -163,32 +238,82 @@
                 </div>
                 <div class="header-actions">
                     <div class="net-status"><div class="pulse-dot"></div>Edge Mesh Active</div>
+                    <button class="dbtn-secondary">Scan Network</button>
                 </div>
             </header>
+
+            <!-- Hardware summary stats -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-label">Total Nodes</div>
+                    <div class="kpi-value">8</div>
+                    <div class="kpi-sub">Deployed</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Online</div>
+                    <div class="kpi-value" style="color:#2a5c38;">7</div>
+                    <div class="kpi-sub">87.5% uptime</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg Latency</div>
+                    <div class="kpi-value">23ms</div>
+                    <div class="kpi-sub">LoRa mesh</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Last Firmware</div>
+                    <div class="kpi-value">v2.4.1</div>
+                    <div class="kpi-sub">3 days ago</div>
+                </div>
+            </div>
+
             <div class="hw-grid">
                 <div class="hw-card">
                     <div class="hw-card-top"><span>Node 1A</span><div class="dbadge success">Online</div></div>
                     <div class="hw-card-name">Main Line Flowmeter</div>
-                    <div class="hw-card-model">SustainAI xT-900</div>
-                    <div class="hw-card-bot"><span>🔋 84%</span><span>Ping: 12 ms</span></div>
+                    <div class="hw-card-model">SustainAI xT-900 · LoRa</div>
+                    <div class="hw-card-bot"><span>BAT 84%</span><span>Ping: 12ms</span><span>Uptime: 47d</span></div>
                 </div>
                 <div class="hw-card">
                     <div class="hw-card-top"><span>Node 1B</span><div class="dbadge success">Online</div></div>
                     <div class="hw-card-name">South Well Conductivity</div>
-                    <div class="hw-card-model">Generic RS-485 Probe</div>
-                    <div class="hw-card-bot"><span>🔌 Wired</span><span>Ping: 14 ms</span></div>
+                    <div class="hw-card-model">Generic RS-485 Probe · Wired</div>
+                    <div class="hw-card-bot"><span>PWR Wired</span><span>Ping: 14ms</span><span>Uptime: 112d</span></div>
                 </div>
                 <div class="hw-card">
                     <div class="hw-card-top"><span>Node 2A</span><div class="dbadge success">Online</div></div>
                     <div class="hw-card-name">Tract B Soil Array</div>
-                    <div class="hw-card-model">SustainAI M-Series</div>
-                    <div class="hw-card-bot"><span>🔋 92%</span><span>Ping: 45 ms</span></div>
+                    <div class="hw-card-model">SustainAI M-Series · LoRa</div>
+                    <div class="hw-card-bot"><span>BAT 92%</span><span>Ping: 45ms</span><span>Uptime: 31d</span></div>
+                </div>
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 2B</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">Tract B Soil N/P/K</div>
+                    <div class="hw-card-model">SustainAI M-Series · LoRa</div>
+                    <div class="hw-card-bot"><span>BAT 88%</span><span>Ping: 48ms</span><span>Uptime: 31d</span></div>
+                </div>
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 3A</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">Weather Station — Central</div>
+                    <div class="hw-card-model">Davis Vantage Pro2 · WiFi</div>
+                    <div class="hw-card-bot"><span>PWR AC</span><span>Ping: 8ms</span><span>Uptime: 204d</span></div>
+                </div>
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 3B</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">South Well pH Probe</div>
+                    <div class="hw-card-model">Atlas EZO-pH · RS-485</div>
+                    <div class="hw-card-bot"><span>PWR Wired</span><span>Ping: 16ms</span><span>Uptime: 89d</span></div>
+                </div>
+                <div class="hw-card">
+                    <div class="hw-card-top"><span>Node 4A</span><div class="dbadge success">Online</div></div>
+                    <div class="hw-card-name">Ambient Temp/Humidity</div>
+                    <div class="hw-card-model">SustainAI xT-900 · LoRa</div>
+                    <div class="hw-card-bot"><span>BAT 76%</span><span>Ping: 34ms</span><span>Uptime: 22d</span></div>
                 </div>
                 <div class="hw-card" style="opacity:0.55;">
                     <div class="hw-card-top"><span>Node 4C</span><div class="dbadge danger">Offline</div></div>
                     <div class="hw-card-name">Tract C Moisture</div>
-                    <div class="hw-card-model">SustainAI M-Series</div>
-                    <div class="hw-card-bot"><span>🔋 —</span><span>Last: 2h ago</span></div>
+                    <div class="hw-card-model">SustainAI M-Series · LoRa</div>
+                    <div class="hw-card-bot"><span>BAT —</span><span>Last: 2h ago</span><span>Check pending</span></div>
                 </div>
             </div>
         </div>
@@ -201,29 +326,109 @@
                     <div class="breadcrumb">Hub 01 / AI Reasoning</div>
                     <h1>Intelligence Logs</h1>
                 </div>
+                <div class="header-actions">
+                    <div class="net-status"><div class="pulse-dot"></div>LLM Active</div>
+                    <button class="dbtn-secondary">Export Logs</button>
+                </div>
             </header>
+
+            <!-- Log summary -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-label">Total Queries</div>
+                    <div class="kpi-value">1,247</div>
+                    <div class="kpi-sub">Last 30 days</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Avg Response</div>
+                    <div class="kpi-value">4.2s</div>
+                    <div class="kpi-sub">On-site LLM</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Anomalies</div>
+                    <div class="kpi-value">3</div>
+                    <div class="kpi-sub">Auto-detected</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Knowledge Base</div>
+                    <div class="kpi-value">5,127</div>
+                    <div class="kpi-sub">Documents indexed</div>
+                </div>
+            </div>
+
             <div class="log-list">
                 <div class="log-item alert">
                     <div>
-                        <div class="log-meta">Today · 04:30 AM</div>
-                        <div class="log-title" style="color:#c83232;">Conductivity Anomaly Detected</div>
-                        <div class="log-desc">Auto-shutoff protocol requested. Pending operator acknowledgment.</div>
+                        <div class="log-meta">Today · 04:30 AM · <span class="log-sev critical">CRITICAL</span></div>
+                        <div class="log-title" style="color:#c83232;">Conductivity Anomaly — South Well</div>
+                        <div class="log-desc">Isolation Forest flagged 1180 µS/cm reading (threshold: 900). Auto-shutoff protocol requested. Pending operator acknowledgment.</div>
+                    </div>
+                    <button class="dbtn-secondary" style="white-space:nowrap;">View Trace</button>
+                </div>
+                <div class="log-item alert">
+                    <div>
+                        <div class="log-meta">Today · 04:28 AM · <span class="log-sev warning">WARNING</span></div>
+                        <div class="log-title" style="color:#b8860b;">Soil Moisture Dropping — Tract B</div>
+                        <div class="log-desc">Moisture at 24%, below 28% threshold. Correlated with 1.2in precipitation runoff creating surface saturation but subsurface drying.</div>
                     </div>
                     <button class="dbtn-secondary" style="white-space:nowrap;">View Trace</button>
                 </div>
                 <div class="log-item resolved">
                     <div>
-                        <div class="log-meta">Yesterday · 14:12 PM</div>
+                        <div class="log-meta">Yesterday · 14:12 PM · <span class="log-sev info">INFO</span></div>
                         <div class="log-title">LLM Query — Soil Nitrogen Levels</div>
-                        <div class="log-desc">Operator 'J. Carter' requested N-status. Context retrieved in 0.8s.</div>
+                        <div class="log-desc">Operator 'J. Carter' asked: "What are N levels across Tract B?" Context retrieved in 0.8s from 12 local documents. Response grounded with 3 citations.</div>
+                    </div>
+                    <button class="dbtn-secondary" style="white-space:nowrap;">View Trace</button>
+                </div>
+                <div class="log-item resolved">
+                    <div>
+                        <div class="log-meta">Yesterday · 09:44 AM · <span class="log-sev info">INFO</span></div>
+                        <div class="log-title">LLM Query — Fertilizer Application Window</div>
+                        <div class="log-desc">Operator 'M. Torres' asked: "Can I apply 28-0-0 before rain?" LLM cross-referenced weather forecast + soil saturation. Advised 48hr delay.</div>
                     </div>
                     <button class="dbtn-secondary" style="white-space:nowrap;">View Trace</button>
                 </div>
                 <div class="log-item">
                     <div>
-                        <div class="log-meta">Oct 12 · 09:00 AM</div>
+                        <div class="log-meta">2 days ago · 16:30 PM · <span class="log-sev info">INFO</span></div>
+                        <div class="log-title">County Advisory Indexed</div>
+                        <div class="log-desc">Advisory CA-2026-031 (Water Quality Update) automatically downloaded and indexed into the knowledge graph. 14 new regulatory entities mapped.</div>
+                    </div>
+                </div>
+                <div class="log-item">
+                    <div>
+                        <div class="log-meta">3 days ago · 06:15 AM · <span class="log-sev warning">WARNING</span></div>
+                        <div class="log-title">pH Drift Detected — South Well</div>
+                        <div class="log-desc">pH dropped from 7.4 to 6.8 over 12 hours. Model flagged as within seasonal variance. No action required — logged for trend analysis.</div>
+                    </div>
+                </div>
+                <div class="log-item resolved">
+                    <div>
+                        <div class="log-meta">4 days ago · 11:20 AM · <span class="log-sev info">INFO</span></div>
+                        <div class="log-title">LLM Query — Compliance Deadline Check</div>
+                        <div class="log-desc">Operator 'J. Carter' asked: "When is our next water quality filing?" Retrieved filing schedule from indexed county docs. Due: April 15, 2026.</div>
+                    </div>
+                </div>
+                <div class="log-item">
+                    <div>
+                        <div class="log-meta">5 days ago · 09:00 AM · <span class="log-sev info">INFO</span></div>
                         <div class="log-title">Model Weights Updated</div>
-                        <div class="log-desc">Local Isolation Forest retrained on 30 days of site-specific data.</div>
+                        <div class="log-desc">Local Isolation Forest retrained on 2,847 samples (60-day site-specific window). Precision: 98.2%, Recall: 96.7%.</div>
+                    </div>
+                </div>
+                <div class="log-item resolved">
+                    <div>
+                        <div class="log-meta">1 week ago · 07:45 AM · <span class="log-sev warning">WARNING</span></div>
+                        <div class="log-title">Flow Anomaly — Main Line</div>
+                        <div class="log-desc">Flow rate spiked to 185 GPM (normal: 110-130). Resolved: irrigation valve left open by field crew. Operator acknowledged within 12 min.</div>
+                    </div>
+                </div>
+                <div class="log-item">
+                    <div>
+                        <div class="log-meta">2 weeks ago · 14:00 PM · <span class="log-sev info">INFO</span></div>
+                        <div class="log-title">Knowledge Graph Expansion</div>
+                        <div class="log-desc">Added 342 entities from new USDA soil survey data (Johnston County). Graph now contains 4,892 total entities across 127 document sources.</div>
                     </div>
                 </div>
             </div>
@@ -238,15 +443,44 @@
                     <h1>Compliance Reports</h1>
                 </div>
                 <div class="header-actions">
-                    <button class="dbtn-secondary">+ Generate Report</button>
+                    <button class="dbtn-primary">+ Generate Report</button>
+                    <button class="dbtn-secondary">Export All</button>
                 </div>
             </header>
+
+            <!-- Compliance summary -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-label">Reports Filed</div>
+                    <div class="kpi-value">14</div>
+                    <div class="kpi-sub">This year</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Next Deadline</div>
+                    <div class="kpi-value">Apr 15</div>
+                    <div class="kpi-sub">Water Q2 filing</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Auto-Generated</div>
+                    <div class="kpi-value">9</div>
+                    <div class="kpi-sub">From sensor data</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Compliance Score</div>
+                    <div class="kpi-value" style="color:#2a5c38;">100%</div>
+                    <div class="kpi-sub">All filings on time</div>
+                </div>
+            </div>
+
             <div class="doc-grid">
-                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Water Q1 Audit</div><div class="doc-date">Mar 30, 2025</div></div>
-                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">County Soil Log</div><div class="doc-date">Mar 15, 2025</div></div>
-                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Runoff Event Mar-12</div><div class="doc-date">Mar 13, 2025</div></div>
-                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Annual Hardware Audit</div><div class="doc-date">Jan 1, 2025</div></div>
-                <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Fertilizer Runoff Q4</div><div class="doc-date">Dec 31, 2024</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="doc-name">Water Q1 2026 Audit</div><div class="doc-date">Mar 30, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="doc-name">County Soil Log — Tract B</div><div class="doc-date">Mar 15, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="doc-name">Runoff Event Report — Mar 12</div><div class="doc-date">Mar 13, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="17" x2="8" y2="11"/><line x1="12" y1="17" x2="12" y2="7"/><line x1="16" y1="17" x2="16" y2="13"/></svg></div><div class="doc-name">Nutrient Balance Analysis</div><div class="doc-date">Feb 28, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M9 3h6v8l4 9H5l4-9V3z"/><line x1="9" y1="3" x2="15" y2="3"/></svg></div><div class="doc-name">pH Trend Report — South Well</div><div class="doc-date">Feb 15, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="doc-name">Annual Hardware Calibration</div><div class="doc-date">Jan 15, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="doc-name">Water Annual Summary 2025</div><div class="doc-date">Jan 1, 2026</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
+                <div class="doc-card"><div class="doc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--d-green3)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="doc-name">Fertilizer Runoff Q4 2025</div><div class="doc-date">Dec 31, 2025</div><div class="dbadge success" style="font-size:0.65rem;">Filed</div></div>
             </div>
         </div>
 

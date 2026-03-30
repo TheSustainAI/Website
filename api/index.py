@@ -1,10 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 import json
 import os
 import httpx
+
+# Resolve the project root (one level up from /api/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI(
     title="SustainAI API",
@@ -24,6 +29,25 @@ RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
 TEAM_EMAIL = "team@sustain-ai.net"
 
 
+# ── Static asset directories ────────────────────────────────
+app.mount("/css",    StaticFiles(directory=os.path.join(BASE_DIR, "css")),    name="css")
+app.mount("/js",     StaticFiles(directory=os.path.join(BASE_DIR, "js")),     name="js")
+app.mount("/images", StaticFiles(directory=os.path.join(BASE_DIR, "images")), name="images")
+
+
+# ── HTML pages ──────────────────────────────────────────────
+@app.get("/", response_class=FileResponse, include_in_schema=False)
+async def serve_index():
+    return FileResponse(os.path.join(BASE_DIR, "index.html"))
+
+
+@app.get("/demo", response_class=FileResponse, include_in_schema=False)
+@app.get("/demo.html", response_class=FileResponse, include_in_schema=False)
+async def serve_demo():
+    return FileResponse(os.path.join(BASE_DIR, "demo.html"))
+
+
+# ── Data models ─────────────────────────────────────────────
 class ContactRequest(BaseModel):
     name: str = Field(..., min_length=1, max_length=200)
     email: str = Field(..., min_length=5, max_length=254)
@@ -42,6 +66,7 @@ class HealthResponse(BaseModel):
     version: str
 
 
+# ── Health ──────────────────────────────────────────────────
 @app.get("/api/health", response_model=HealthResponse)
 async def health_check():
     return HealthResponse(
@@ -51,6 +76,7 @@ async def health_check():
     )
 
 
+# ── Contact form ─────────────────────────────────────────────
 @app.post("/api/contact", response_model=ContactResponse)
 async def submit_contact(payload: ContactRequest):
     try:
@@ -112,3 +138,4 @@ async def submit_contact(payload: ContactRequest):
     except Exception as e:
         print(f"[CONTACT] Error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to process your request.")
+

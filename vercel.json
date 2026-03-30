@@ -9,11 +9,19 @@
       "use": "@vercel/static"
     },
     {
+      "src": "demo.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "css/**",
       "use": "@vercel/static"
     },
     {
       "src": "js/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**",
       "use": "@vercel/static"
     }
   ],
@@ -21,6 +29,10 @@
     {
       "source": "/api/(.*)",
       "destination": "/api/index.py"
+    },
+    {
+      "source": "/demo",
+      "destination": "/demo.html"
     }
   ],
   "headers": [

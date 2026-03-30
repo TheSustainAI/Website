@@ -15,11 +15,13 @@ nav.scrolled{box-shadow:0 10px 40px rgba(0,0,0,0.04);background:rgba(255,255,255
 .nl{font-family:var(--fm);font-size:1.05rem;font-weight:600;color:var(--ik);text-decoration:none;display:flex;align-items:center;gap:10px}
 .nm{width:30px;height:30px;background:var(--gd);border-radius:8px;display:flex;align-items:center;justify-content:center}
 .nm svg{width:16px;height:16px}
-.nr{display:flex;align-items:center;gap:28px}
+/* Desktop: .nr is fixed to match the nav bar (it lives outside <nav> to avoid stacking context issues) */
+.nr{position:fixed;top:0;right:48px;height:68px;display:flex;align-items:center;gap:28px;z-index:101}
 .nk{font-size:.95rem;font-weight:500;color:var(--im);text-decoration:none;transition:color .2s}
 .nk:hover{color:var(--ik)}
 .nc{font-family:var(--fb);font-size:.95rem;font-weight:600;padding:9px 24px;background:var(--gd);color:#fff;border:none;border-radius:100px;cursor:pointer;text-decoration:none;transition:all .3s}
 .nc:hover{background:var(--g);transform:translateY(-1px);box-shadow:0 4px 16px rgba(42,92,56,0.15)}
+
 
 /* === Scroll Reveal === */
 .sr{opacity:0;transform:translateY(60px) scale(0.97);filter:blur(4px);transition:opacity 1.2s cubic-bezier(0.16,1,0.3,1),transform 1.2s cubic-bezier(0.16,1,0.3,1),filter 1s cubic-bezier(0.16,1,0.3,1);will-change:opacity,transform,filter}
@@ -39,11 +41,16 @@ nav.scrolled{box-shadow:0 10px 40px rgba(0,0,0,0.04);background:rgba(255,255,255
 .hero::before{content:'';position:absolute;top:-20%;right:-10%;width:800px;height:800px;background:radial-gradient(circle,rgba(77,184,102,0.15)0%,transparent 60%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-30%;left:-20%;width:900px;height:900px;background:radial-gradient(circle,rgba(93,168,114,0.1)0%,transparent 50%);pointer-events:none}
 .hc{text-align:center;max-width:880px;position:relative;z-index:1}
-.ht{font-family:var(--fm);font-size:.85rem;font-weight:500;color:var(--gm);letter-spacing:.12em;text-transform:uppercase;margin-bottom:32px;display:inline-block;padding:6px 16px;background:rgba(42,92,56,0.06);border:1px solid rgba(42,92,56,0.1);border-radius:100px}
+.ht{font-family:var(--fm);font-size:.85rem;font-weight:500;color:var(--gm);letter-spacing:.12em;text-transform:uppercase;margin-bottom:32px;display:inline-block;padding:6px 16px;background:rgba(42,92,56,0.06);border:1px solid rgba(42,92,56,0.1);border-radius:100px;animation:subtlePulse 3s ease-in-out infinite}
+@keyframes subtlePulse{0%,100%{box-shadow:0 0 0 0 rgba(77,184,102,0)}50%{box-shadow:0 0 0 8px rgba(77,184,102,0.08)}}
 .hero h1{font-family:var(--fd);font-size:clamp(3rem,6.5vw,5.5rem);font-weight:400;color:var(--ik);line-height:1.05;letter-spacing:-.03em;margin-bottom:28px}
 .hero h1 em{font-style:italic;color:var(--gm);font-weight:300}
 .hs{font-size:1.35rem;font-weight:300;color:var(--im);max-width:620px;margin:0 auto 48px;line-height:1.75}
-.hc-actions{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:40px}
+.hc-actions{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px}
+
+/* Hero social proof badge */
+.hero-proof{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--fm);font-size:.8rem;font-weight:500;color:var(--im);letter-spacing:.02em;margin-bottom:24px;opacity:0.8}
+.proof-dot{width:4px;height:4px;border-radius:50%;background:var(--gm);flex-shrink:0}
 
 /* === Global Button Styles === */
 .btn-primary{font-family:var(--fb);font-size:1.05rem;font-weight:500;padding:16px 40px;background:var(--gd);color:#fff;border:none;border-radius:100px;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-block;box-shadow:0 8px 24px rgba(27,58,35,0.15)}
@@ -91,9 +98,10 @@ nav.scrolled{box-shadow:0 10px 40px rgba(0,0,0,0.04);background:rgba(255,255,255
 .ucc h2{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--ik);margin-bottom:20px}
 .uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .uc-card{padding:40px;background:var(--cw);border:1px solid rgba(0,0,0,0.04);border-radius:20px;transition:all .3s;box-shadow:0 4px 12px rgba(0,0,0,0.02)}
-.uc-card:hover{background:var(--cw);border-color:rgba(77,184,102,0.2);box-shadow:0 12px 30px rgba(0,0,0,0.05);transform:translateY(-2px)}
+.uc-card:hover{background:var(--cw);border-color:rgba(77,184,102,0.2);box-shadow:0 12px 30px rgba(0,0,0,0.05);transform:translateY(-2px);border-left:3px solid var(--gm)}
 .uc-card h3{font-family:var(--fd);font-size:1.5rem;font-weight:500;color:var(--ik);margin-bottom:12px}
 .uc-card p{font-size:1.05rem;color:var(--is);line-height:1.6;font-weight:300}
+.uc-icon{display:block;margin-bottom:16px;opacity:0.85}
 
 /* === Envision (5:30 AM Workflow) === */
 .env{padding:160px 48px;position:relative;overflow:hidden}
@@ -121,7 +129,9 @@ nav.scrolled{box-shadow:0 10px 40px rgba(0,0,0,0.04);background:rgba(255,255,255
 .prfsg{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .prfs{background:var(--cw);border:1px solid rgba(0,0,0,0.04);border-radius:16px;padding:32px 24px;text-align:center;transition:all .3s;box-shadow:0 4px 12px rgba(0,0,0,0.02)}
 .prfs:hover{box-shadow:0 16px 30px rgba(0,0,0,0.06);transform:translateY(-4px);border-color:rgba(77,184,102,0.2)}
-.prfsn{font-family:var(--fd);font-size:2.4rem;font-weight:500;color:var(--gd);line-height:1;margin-bottom:8px}
+.prfsn{font-family:var(--fd);font-size:2.4rem;font-weight:500;color:var(--gd);line-height:1;margin-bottom:8px;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+.prfs.vis .prfsn{animation:statPop 0.6s cubic-bezier(0.16,1,0.3,1)}
+@keyframes statPop{0%{transform:scale(0.7);opacity:0}100%{transform:scale(1);opacity:1}}
 .prfsl{font-size:1rem;font-weight:300;color:var(--im)}
 
 /* === Differentiators === */
@@ -134,6 +144,8 @@ nav.scrolled{box-shadow:0 10px 40px rgba(0,0,0,0.04);background:rgba(255,255,255
 .di:hover{border-color:rgba(77,184,102,0.2);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.06)}
 .di h3{font-family:var(--fd);font-size:1.3rem;font-weight:500;color:var(--ik);margin-bottom:12px}
 .di p{font-size:1.05rem;font-weight:300;color:var(--is);line-height:1.6}
+.di-icon{display:block;margin-bottom:16px;opacity:0.75}
+.di:hover .di-icon{opacity:1}
 
 /* === Team === */
 .team{padding:140px 48px;position:relative;overflow:hidden}
@@ -150,6 +162,15 @@ nav.scrolled{box-shadow:0 10px 40px rgba(0,0,0,0.04);background:rgba(255,255,255
 .tm::before{content:'';position:absolute;left:50%;top:50%;width:12px;height:12px;background:var(--cw);border:2px solid var(--gm);border-radius:50%;transform:translate(-50%,-50%);z-index:2;box-shadow:0 0 0 4px rgba(77,184,102,0.1)}
 .tp{display:flex;justify-content:center;align-items:center}
 .tp svg{width:280px;height:300px}
+.team-photo{
+  width:240px;height:240px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center top;
+  border:3px solid rgba(77,184,102,0.25);
+  box-shadow:0 8px 32px rgba(0,0,0,0.08);
+  display:block;
+}
 .tinfo{padding:0 20px}
 .tn{font-family:var(--fd);font-size:1.8rem;font-weight:500;color:var(--ik);margin-bottom:8px}
 .tr{font-family:var(--fm);font-size:.9rem;font-weight:500;color:var(--gm);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
@@ -175,6 +196,7 @@ footer{padding:60px 48px 40px;border-top:1px solid rgba(0,0,0,0.04)}
 .fl{display:flex;gap:28px}
 .fl a{font-size:.95rem;font-weight:400;color:var(--im);text-decoration:none;transition:color .2s}
 .fl a:hover{color:var(--ik)}
+.fgeo{font-family:var(--fm);font-size:.8rem;font-weight:400;color:var(--il);margin-top:6px;letter-spacing:0.03em}
 .fc{padding:24px 0 0;font-size:.8rem;color:var(--il);font-weight:300;text-align:center;border-top:1px solid rgba(0,0,0,0.04);margin-top:40px}
 
 /* === Utilities & Modal === */
@@ -219,6 +241,16 @@ body.loaded{opacity:1;transition:opacity .5s ease}
 .cf-spinner{width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* Error messages for validation */
+.cf-error{font-size:.78rem;color:#c83232;margin-top:6px;min-height:0;transition:all .2s}
+.cf-error:empty{display:none}
+.cf-group input.invalid,.cf-group textarea.invalid{border-color:#c83232;box-shadow:0 0 0 3px rgba(200,50,50,0.1)}
+.cf-group input.valid,.cf-group textarea.valid{border-color:var(--gm);box-shadow:0 0 0 3px rgba(58,122,76,0.1)}
+
+/* Demo nav link accent */
+.demo-nav-link{position:relative}
+
+
 /* === Responsive === */
 
 /* ── Tablet (≤1000px) ─────────────────────────────────── */
@@ -232,6 +264,7 @@ body.loaded{opacity:1;transition:opacity .5s ease}
   .tp{justify-content:flex-start}
   .sol,.prob,.usecases,.prf,.dif,.team,.about,.cta{padding-left:36px;padding-right:36px}
   .tp svg{width:220px;height:240px}
+  .team-photo{width:200px;height:200px}
 }
 
 /* ── Small Tablet (≤768px) ────────────────────────────── */
@@ -250,6 +283,74 @@ body.loaded{opacity:1;transition:opacity .5s ease}
   .fl{justify-content:center;flex-wrap:wrap;gap:16px}
   .prfsg{grid-template-columns:1fr 1fr}
   .tp svg{width:200px;height:220px}
+  .team-photo{width:180px;height:180px}
+}
+
+/* ── Mobile (≤768px) — Hamburger ────────────────────────── */
+@media(max-width:768px){
+  nav{padding:0 20px;height:60px}
+  .hb{display:flex !important}
+
+  /* Panel sits below nav, slides down — NOT full-screen */
+  .nr{
+    position:fixed !important;
+    top:60px !important;
+    left:0 !important; right:0 !important;
+    height:auto !important;
+    max-height:0;
+    overflow:hidden;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    padding:0 !important;
+    background:#fff;
+    border-bottom:1px solid rgba(0,0,0,0.06);
+    box-shadow:0 16px 48px rgba(0,0,0,0.1);
+    z-index:9999;
+    transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Open: expand to auto height (capped so page is still visible) */
+  .nr.open{
+    display:flex !important;
+    max-height:70vh;
+    padding:12px 0 16px !important;
+    overflow-y:auto;
+  }
+
+  /* Nav links — big, centered rows */
+  .nr .nk{
+    display:block !important;
+    width:100% !important;
+    text-align:center;
+    padding:16px 24px;
+    font-size:1.15rem;
+    font-weight:500;
+    color:var(--ik);
+    text-decoration:none;
+    transition:background 0.15s, color 0.15s;
+    border-radius:0;
+  }
+  .nr .nk:hover{background:rgba(77,184,102,0.06);color:var(--gm)}
+
+  /* CTA — separator line + green accent */
+  .nr .nc{
+    display:block !important;
+    width:auto !important;
+    text-align:center;
+    padding:16px 24px;
+    margin:4px 24px 0;
+    font-size:1rem;
+    font-weight:600;
+    color:#fff;
+    background:var(--gd);
+    border-radius:12px;
+    text-decoration:none;
+    transition:background 0.2s;
+    box-shadow:none;
+    transform:none;
+  }
+  .nr .nc:hover{background:var(--g);transform:none;box-shadow:none}
 }
 
 /* ── Mobile (≤600px) ──────────────────────────────────── */
@@ -258,20 +359,8 @@ body.loaded{opacity:1;transition:opacity .5s ease}
   section,.hero,.prob,.usecases,.sol,.prf,.dif,.cta,.team,.about{padding-left:20px!important;padding-right:20px!important}
   .hero{padding-top:112px;padding-bottom:56px}
 
-  /* Nav */
-  nav{padding:0 20px;height:60px;background:rgba(247,252,248,0.97)}
-  .hb{display:flex}
-  /* Mobile fullscreen menu overlay */
-  .nr{
-    position:fixed;top:0;left:0;right:0;bottom:0;
-    background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-    flex-direction:column;align-items:center;justify-content:center;
-    gap:28px;opacity:0;visibility:hidden;transition:all .35s;z-index:100;
-    display:flex
-  }
-  .nr.open{opacity:1;visibility:visible}
-  .nr .nk{font-size:1.25rem;font-weight:500;color:var(--ik)}
-  .nr .nc{font-size:1.05rem;padding:14px 36px}
+  /* Nav handled by ≤768px block above — no overrides needed here */
+  nav{background:rgba(247,252,248,0.99)}
 
   /* Hero */
   .hero h1{font-size:clamp(2.2rem,9vw,2.8rem);letter-spacing:-.015em}
@@ -298,6 +387,7 @@ body.loaded{opacity:1;transition:opacity .5s ease}
   .tm:nth-child(even){direction:ltr}
   .tp{justify-content:center}
   .tp svg{width:180px;height:200px}
+  .team-photo{width:150px;height:150px}
   .tinfo{padding:0}
   .tn{font-size:1.5rem}
 
