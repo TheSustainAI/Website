@@ -4,730 +4,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SustainAI | Local-First AI for Agriculture</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
+    <title>SustainAI - One Clear Answer</title>
     <meta name="description"
-        content="SustainAI is a local-first AI systems company building practical intelligence for agriculture and field environments.">
-    <meta name="theme-color" content="#030604">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="SustainAI. Local-first AI for agriculture">
+        content="SustainAI turns fragmented agricultural data into immediate, actionable decisions. On-site. In real time. Even without internet.">
+    <meta property="og:title" content="SustainAI — One Clear Answer">
     <meta property="og:description"
-        content="Private AI infrastructure for farms. Turning fragmented data into clear, timely decisions. Built for the people who need it most.">
-    <meta property="og:url" content="https://sustain-ai.net">
+        content="From dashboards to decisions. AI that actually works at the edge of the field.">
+    <meta property="og:type" content="website">
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050a06'/%3E%3Cpath d='M16 6v20M9 13c3-4 7-4 7-4s4 0 7 4M11 19c2-3 5-3 5-3s3 0 5 3' stroke='%234db866' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="/css/styles.css">
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232a5c38'/%3E%3Cpath d='M16 8 L16 20 M10 14 L16 8 L22 14' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
-<body class="loading">
-    <a href="#main" class="skip-link">Skip to main content</a>
-    <nav id="nav" aria-label="Main navigation">
-        <a href="#" class="nl">
-            <span class="nm">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#4db866" stroke-width="2" stroke-linecap="round">
-                    <path d="M12 3v18" />
-                    <path d="M6 10c2.5-3 6-3 6-3s3.5 0 6 3" />
-                    <path d="M8 15c1.5-2 4-2 4-2s2.5 0 4 2" />
+<body>
+
+    <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav__inner">
+            <a href="#" class="nav__logo" aria-label="SustainAI Home">
+                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <circle cx="16" cy="16" r="14" stroke="#2a5c38" stroke-width="1.5" fill="rgba(42,92,56,0.08)" />
+                    <path d="M16 22V12M11 16l5-5 5 5" stroke="#2a5c38" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="16" cy="24" r="1.5" fill="#4db866" />
                 </svg>
-            </span>SustainAI
-        </a>
-        <button class="hb" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+                SustainAI
+            </a>
+
+            <ul class="nav__links" role="list">
+                <li><a href="./story.html" class="nav__link">Story</a></li>
+                <li><a href="./story2.html" class="nav__link">Ecosystem</a></li>
+                <li><a href="#solution" class="nav__link">Solution</a></li>
+                <li><a href="#demo" class="nav__link">Demo</a></li>
+                <li><a href="#proof" class="nav__link">Proof</a></li>
+                <li><a href="#team" class="nav__link">Team</a></li>
+                <li><a href="#" class="nav__cta" data-modal="contact">Talk to Us</a></li>
+            </ul>
+
+            <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div class="nav__mobile" id="mobileMenu">
+            <a href="./story.html" class="mobile-link">Story</a>
+            <a href="./story2.html" class="mobile-link">Ecosystem</a>
+            <a href="#solution" class="mobile-link">Solution</a>
+            <a href="#demo" class="mobile-link">Demo</a>
+            <a href="#proof" class="mobile-link">Proof</a>
+            <a href="#team" class="mobile-link">Team</a>
+            <a href="#" class="mobile-link" data-modal="contact">Talk to Us</a>
+        </div>
     </nav>
 
-    <!-- Mobile nav overlay — OUTSIDE <nav> to escape backdrop-filter stacking context -->
-    <div class="nr" id="navMenu">
-        <a href="#prob" class="nk">Problem</a>
-        <a href="#sol" class="nk">Platform</a>
-        <a href="#usecases" class="nk">Use Cases</a>
-        <a href="#about" class="nk">About</a>
-        <a href="#prfs" class="nk">Evidence</a>
-        <a href="#team" class="nk">Team</a>
-        <a href="#" class="nk demo-nav-link" id="demoNavBtn">Try Demo</a>
-        <a href="#cta" class="nc">Request a Pilot</a>
-    </div>
-
-
-    <section class="hero" id="main">
-        <div class="hc">
-            <div class="ht sr d1">Local-First AI for Agriculture</div>
-            <h1 class="sr d2">AI that works where <em>your farm</em> does</h1>
-            <p class="hs sr d3">Turn sensor noise into clear decisions. On-site, offline ready, and built for the people
-                who grow our food.</p>
-            <div class="hc-actions sr d4">
-                <a href="#cta" class="btn-primary">Request a Pilot</a>
-                <a href="#sol" class="btn-secondary">See How It Works</a>
+    <!-- ============================================================
+       1. HERO
+       ============================================================ -->
+    <section class="hero" id="hero">
+        <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+        <div class="hero__content">
+            <h1 class="hero__headline reveal">One clear decision.</h1>
+            <p class="hero__sub reveal reveal-delay-1">SustainAI turns fragmented agricultural data into immediate,
+                actionable decisions. On-site. In real time. Even without internet.</p>
+            <div class="hero__ctas reveal reveal-delay-2">
+                <a href="#demo" class="btn btn--primary btn--large">See It In Action</a>
+                <button class="btn btn--secondary btn--large" data-modal="contact">Talk to Us</button>
             </div>
-            <div class="hero-proof sr d5">
-                <span>On-site inference</span>
-                <span class="proof-dot"></span>
-                <span>Your data never leaves your farm</span>
-                <span class="proof-dot"></span>
-                <span>Born at NC State</span>
-            </div>
-            <svg class="sr d5 parallax" data-speed="0.08" width="680" height="260" viewBox="0 0 520 200" fill="none"
-                style="display:block;margin:48px auto 0;opacity:0.85;max-width:100%">
-
-                <!-- SENSE: Left cluster (sensors) -->
-                <circle cx="60" cy="70" r="18" fill="rgba(77,184,102,0.08)" stroke="var(--lg)" stroke-width="1.2" />
-                <text x="60" y="74" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
-                    fill="var(--lg)" font-weight="500">H₂O</text>
-                <circle cx="45" cy="130" r="14" fill="rgba(77,184,102,0.06)" stroke="var(--lg)" stroke-width="1" />
-                <text x="45" y="134" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
-                    fill="var(--lg)">pH</text>
-                <circle cx="100" cy="145" r="12" fill="rgba(77,184,102,0.06)" stroke="var(--gm)" stroke-width="1" />
-                <text x="100" y="149" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7"
-                    fill="var(--gm)">SOIL</text>
-                <text x="70" y="26" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
-                    fill="var(--im)" letter-spacing="0.08em" font-weight="500">SENSE</text>
-                <line x1="70" y1="32" x2="70" y2="48" stroke="var(--lg)" stroke-width="0.8" opacity="0.3" />
-
-                <!-- Animated data lines: Sense → Hub -->
-                <line x1="78" y1="72" x2="195" y2="88" stroke="var(--lg)" stroke-width="1" stroke-dasharray="5,4"
-                    opacity="0.5">
-                    <animate attributeName="stroke-dashoffset" values="36;0" dur="2.5s" repeatCount="indefinite" />
-                </line>
-                <line x1="59" y1="118" x2="195" y2="95" stroke="var(--lg)" stroke-width="0.8" stroke-dasharray="4,4"
-                    opacity="0.35">
-                    <animate attributeName="stroke-dashoffset" values="32;0" dur="3s" repeatCount="indefinite" />
-                </line>
-                <line x1="110" y1="138" x2="195" y2="100" stroke="var(--gm)" stroke-width="0.8" stroke-dasharray="4,4"
-                    opacity="0.3">
-                    <animate attributeName="stroke-dashoffset" values="28;0" dur="2.8s" repeatCount="indefinite" />
-                </line>
-
-                <!-- HUB: Center box (intelligence) -->
-                <rect x="195" y="62" width="130" height="70" rx="14" fill="rgba(77,184,102,0.1)" stroke="var(--lg)"
-                    stroke-width="1.5" />
-                <text x="260" y="88" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10"
-                    fill="var(--gd)" font-weight="600" letter-spacing="0.1em">LOCAL HUB</text>
-                <text x="260" y="105" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="9"
-                    fill="var(--im)">On-site AI reasoning</text>
-                <text x="260" y="118" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="8"
-                    fill="var(--il)">LLM + ML + Knowledge Graph</text>
-                <text x="260" y="42" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
-                    fill="var(--im)" letter-spacing="0.08em" font-weight="500">HUB</text>
-                <line x1="260" y1="48" x2="260" y2="60" stroke="var(--lg)" stroke-width="0.8" opacity="0.3" />
-
-                <!-- Animated data line: Hub → Edge -->
-                <line x1="325" y1="92" x2="400" y2="80" stroke="var(--gd)" stroke-width="1.2" stroke-dasharray="6,4"
-                    opacity="0.5">
-                    <animate attributeName="stroke-dashoffset" values="0;-40" dur="2s" repeatCount="indefinite" />
-                </line>
-                <line x1="325" y1="100" x2="400" y2="130" stroke="var(--gd)" stroke-width="1" stroke-dasharray="5,4"
-                    opacity="0.35">
-                    <animate attributeName="stroke-dashoffset" values="0;-36" dur="2.2s" repeatCount="indefinite" />
-                </line>
-
-                <!-- EDGE: Right output nodes -->
-                <rect x="400" y="60" width="90" height="36" rx="10" fill="rgba(27,58,35,0.08)" stroke="var(--gd)"
-                    stroke-width="1.2" />
-                <text x="445" y="76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
-                    fill="var(--gd)" font-weight="500">ALERT SENT</text>
-                <text x="445" y="88" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="7.5"
-                    fill="var(--im)">Phone / Display</text>
-
-                <rect x="405" y="118" width="85" height="32" rx="10" fill="rgba(27,58,35,0.06)" stroke="var(--gd)"
-                    stroke-width="1" />
-                <text x="447" y="133" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5"
-                    fill="var(--gd)" font-weight="500">REPORT FILED</text>
-                <text x="447" y="144" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="7"
-                    fill="var(--im)">Auto compliance</text>
-
-                <text x="445" y="42" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
-                    fill="var(--im)" letter-spacing="0.08em" font-weight="500">EDGE</text>
-                <line x1="445" y1="48" x2="445" y2="58" stroke="var(--gd)" stroke-width="0.8" opacity="0.3" />
-
-                <!-- Bottom story line -->
-                <text x="260" y="185" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
-                    fill="var(--il)" font-weight="300" font-style="italic">Sensor to decision. No cloud required.</text>
-            </svg>
-        </div>
-    </section>
-
-    <!-- About & Origin Story -->
-    <section class="about" id="about">
-        <div class="aboutc">
-            <div class="about-info">
-                <div class="plbl sr-left">Our Mission</div>
-                <h2 class="sr-left d1"
-                    style="font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;color:var(--ik);margin-bottom:20px;">
-                    Field operations need small, powerful AI. Not disconnected cloud models.</h2>
-                <p class="about-p sr-left d2">We combine on-site sensor data, private documents, and domain knowledge
-                    into one modular system that helps teams decide faster. Local-first, explainable, built for
-                    environments where connectivity is inconsistent and action cannot wait.</p>
-            </div>
-            <div class="about-quote sr-right d1 glass-panel" style="padding: 40px; border-radius: 20px;">
-                <div class="about-q">My father is a farmer. I grew up watching him walk the fields before sunrise,
-                    checking soil by feel. He didn't have sensors or software. He had experience. And most of the time,
-                    that was enough. But when it was not, the cost was real. <span
-                        style="display:block;margin-top:20px;font-size:0.85rem;color:var(--lg);font-family:var(--fm);text-transform:uppercase;font-style:normal;letter-spacing:0.04em;">—
-                        Deepak Sai Pendyala, CEO</span></div>
-                <p style="font-size:1.05rem;font-weight:300;color:var(--is);line-height:1.75;margin-top:20px;">SustainAI
-                    comes from direct exposure to the realities of agriculture. In many field environments, important
-                    decisions rely on fragmented information and tools that don't fit the conditions on the ground. We
-                    built SustainAI to close that gap.</p>
+            <div class="hero__proof reveal reveal-delay-3">
+                <span class="hero__badge">Runs locally</span>
+                <span class="hero__badge">Makes decisions in real time</span>
+                <span class="hero__badge">Connects all your systems together</span>
             </div>
         </div>
     </section>
 
-    <!-- The Problem -->
-    <section class="prob" id="prob">
-        <div class="pc">
-            <div class="plbl sr">The Problem</div>
-            <h2 class="sr d1">Your farm generates data. But data is <em>not</em> a decision.</h2>
-            <p class="pb sr d2">Sensors, weather reports, lab results, and compliance files. All siloed, hard to
-                interpret, and useless without timely action.</p>
+    <!-- ============================================================
+       2. THE MOMENT: 5:30 AM Story
+       ============================================================ -->
+    <section class="story" id="story">
+        <div class="container">
+            <span class="section-label reveal">Imagine This</span>
+            <div class="story__grid">
 
-            <div class="pcs">
-                <div class="pcd glass-panel sr d1">
-                    <div class="pcd-header">
-                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-                            <circle cx="12" cy="24" r="6" stroke="var(--lg)" stroke-width="1.5" />
-                            <circle cx="36" cy="14" r="6" stroke="var(--im)" stroke-width="1.5" />
-                            <circle cx="36" cy="34" r="6" stroke="var(--im)" stroke-width="1.5" />
-                            <line x1="18" y1="24" x2="30" y2="14" stroke="var(--is)" stroke-width="1.5"
-                                stroke-dasharray="3" />
-                            <line x1="18" y1="24" x2="30" y2="34" stroke="var(--is)" stroke-width="1.5"
-                                stroke-dasharray="3" />
-                        </svg>
-                        <h3>Fragmented Data</h3>
+                <!-- Left: all narrative text -->
+                <div class="story__narrative">
+                    <h2 class="story__header reveal">It's 5:30 AM.<br>Your phone buzzes.</h2>
+                    <p class="story__subhead reveal">One notification. Clear and certain.</p>
+                    <p class="story__text reveal">You tap "Initiate Shutoff." The hub on your farm closes the
+                        valve in 340 milliseconds. No cloud. No lag. No waiting around.</p>
+                    <p class="story__text reveal">By the time you finish your coffee, the compliance report is
+                        already filed, the event is logged, and irrigation is adjusted for the rest of the day.</p>
+                    <p class="story__kicker reveal">That's the difference between staring at a dashboard and knowing
+                        what to do.</p>
+                    <div class="story__actions reveal">
+                        <a href="./story.html" class="btn btn--primary">Watch the Field Story →</a>
+                        <a href="./story2.html" class="btn btn--secondary">The Ecosystem Story →</a>
                     </div>
-                    <p>Sensors, lab reports, and compliance docs scattered across systems. Signals exist, but they're
-                        disconnected.</p>
                 </div>
-                <div class="pcd glass-panel sr d2">
-                    <div class="pcd-header">
-                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-                            <rect x="6" y="10" width="36" height="28" rx="4" stroke="var(--lg)" stroke-width="1.5" />
-                            <path d="M12 30 L 20 20 L 28 26 L 36 14" stroke="var(--im)" stroke-width="1.5"
-                                fill="none" />
-                            <circle cx="28" cy="18" r="3" fill="var(--is)" />
-                        </svg>
-                        <h3>Hard to Interpret</h3>
-                    </div>
-                    <p>Raw readings and convoluted dashboards force specialists to decode data before anyone can act.
-                    </p>
-                </div>
-                <div class="pcd glass-panel sr d3">
-                    <div class="pcd-header">
-                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-                            <path d="M12 24 A 18 18 0 0 1 36 24" stroke="var(--is)" stroke-width="1.5"
-                                stroke-dasharray="4" />
-                            <path d="M18 30 A 10 10 0 0 1 30 30" stroke="var(--im)" stroke-width="1.5"
-                                stroke-dasharray="4" />
-                            <circle cx="24" cy="36" r="3" fill="var(--lg)" />
-                            <line x1="10" y1="10" x2="38" y2="38" stroke="var(--lg)" stroke-width="1.5" />
-                        </svg>
-                        <h3>Unreliable Connectivity</h3>
-                    </div>
-                    <p>Cloud tools assume stable internet. Farms and rural field environments rarely have that luxury.
-                    </p>
-                </div>
-                <div class="pcd glass-panel sr d4">
-                    <div class="pcd-header">
-                        <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="16" stroke="var(--lg)" stroke-width="1.5" />
-                            <polyline points="24,12 24,24 32,24" stroke="var(--lg)" stroke-width="1.5" fill="none" />
-                            <line x1="24" y1="4" x2="24" y2="8" stroke="var(--im)" stroke-width="1.5" />
-                        </svg>
-                        <h3>Time Critical Decisions</h3>
-                    </div>
-                    <p>Water quality shifts and disease risks become expensive when guidance arrives an hour too late.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Product Architecture -->
-    <section class="sol" id="sol">
-        <div class="solc">
-            <div class="solh">
-                <div class="plbl sr">Product Architecture</div>
-                <h2 class="sr d1">Three layers. One clear decision.</h2>
-            </div>
-            <div class="sst">
-                <div class="ss glass-panel sr-scale d1">
-                    <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
-                        <circle cx="36" cy="36" r="28" fill="rgba(77,184,102,0.1)" />
-                        <rect x="22" y="26" width="6" height="24" rx="3" stroke="var(--lg)" stroke-width="1.2"
-                            fill="none" />
-                        <rect x="33" y="22" width="6" height="28" rx="3" stroke="var(--lg)" stroke-width="1.2"
-                            fill="none" />
-                        <rect x="44" y="28" width="6" height="22" rx="3" stroke="var(--lg)" stroke-width="1.2"
-                            fill="none" />
-                    </svg>
-                    <div class="ssn">01</div>
-                    <h3>SustainAI Sense</h3>
-                    <div class="sss">Ingestion Layer</div>
-                    <p>Connects to existing field hardware. Water monitors, soil sensors, weather stations. Normalizes
-                        fragmented signals into usable data.</p>
-                </div>
-                <div class="ss glass-panel sr-scale d2">
-                    <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
-                        <circle cx="36" cy="36" r="28" fill="rgba(77,184,102,0.1)" />
-                        <circle cx="36" cy="26" r="4" stroke="var(--lg)" stroke-width="1.2" fill="var(--f0)" />
-                        <circle cx="22" cy="38" r="3.5" stroke="var(--im)" stroke-width="1" fill="var(--f0)" />
-                        <circle cx="50" cy="38" r="3.5" stroke="var(--im)" stroke-width="1" fill="var(--f0)" />
-                        <line x1="33" y1="29" x2="24" y2="36" stroke="var(--lg)" stroke-width="1" opacity="0.6" />
-                        <line x1="39" y1="29" x2="48" y2="36" stroke="var(--lg)" stroke-width="1" opacity="0.6" />
-                    </svg>
-                    <div class="ssn">02</div>
-                    <h3>SustainAI Hub</h3>
-                    <div class="sss">On-site Intelligence Layer</div>
-                    <p>Runs fine-tuned language models, retrieval pipelines, and knowledge graph generation. Entirely on
-                        site, entirely private.</p>
-                </div>
-                <div class="ss glass-panel sr-scale d3">
-                    <svg width="80" height="80" viewBox="0 0 72 72" fill="none" style="margin-bottom:20px">
-                        <circle cx="36" cy="36" r="28" fill="rgba(77,184,102,0.1)" />
-                        <rect x="26" y="16" width="20" height="36" rx="4" stroke="var(--lg)" stroke-width="1.2"
-                            fill="none" />
-                        <path d="M30 42L34 46L42 36" stroke="var(--lg)" stroke-width="1.5" fill="none" />
-                    </svg>
-                    <div class="ssn">03</div>
-                    <h3>SustainAI Edge</h3>
-                    <div class="sss">Operator Interface</div>
-                    <p>Turns complexity into simple, explainable outputs. Decision ready alerts sent directly to a phone
-                        or barn display.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Use Cases -->
-    <section class="usecases" id="usecases">
-        <div class="ucc">
-            <div class="uch">
-                <div class="plbl sr">Initial Market Use Cases</div>
-                <h2 class="sr d1">Built for the workflows that matter.</h2>
-            </div>
-            <div class="uc-grid">
-                <div class="uc-card sr d1">
-                    <div class="uc-header">
-                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                        </svg>
-                        <h3>Water Quality Monitoring</h3>
-                    </div>
-                    <p>Proactive anomaly detection across wells and distribution points. 80% of Safe Drinking Water Act
-                        violations come from small systems. We catch the shift before it becomes a penalty.</p>
-                </div>
-                <div class="uc-card sr d2">
-                    <div class="uc-header">
-                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z" />
-                            <path d="M12 10v4" />
-                            <path d="M10 12h4" />
-                        </svg>
-                        <h3>Nutrient &amp; Runoff Risk</h3>
-                    </div>
-                    <p>Combines soil, weather, and sensor data to flag fertilization imbalances and runoff risk before
-                        they reach waterways. Field specific recommendations with water savings measurable from the
-                        first irrigation cycle.</p>
-                </div>
-                <div class="uc-card sr d3">
-                    <div class="uc-header">
-                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <path
-                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                            <line x1="12" y1="9" x2="12" y2="13" />
-                            <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                        <h3>Livestock Health Monitoring</h3>
-                    </div>
-                    <p>Detects early disease indicators from activity, rumination, and temperature signals on site,
-                        without cloud dependency. Livestock disease costs U.S. operations over $300 billion annually.
-                        Catching a case 24 to 48 hours earlier saves $200 to $500 per animal in treatment costs and
-                        improves cure rates.</p>
-                </div>
-                <div class="uc-card sr d4">
-                    <div class="uc-header">
-                        <svg class="uc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <line x1="16" y1="13" x2="8" y2="13" />
-                            <line x1="16" y1="17" x2="8" y2="17" />
-                        </svg>
-                        <h3>Compliance &amp; Reporting</h3>
-                    </div>
-                    <p>Reasons over EPA thresholds, county regulations, and your operational data to flag compliance
-                        risks before they escalate. Violations under the Safe Drinking Water Act can run $25,000 or more
-                        per day. We give you the answer before the question becomes urgent.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Envision Workflow -->
-    <section class="env">
-        <div class="ec">
-            <div class="et sr">The Operator Experience</div>
-            <h2 class="sr d1">It is 5:30 in the morning. Your phone buzzes. Once.</h2>
-            <div class="env-grid">
-                <div class="en sr d3">
-                    <p>The SustainAI system flagged an overnight shift in water conductivity at the south well. Based on
-                        your soil type and recent weather, it suggests possible contamination from field runoff.</p>
-                    <p>Because the system had a connection last night, it already pulled the latest county advisory and
-                        cross-referenced your readings. It's showing you <strong>two recommended actions in three
-                            sentences</strong>.</p>
-                    <p>You didn't open a dashboard. You didn't call a consultant. You didn't wait for a cloud server.
-                        <strong>The answer was already there.</strong> Generated on your property, by a system that
-                        understands your farm.</p>
-                </div>
-                <div class="env-visual sr d4"
-                    style="position:relative; width:100%; height:440px; display:flex; justify-content:center;">
-                    <!-- Phone 2 (Background - Irrigation) -->
-                    <svg class="p2" width="260" height="440" viewBox="0 0 260 440" fill="none"
-                        style="position:absolute; right: -25px; top: 30px; filter:drop-shadow(0 10px 30px rgba(0,0,0,0.05)); z-index: 1; transform: scale(0.97) rotate(2deg); opacity: 0.95;">
-                        <!-- Phone body -->
-                        <rect x="10" y="10" width="240" height="420" rx="32" fill="#fcfdf8" stroke="var(--lg)"
-                            stroke-width="1.5" />
-                        <rect x="10" y="10" width="240" height="420" rx="32" fill="url(#phoneGrad2)" opacity="0.4" />
-                        <!-- Notch -->
-                        <rect x="90" y="14" width="80" height="6" rx="3" fill="var(--lg)" opacity="0.2" />
-                        <!-- Status bar -->
-                        <text x="30" y="42" font-family="'JetBrains Mono',monospace" font-size="10" fill="var(--im)"
-                            font-weight="500">2:15 PM</text>
-                        <!-- Alert card -->
-                        <g class="sim-step-1">
-                        <rect x="24" y="60" width="212" height="110" rx="16" fill="rgba(65,105,225,0.06)"
-                            stroke="rgba(65,105,225,0.15)" stroke-width="1" />
-                        <circle cx="44" cy="82" r="10" fill="rgba(65,105,225,0.1)" stroke="#4169e1" stroke-width="1" />
-                        <text x="44" y="86" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
-                            fill="#4169e1" font-weight="600">i</text>
-                        <text x="62" y="86" font-family="'Outfit',sans-serif" font-size="11" fill="#4169e1"
-                            font-weight="500">Irrigation Optimizer</text>
-                        <text x="36" y="108" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Soil
-                            moisture: 85% (Optimal)</text>
-                        <text x="36" y="124" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Rain
-                            forecast: 0.5in in 12hrs</text>
-                        <rect x="36" y="138" width="56" height="20" rx="6" fill="rgba(65,105,225,0.08)"
-                            stroke="rgba(65,105,225,0.2)" stroke-width="0.8" />
-                        <text x="64" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
-                            fill="#4169e1" font-weight="500">SAVINGS</text>
-                        <rect x="100" y="138" width="56" height="20" rx="6" fill="rgba(77,184,102,0.08)"
-                            stroke="rgba(77,184,102,0.2)" stroke-width="0.8" />
-                        <text x="128" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace"
-                            font-size="8" fill="var(--gm)" font-weight="500">ON-SITE AI</text>
-                        </g>
-                        <!-- AI reasoning card -->
-                        <g class="sim-step-2">
-                        <rect x="24" y="184" width="212" height="140" rx="16" fill="rgba(77,184,102,0.04)"
-                            stroke="rgba(77,184,102,0.12)" stroke-width="1" />
-                        <text x="36" y="206" font-family="'JetBrains Mono',monospace" font-size="9" fill="var(--gm)"
-                            font-weight="500" letter-spacing="0.06em">AI ANALYSIS</text>
-                        <text x="36" y="226" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Action:
-                            Delay Sector 4 watering</text>
-                        <text x="36" y="242" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Reason:
-                            Approaching saturation point</text>
-                        <text x="36" y="258" font-family="'Outfit',sans-serif" font-size="9.5"
-                            fill="var(--im)">Projected saving: 12,000 gallons</text>
-                        <line x1="36" y1="270" x2="224" y2="270" stroke="var(--lg)" stroke-width="0.5" opacity="0.3" />
-                        <text x="36" y="288" font-family="'Outfit',sans-serif" font-size="9" fill="var(--gd)"
-                            font-weight="500">Recommended: Pause schedule</text>
-                        </g>
-                        <!-- Action buttons -->
-                        <g class="sim-step-3">
-                        <rect x="24" y="338" width="104" height="36" rx="12" fill="var(--gm)" />
-                        <text x="76" y="361" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
-                            fill="#fff" font-weight="500">Apply Savings</text>
-                        </g>
-                        <!-- Bottom bar -->
-                        <rect x="100" y="410" width="60" height="5" rx="2.5" fill="var(--lg)" opacity="0.2" />
-                        <defs>
-                            <linearGradient id="phoneGrad2" x1="130" y1="10" x2="130" y2="430"
-                                gradientUnits="userSpaceOnUse">
-                                <stop offset="0" stop-color="rgba(65,105,225,0.05)" />
-                                <stop offset="1" stop-color="rgba(65,105,225,0)" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-
-                    <!-- Phone 1 (Foreground - Water Alert) -->
-                    <svg class="p1" width="260" height="440" viewBox="0 0 260 440" fill="none"
-                        style="position:absolute; left: 0; top: 0; filter:drop-shadow(0 20px 40px rgba(0,0,0,0.12)); z-index: 2; transform: rotate(-1deg);">
-                        <!-- Phone body -->
-                        <rect x="10" y="10" width="240" height="420" rx="32" fill="#fcfdf8" stroke="var(--lg)"
-                            stroke-width="1.5" />
-                        <rect x="10" y="10" width="240" height="420" rx="32" fill="url(#phoneGrad1)" opacity="0.4" />
-                        <!-- Notch -->
-                        <rect x="90" y="14" width="80" height="6" rx="3" fill="var(--lg)" opacity="0.2" />
-                        <!-- Status bar -->
-                        <text x="30" y="42" font-family="'JetBrains Mono',monospace" font-size="10" fill="var(--im)"
-                            font-weight="500">5:30 AM</text>
-                        <circle cx="220" cy="38" r="4" fill="none" stroke="var(--lg)" stroke-width="1.2" />
-                        <line x1="224" y1="38" x2="228" y2="38" stroke="var(--lg)" stroke-width="1.2" />
-                        <!-- Alert card -->
-                        <g class="sim-step-1">
-                        <rect x="24" y="60" width="212" height="110" rx="16" fill="rgba(200,50,50,0.06)"
-                            stroke="rgba(200,50,50,0.15)" stroke-width="1" />
-                        <circle cx="44" cy="82" r="10" fill="rgba(200,50,50,0.1)" stroke="#c83232" stroke-width="1" />
-                        <text x="44" y="86" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9"
-                            fill="#c83232" font-weight="600">!</text>
-                        <text x="62" y="86" font-family="'Outfit',sans-serif" font-size="11" fill="#c83232"
-                            font-weight="500">Water Quality Alert</text>
-                        <text x="36" y="108" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">South
-                            Well conductivity: 1180 µS/cm</text>
-                        <text x="36" y="124" font-family="'Outfit',sans-serif" font-size="9.5"
-                            fill="var(--im)">Threshold: 900 µS/cm</text>
-                        <rect x="36" y="138" width="56" height="20" rx="6" fill="rgba(200,50,50,0.08)"
-                            stroke="rgba(200,50,50,0.2)" stroke-width="0.8" />
-                        <text x="64" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8"
-                            fill="#c83232" font-weight="500">HIGH RISK</text>
-                        <rect x="100" y="138" width="56" height="20" rx="6" fill="rgba(77,184,102,0.08)"
-                            stroke="rgba(77,184,102,0.2)" stroke-width="0.8" />
-                        <text x="128" y="152" text-anchor="middle" font-family="'JetBrains Mono',monospace"
-                            font-size="8" fill="var(--gm)" font-weight="500">ON-SITE AI</text>
-                        </g>
-                        <!-- AI reasoning card -->
-                        <g class="sim-step-2">
-                        <rect x="24" y="184" width="212" height="140" rx="16" fill="rgba(77,184,102,0.04)"
-                            stroke="rgba(77,184,102,0.12)" stroke-width="1" />
-                        <text x="36" y="206" font-family="'JetBrains Mono',monospace" font-size="9" fill="var(--gm)"
-                            font-weight="500" letter-spacing="0.06em">AI ANALYSIS</text>
-                        <text x="36" y="226" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">Probable
-                            cause: fertilizer runoff</text>
-                        <text x="36" y="242" font-family="'Outfit',sans-serif" font-size="9.5"
-                            fill="var(--im)">Correlated with 1.2in rainfall</text>
-                        <text x="36" y="258" font-family="'Outfit',sans-serif" font-size="9.5" fill="var(--im)">pH
-                            shifted from 7.2 to 6.4</text>
-                        <line x1="36" y1="270" x2="224" y2="270" stroke="var(--lg)" stroke-width="0.5" opacity="0.3" />
-                        <text x="36" y="288" font-family="'Outfit',sans-serif" font-size="9" fill="var(--gd)"
-                            font-weight="500">Recommended: Valve shutoff</text>
-                        <text x="36" y="304" font-family="'Outfit',sans-serif" font-size="9" fill="var(--gd)"
-                            font-weight="500">Recommended: File runoff report</text>
-                        </g>
-                        <!-- Action buttons -->
-                        <g class="sim-step-3">
-                        <rect x="24" y="338" width="104" height="36" rx="12" fill="var(--gm)" />
-                        <text x="76" y="361" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
-                            fill="#fff" font-weight="500">Take Action</text>
-                        <rect x="132" y="338" width="104" height="36" rx="12" fill="none" stroke="var(--lg)"
-                            stroke-width="1" />
-                        <text x="184" y="361" text-anchor="middle" font-family="'Outfit',sans-serif" font-size="10"
-                            fill="var(--gd)" font-weight="500">Dismiss</text>
-                        </g>
-                        <!-- Bottom bar -->
-                        <rect x="100" y="410" width="60" height="5" rx="2.5" fill="var(--lg)" opacity="0.2" />
-                        <!-- Gradient def -->
-                        <defs>
-                            <linearGradient id="phoneGrad1" x1="130" y1="10" x2="130" y2="430"
-                                gradientUnits="userSpaceOnUse">
-                                <stop offset="0" stop-color="rgba(77,184,102,0.05)" />
-                                <stop offset="1" stop-color="rgba(77,184,102,0)" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Proof (PASTOR) -->
-    <section class="prf" id="prfs">
-        <div class="prfc">
-            <div>
-                <div class="prfl sr">Technical Foundation</div>
-                <h2 class="sr">Not theoretical. Proven.</h2>
-                <p class="prfb sr d1">PASTOR, our first working system, integrated thousands of scientific papers into a
-                    citation grounded knowledge base. That exact architecture now powers SustainAI for agriculture.
-                    Proving massive data can be unified rapidly with trust and traceability.</p>
-            </div>
-            <div class="prfsg">
-                <div class="prfs sr d1">
-                    <div class="prfsn" data-count="5000">5,000+</div>
-                    <div class="prfsl">Papers integrated</div>
-                </div>
-                <div class="prfs sr d2">
-                    <div class="prfsn" data-count="98">98%</div>
-                    <div class="prfsl">Citation precision</div>
-                </div>
-                <div class="prfs sr d3">
-                    <div class="prfsn">&lt;6s</div>
-                    <div class="prfsl">Response time</div>
-                </div>
-                <div class="prfs sr d4">
-                    <div class="prfsn" data-count="99.7">99.7%</div>
-                    <div class="prfsl">50 hrs reduced to 10 min</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Differentiators -->
-    <section class="dif">
-        <div class="difc">
-            <div class="difh">
-                <div class="plbl sr">Why SustainAI</div>
-                <h2 class="sr d1">Built different. On purpose.</h2>
-            </div>
-            <div class="difg">
-                <div class="di sr d1">
-                    <div class="di-header">
-                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <circle cx="12" cy="12" r="6" />
-                            <circle cx="12" cy="12" r="2" />
-                        </svg>
-                        <h3>Decision first design</h3>
-                    </div>
-                    <p>Most tools stop at analytics. We help you decide what to do next.</p>
-                </div>
-                <div class="di sr d2">
-                    <div class="di-header">
-                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <path d="M2 12h4l3-9 6 18 3-9h4" />
-                        </svg>
-                        <h3>Local first, not offline only</h3>
-                    </div>
-                    <p>Core reasoning happens on site. The system doesn't fail when the internet drops.</p>
-                </div>
-                <div class="di sr d3">
-                    <div class="di-header">
-                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <rect x="4" y="4" width="16" height="16" rx="2" />
-                            <path d="M9 9h6v6H9z" />
-                        </svg>
-                        <h3>Right sized AI</h3>
-                    </div>
-                    <p>No oversized general purpose models. Smaller, efficient, domain tuned models built for the task.
-                    </p>
-                </div>
-                <div class="di sr d4">
-                    <div class="di-header">
-                        <svg class="di-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gm)"
-                            stroke-width="1.5" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M2 12h20" />
-                            <path
-                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                        </svg>
-                        <h3>Domain grounded reasoning</h3>
-                    </div>
-                    <p>Combines models with operational context, scientific input, and real world field signals.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team -->
-    <section class="team" id="team">
-        <div class="tc">
-            <div class="th">
-                <div class="plbl sr">The Core Team</div>
-                <h2 class="sr d1">Turning domain science into field reality.</h2>
-            </div>
-            <p class="ti sr d2">A team of researchers and builders turning years of applied AI and domain science into a
-                right-sized system that works where it is needed.</p>
-            <div class="ts">
-                <div class="tm sr">
-                    <div class="tp">
-                        <img src="/images/yingling.jpg" alt="Dr. Yaroslava G. Yingling" class="team-photo">
-                    </div>
-                    <div class="tinfo">
-                        <div class="tn">Dr. Yaroslava G. Yingling</div>
-                        <div class="tr">Founder</div>
-                        <div class="td">Associate Head &amp; Kobe Steel Distinguished Professor, NC State University
+                <!-- Right: notification card + pipeline -->
+                <div class="story__aside">
+                    <div class="notification-card reveal">
+                        <div class="notification-card__header">
+                            <span class="notification-card__dot"></span>
+                            SustainAI Alert: South Well
                         </div>
-                        <p class="tbio">University Faculty Scholar and Director of Undergraduate Programs in Materials
-                            Science &amp; Engineering. She brings deep scientific rigor and applied AI
-                            expertise to the foundation.</p>
-                        <a href="https://www.linkedin.com/in/yaroslava-yingling/" class="tli" target="_blank"
-                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg>LinkedIn</a>
+                        <p class="notification-card__body">Conductivity spike detected. Likely fertilizer runoff from
+                            overnight rain.</p>
+                        <div class="notification-card__actions">
+                            <span class="notification-card__action">Close valve on east lateral</span>
+                            <span class="notification-card__action">Send someone to check the drainage channel</span>
+                            <span class="notification-card__action">File preliminary report (county deadline:
+                                24h)</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="tm sr">
-                    <div class="tp">
-                        <img src="/images/Deepak.jpeg" alt="Deepak Sai Pendyala" class="team-photo">
-                    </div>
-                    <div class="tinfo">
-                        <div class="tn">Deepak Sai Pendyala</div>
-                        <div class="tr">CEO · Co-Founder</div>
-                        <div class="td">Masters in Computer Science, NC State University</div>
-                        <p class="tbio">Leads product architecture, edge AI systems, and the vision from research
-                            prototype to field-deployable infrastructure. Focuses heavily on local-first modularity.</p>
-                        <a href="https://www.linkedin.com/in/deepaksaip/" class="tli" target="_blank"><svg
-                                viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg>LinkedIn</a>
-                    </div>
-                </div>
-
-                <div class="tm sr">
-                    <div class="tp">
-                        <img src="/images/nahed.jpg" alt="Nahed Abu Zaid" class="team-photo">
-                    </div>
-                    <div class="tinfo">
-                        <div class="tn">Nahed Abu Zaid</div>
-                        <div class="tr">CTO · Founding Team</div>
-                        <div class="td">PhD Student - Computer Science, NC State University</div>
-                        <p class="tbio">Leads the knowledge graph architecture, citation-grounded retrieval, and
-                            multi-agent systems giving SustainAI its ability to reason across fragmented sources
-                            securely.</p>
-                        <a href="https://www.linkedin.com/in/nahedabuzaidcsc/" class="tli" target="_blank"
-                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg>LinkedIn</a>
-                    </div>
-                </div>
-
-                <div class="tm sr">
-                    <div class="tp">
-                        <img src="/images/alexey.jpg" alt="Dr. Alexey Gulyuk" class="team-photo">
-                    </div>
-                    <div class="tinfo">
-                        <div class="tn">Dr. Alexey Gulyuk</div>
-                        <div class="tr">Materials Science Expert · Founding Team</div>
-                        <div class="td">Ph.D. Materials Science &amp; Engineering</div>
-                        <p class="tbio">Faculty at NC State bringing deep materials science expertise to ground
-                            SustainAI's sensor and hardware integration in validated physical science methodologies.</p>
-                        <a href="https://www.linkedin.com/in/alexey-gulyuk/" class="tli" target="_blank"
-                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg>LinkedIn</a>
-                    </div>
-                </div>
-
-                <div class="tm sr">
-                    <div class="tp">
-                        <img src="/images/ramesh.webp" alt="Dr. Ramesh Lakshmi Ratan" class="team-photo">
-                    </div>
-                    <div class="tinfo">
-                        <div class="tn">Dr. Ramesh Lakshmi Ratan</div>
-                        <div class="tr">Board Advisor · Founding Team</div>
-                        <div class="td">Board Director · Retired PE CEO</div>
-                        <p class="tbio">Decades of leadership in digital and quantitative technology, bringing immense
-                            commercialization strategy and scaling expertise to the architectural foundation.</p>
-                        <a href="https://www.linkedin.com/in/rameshratan/" class="tli" target="_blank"
-                            rel="noopener"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg>LinkedIn</a>
+                    <div class="pipeline-wrap reveal">
+                        <div class="pipeline">
+                            <div class="pipeline__stage">
+                                <div class="pipeline__stage-label">Sense</div>
+                                <div class="pipeline__stage-visual">
+                                    <div class="sensor-dots">
+                                        <span class="sensor-dot"></span>
+                                        <span class="sensor-dot"></span>
+                                        <span class="sensor-dot"></span>
+                                        <span class="sensor-dot"></span>
+                                        <span class="sensor-dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pipeline__connector"></div>
+                            <div class="pipeline__stage">
+                                <div class="pipeline__stage-label">Hub</div>
+                                <div class="pipeline__stage-visual">
+                                    <div class="processing-rings">
+                                        <div class="processing-ring processing-ring--outer"></div>
+                                        <div class="processing-ring processing-ring--inner"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pipeline__connector"></div>
+                            <div class="pipeline__stage">
+                                <div class="pipeline__stage-label">Edge</div>
+                                <div class="pipeline__stage-visual">
+                                    <div class="output-bars">
+                                        <div class="output-bar"></div>
+                                        <div class="output-bar"></div>
+                                        <div class="output-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="pipeline-wrap__label">How it works: sense, process, act</p>
                     </div>
                 </div>
 
@@ -735,123 +169,661 @@
         </div>
     </section>
 
-    <!-- Pilot Call To Action -->
-    <section class="cta" id="cta">
-        <div class="ctac glass-panel" style="padding:60px 40px; border-radius:32px;">
-            <svg class="sr" width="80" height="80" viewBox="0 0 120 120" fill="none"
-                style="display:block;margin:0 auto 30px">
-                <circle cx="38" cy="24" r="10" fill="none" stroke="var(--lg)" stroke-width="2" />
-                <path d="M28 20H48M31 20V12H45V20" fill="none" stroke="var(--lg)" stroke-width="2" />
-                <line x1="38" y1="34" x2="38" y2="70" stroke="var(--lg)" stroke-width="2" />
-                <circle cx="82" cy="24" r="10" fill="none" stroke="var(--lg)" stroke-width="2" />
-                <line x1="82" y1="34" x2="82" y2="70" stroke="var(--lg)" stroke-width="2" />
-                <path d="M38 70L24 100M38 70L52 100M82 70L68 100M82 70L96 100" fill="none" stroke="var(--lg)"
-                    stroke-width="2" />
-                <ellipse cx="60" cy="55" rx="14" ry="7" fill="rgba(77,184,102,0.15)" stroke="var(--is)"
-                    stroke-width="2" />
-            </svg>
-            <h2 class="sr d1">Let's build this together.</h2>
-            <p class="ctab sr d2">We are piloting with 3 to 5 farms and water utilities. If you have sensors, field
-                challenges, and a desire to move faster, we want to talk. Our pilot runs 90 days and produces a
-                documented report on what was caught, what was saved, and what comes next.</p>
-            <button class="btn-primary sr d3" id="ctaBtn" type="button">Start a Conversation</button>
-            <div class="cn sr d4">Tell us about your sensor mix and field conditions.</div>
+    <!-- ============================================================
+       3. THE PROBLEM
+       ============================================================ -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <span class="section-label reveal">The Reality</span>
+            <h2 class="section-headline reveal">Farms don't lack data.<br>They drown in it.</h2>
+            <p class="section-body reveal">Sensors everywhere. Reports piling up. Three different dashboards open. And
+                when something actually goes wrong in the field, the answer still comes too late.</p>
+
+            <div class="problem__cards">
+                <div class="problem__card reveal">
+                    <svg class="problem__card-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 14h6" />
+                        <path d="M18 14h6" />
+                        <circle cx="13" cy="14" r="3" />
+                        <path d="M10.5 12l-2-4" />
+                        <path d="M15.5 12l2-4" />
+                        <path d="M10.5 16l-2 4" />
+                        <path d="M15.5 16l2 4" />
+                        <line x1="11" y1="14" x2="12" y2="14" stroke-dasharray="1 2" />
+                    </svg>
+                    <h3 class="problem__card-title">Fragmented Systems</h3>
+                    <p class="problem__card-desc">Your sensors, software, and reports don't talk to each other.</p>
+                </div>
+
+                <div class="problem__card reveal reveal-delay-1">
+                    <svg class="problem__card-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="14" cy="14" r="10" />
+                        <path d="M14 8v6l4 3" />
+                        <path d="M21 7l2-2" />
+                        <path d="M22 5l1.5-0.5" />
+                        <path d="M23 7l0.5 1.5" />
+                    </svg>
+                    <h3 class="problem__card-title">Delayed Decisions</h3>
+                    <p class="problem__card-desc">It takes hours to figure out what happened minutes ago.</p>
+                </div>
+
+                <div class="problem__card reveal reveal-delay-2">
+                    <svg class="problem__card-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 10a10 10 0 0 1 14 0" />
+                        <path d="M9.5 13.5a6 6 0 0 1 9 0" />
+                        <circle cx="14" cy="18" r="1.5" fill="currentColor" />
+                        <line x1="4" y1="4" x2="24" y2="24" />
+                    </svg>
+                    <h3 class="problem__card-title">No Connectivity</h3>
+                    <p class="problem__card-desc">Your fields are remote. Internet out there is spotty at best.</p>
+                </div>
+
+                <div class="problem__card reveal reveal-delay-3">
+                    <svg class="problem__card-icon" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="16" height="12" rx="2" />
+                        <rect x="6" y="8" width="16" height="12" rx="2" />
+                        <rect x="10" y="12" width="16" height="12" rx="2" />
+                        <line x1="14" y1="16" x2="22" y2="16" />
+                        <line x1="14" y1="19" x2="20" y2="19" />
+                    </svg>
+                    <h3 class="problem__card-title">Dashboard Fatigue</h3>
+                    <p class="problem__card-desc">You've got five screens open and still no clear answer.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="fi">
-            <div>
-                <div class="fb" style="font-family: var(--fm); letter-spacing: 0.1em; color: var(--lg);">SustainAI</div>
-                <div class="fsu">Practical AI infrastructure for agriculture and field environments.</div>
-                <div class="fgeo">Built in Raleigh, NC</div>
-            </div>
-            <div class="fl">
-                <a href="mailto:team@sustain-ai.net">Contact</a>
-                <a href="https://www.linkedin.com/company/sustainai/" target="_blank" rel="noopener">LinkedIn</a>
+    <!-- ============================================================
+       4. THE SOLUTION
+       ============================================================ -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <span class="section-label reveal">How It Works</span>
+            <h2 class="section-headline reveal">Three layers. One clear decision.</h2>
+
+            <div class="solution__steps">
+                <div class="solution__step reveal">
+                    <div class="solution__step-num">01</div>
+                    <div class="solution__step-icon">
+                        <svg width="32" height="32" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 4v4" />
+                            <circle cx="14" cy="12" r="3" />
+                            <path d="M8 8a8.5 8.5 0 0 1 12 0" />
+                            <path d="M5 5a13 13 0 0 1 18 0" />
+                            <path d="M14 15v6" />
+                            <path d="M10 21h8" />
+                        </svg>
+                    </div>
+                    <div class="solution__step-label">Sense / Capture</div>
+                    <p class="solution__step-desc">Connects to your existing sensors, tools, and data sources. Captures
+                        real-world signals as they happen.</p>
+                </div>
+
+                <div class="solution__arrow reveal">
+                    <svg width="48" height="24" viewBox="0 0 48 24" fill="none">
+                        <path d="M0 12h40" stroke="#2a5c38" stroke-width="1.5" stroke-dasharray="4 4" id="arrowPath1" />
+                        <path d="M36 6l8 6-8 6" stroke="#2a5c38" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <circle r="3" fill="#4db866" class="solution__arrow-dot"
+                            style="offset-path: path('M0 12 L40 12'); offset-rotate: 0deg;" />
+                    </svg>
+                </div>
+
+                <div class="solution__step reveal reveal-delay-1">
+                    <div class="solution__step-num">02</div>
+                    <div class="solution__step-icon">
+                        <svg width="32" height="32" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="14" cy="14" r="6" />
+                            <path d="M14 8V4" />
+                            <path d="M14 24v-4" />
+                            <path d="M8 14H4" />
+                            <path d="M24 14h-4" />
+                            <path d="M9.76 9.76L7 7" />
+                            <path d="M21 21l-2.76-2.76" />
+                            <path d="M9.76 18.24L7 21" />
+                            <path d="M21 7l-2.76 2.76" />
+                            <circle cx="14" cy="14" r="2" fill="currentColor" stroke="none" />
+                        </svg>
+                    </div>
+                    <div class="solution__step-label">Hub / Think</div>
+                    <p class="solution__step-desc">Runs AI locally on-site. Pulls together sensor readings,
+                        weather, soil reports, and everything else it knows.</p>
+                </div>
+
+                <div class="solution__arrow reveal">
+                    <svg width="48" height="24" viewBox="0 0 48 24" fill="none">
+                        <path d="M0 12h40" stroke="#2a5c38" stroke-width="1.5" stroke-dasharray="4 4" id="arrowPath2" />
+                        <path d="M36 6l8 6-8 6" stroke="#2a5c38" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <circle r="3" fill="#4db866" class="solution__arrow-dot"
+                            style="offset-path: path('M0 12 L40 12'); offset-rotate: 0deg; animation-delay: 1s;" />
+                    </svg>
+                </div>
+
+                <div class="solution__step reveal reveal-delay-2">
+                    <div class="solution__step-num">03</div>
+                    <div class="solution__step-icon">
+                        <svg width="32" height="32" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 3L14 11" />
+                            <path d="M10 7l4-4 4 4" />
+                            <path d="M8 14h12" />
+                            <path d="M6 18h4" />
+                            <path d="M12 18h4" />
+                            <path d="M18 18h4" />
+                            <path d="M14 21v3" />
+                            <circle cx="14" cy="25.5" r="1" fill="currentColor" stroke="none" />
+                            <path d="M10 14v-1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1" />
+                        </svg>
+                    </div>
+                    <div class="solution__step-label">Edge / Act</div>
+                    <p class="solution__step-desc">Gives you one clear answer: what's wrong, why it matters, and
+                        exactly what to do next. In plain English.</p>
+                </div>
             </div>
         </div>
-        <div class="fc" id="copyright"></div>
+    </section>
+
+    <!-- ============================================================
+       5. THE DEMO
+       ============================================================ -->
+    <section class="demo" id="demo">
+        <div class="container" style="text-align: center;">
+            <span class="section-label reveal">See It Live</span>
+            <h2 class="section-headline reveal">Watch a contamination event unfold.<br>From detection to decision in
+                10 seconds.</h2>
+
+            <div class="demo__wrapper reveal">
+                <div class="demo__screen" id="demoScreen">
+                    <div class="demo__topbar">
+                        <span class="demo__topbar-title">
+                            <span class="demo__pulse"></span>
+                            SustainAI Hub 01: South Tract
+                        </span>
+                        <span class="demo__topbar-time" id="demoTime">05:34:12</span>
+                    </div>
+
+                    <div class="demo__kpis">
+                        <div class="demo__kpi">
+                            <div class="demo__kpi-label">Conductivity</div>
+                            <div class="demo__kpi-value" id="kpiConductivity">840 µS/cm</div>
+                        </div>
+                        <div class="demo__kpi">
+                            <div class="demo__kpi-label">pH Level</div>
+                            <div class="demo__kpi-value" id="kpiPh">7.2</div>
+                        </div>
+                        <div class="demo__kpi">
+                            <div class="demo__kpi-label">Flow Rate</div>
+                            <div class="demo__kpi-value" id="kpiFlow">120 GPM</div>
+                        </div>
+                    </div>
+
+                    <div class="demo__chart" id="demoChart">
+                        <div class="demo__bar" style="height: 55%"></div>
+                        <div class="demo__bar" style="height: 48%"></div>
+                        <div class="demo__bar" style="height: 60%"></div>
+                        <div class="demo__bar" style="height: 52%"></div>
+                        <div class="demo__bar" style="height: 58%"></div>
+                        <div class="demo__bar" style="height: 50%"></div>
+                        <div class="demo__bar" style="height: 54%"></div>
+                        <div class="demo__bar" style="height: 56%"></div>
+                    </div>
+
+                    <div class="demo__log" id="demoLog">
+                        <div class="demo__log-label">AI Reasoning</div>
+                        <div class="demo__log-entry demo__log-entry--alert" id="logAlert">
+                            ⚠ Conductivity anomaly detected at South Well (1180 µS/cm)
+                        </div>
+                        <div class="demo__log-entry demo__log-entry--response" id="logResponse"></div>
+                        <div class="demo__log-entry demo__log-entry--success" id="logSuccess">
+                            ✓ Done: Valve closed, report filed
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo__cta-area reveal">
+                <a href="./demo.html" class="btn btn--primary btn--large">Launch Full Interactive Demo →</a>
+                <p class="demo__cta-note">Quick intro, then full access to the dashboard simulation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       6. WHO IT'S FOR
+       ============================================================ -->
+    <section class="audience" id="audience">
+        <div class="container">
+            <h2 class="section-headline reveal" style="text-align: center;">Built for the people who need it.</h2>
+
+            <div class="audience__grid">
+                <div class="audience__card reveal">
+                    <h3 class="audience__card-title">Field Operators</h3>
+                    <p class="audience__card-sub">Farmers · Water operators · Field technicians</p>
+                    <p class="audience__card-quote">You don't need to think more. Just follow this.</p>
+                    <ul class="audience__checklist" role="list">
+                        <li class="audience__check">
+                            <span class="audience__check-icon">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.5 6l2.5 2.5 4.5-5" />
+                                </svg>
+                            </span>
+                            Clear, plain-language decisions
+                        </li>
+                        <li class="audience__check">
+                            <span class="audience__check-icon">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.5 6l2.5 2.5 4.5-5" />
+                                </svg>
+                            </span>
+                            One tap actions
+                        </li>
+                        <li class="audience__check">
+                            <span class="audience__check-icon">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.5 6l2.5 2.5 4.5-5" />
+                                </svg>
+                            </span>
+                            Works offline*
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="audience__card reveal reveal-delay-1">
+                    <h3 class="audience__card-title">Ecosystem Partners</h3>
+                    <p class="audience__card-sub">AgTech companies · Sensor manufacturers · Research institutions</p>
+                    <p class="audience__card-quote">Extend your platform with on-site intelligence and decision
+                        workflows</p>
+                    <ul class="audience__checklist" role="list">
+                        <li class="audience__check">
+                            <span class="audience__check-icon">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.5 6l2.5 2.5 4.5-5" />
+                                </svg>
+                            </span>
+                            API-first integration
+                        </li>
+                        <li class="audience__check">
+                            <span class="audience__check-icon">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.5 6l2.5 2.5 4.5-5" />
+                                </svg>
+                            </span>
+                            White-label ready
+                        </li>
+                        <li class="audience__check">
+                            <span class="audience__check-icon">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.5 6l2.5 2.5 4.5-5" />
+                                </svg>
+                            </span>
+                            Your data stays yours
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       7. PROOF
+       ============================================================ -->
+    <section class="proof" id="proof">
+        <div class="container">
+            <span class="section-label reveal">Proven Architecture</span>
+            <h2 class="section-headline reveal">Built for complexity. Proven under pressure.</h2>
+            <p class="proof__subtitle reveal">PASTOR, our first working system, integrated thousands of scientific
+                papers into a citation grounded knowledge base. That exact architecture now powers SustainAI for
+                agriculture. Proving massive data can be unified rapidly with trust and traceability.</p>
+
+            <div class="proof__stats">
+                <div class="proof__stat reveal">
+                    <div class="proof__stat-number" data-count="8000" data-suffix="+">0</div>
+                    <div class="proof__stat-label">Documents indexed</div>
+                </div>
+                <div class="proof__stat reveal reveal-delay-1">
+                    <div class="proof__stat-number" data-count="98" data-suffix="%">0</div>
+                    <div class="proof__stat-label">Citation precision</div>
+                </div>
+                <div class="proof__stat reveal reveal-delay-2">
+                    <div class="proof__stat-number" data-count="99.7" data-suffix="%" data-decimals="1">0</div>
+                    <div class="proof__stat-label">Time reduction</div>
+                </div>
+                <div class="proof__stat reveal reveal-delay-3">
+                    <div class="proof__stat-number" data-prefix="<" data-count="4" data-suffix="s">0</div>
+                    <div class="proof__stat-label">Average response</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       8. WHY DIFFERENT
+       ============================================================ -->
+    <section class="moat" id="moat">
+        <div class="container">
+            <h2 class="section-headline reveal" style="text-align: center;">Not. Another. Dashboard.</h2>
+
+            <div class="moat__grid">
+                <div class="moat__card reveal">
+                    <div class="moat__card-icon">
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 10a10 10 0 0 1 14 0" />
+                            <path d="M10 13.5a5.5 5.5 0 0 1 8 0" />
+                            <circle cx="14" cy="17" r="1.5" fill="currentColor" />
+                            <line x1="5" y1="5" x2="23" y2="23" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="moat__card-title">Works Without Internet</h3>
+                        <p class="moat__card-desc">Full AI inference on-site. No cloud. No latency. No data leaving your
+                            property.</p>
+                    </div>
+                </div>
+
+                <div class="moat__card reveal reveal-delay-1">
+                    <div class="moat__card-icon">
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="10" width="8" height="8" rx="2" />
+                            <rect x="17" y="10" width="8" height="8" rx="2" />
+                            <path d="M11 14h6" />
+                            <path d="M14 10V7a2 2 0 0 1 2-2h0" />
+                            <path d="M14 18v3a2 2 0 0 0 2 2h0" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="moat__card-title">Connects Everything</h3>
+                        <p class="moat__card-desc">Your sensors, your software, your existing tools. All connected in
+                            one place so they actually talk to each other.</p>
+                    </div>
+                </div>
+
+                <div class="moat__card reveal reveal-delay-2">
+                    <div class="moat__card-icon">
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 3l-3 8h6l-3 8" />
+                            <path d="M14 19v6" />
+                            <circle cx="14" cy="11" r="1" fill="currentColor" stroke="none" />
+                            <path d="M9 24h10" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="moat__card-title">Decisions, Not Analytics</h3>
+                        <p class="moat__card-desc">We don't give you more charts. We give you the answer.</p>
+                    </div>
+                </div>
+
+                <div class="moat__card reveal reveal-delay-3">
+                    <div class="moat__card-icon">
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="6" width="18" height="4" rx="1" />
+                            <rect x="5" y="12" width="18" height="4" rx="1" />
+                            <rect x="5" y="18" width="18" height="4" rx="1" />
+                            <path d="M23 8h2" />
+                            <path d="M23 14h2" />
+                            <path d="M23 20h2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="moat__card-title">Sits on Top</h3>
+                        <p class="moat__card-desc">It works with what you already have. No need to rip anything out.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       9. TEAM
+       ============================================================ -->
+    <section class="team" id="team">
+        <div class="container">
+            <span class="section-label reveal" style="display:block; text-align:center;">The Team</span>
+            <h2 class="section-headline reveal" style="text-align:center;">The people behind it.</h2>
+            <p class="section-body reveal" style="text-align:center; max-width: 52ch; margin: 0 auto;">We're
+                researchers and builders who've spent years working with AI and real-world data. Now we're putting
+                that experience to work where it matters most.</p>
+
+            <div class="team__grid">
+
+                <!-- Dr. Yaroslava G. Yingling -->
+                <div class="team__card reveal">
+                    <div class="team__avatar team__avatar--photo">
+                        <img src="/images/yingling.jpg" alt="Dr. Yaroslava G. Yingling">
+                    </div>
+                    <h3 class="team__name">Dr. Yaroslava G. Yingling</h3>
+                    <span class="team__role">Founder</span>
+                    <p class="team__bio">Associate Head and Kobe Steel Distinguished Professor at NC State.
+                        University Faculty Scholar who brings years of scientific research and hands-on AI work to
+                        SustainAI's foundation.</p>
+                    <a href="https://www.linkedin.com/in/yaroslava-yingling/" target="_blank" rel="noopener noreferrer"
+                        class="team__link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <!-- Deepak Sai Pendyala -->
+                <div class="team__card reveal reveal-delay-1">
+                    <div class="team__avatar team__avatar--photo">
+                        <img src="/images/Deepak.jpeg" alt="Deepak Sai Pendyala">
+                    </div>
+                    <h3 class="team__name">Deepak Sai Pendyala</h3>
+                    <span class="team__role">CEO · Co-Founder</span>
+                    <p class="team__bio">MS in Computer Science from NC State. Background in Electronics and Controls.
+                        Leads the product, edge AI systems, and the push to get this from a research prototype into
+                        something that works in the field.</p>
+                    <a href="https://www.linkedin.com/in/deepaksaip/" target="_blank" rel="noopener noreferrer"
+                        class="team__link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <!-- Nahed Abu Zaid -->
+                <div class="team__card reveal reveal-delay-2">
+                    <div class="team__avatar team__avatar--photo">
+                        <img src="/images/nahed.jpg" alt="Nahed Abu Zaid">
+                    </div>
+                    <h3 class="team__name">Nahed Abu Zaid</h3>
+                    <span class="team__role">CTO · Founding Team</span>
+                    <p class="team__bio">PhD student in Computer Science at NC State. Builds the knowledge graph,
+                        retrieval systems, and the multi-agent architecture that makes SustainAI's reasoning
+                        reliable and trustworthy.</p>
+                    <a href="https://www.linkedin.com/in/nahedabuzaidcsc/" target="_blank" rel="noopener noreferrer"
+                        class="team__link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <!-- Dr. Alexey Gulyuk -->
+                <div class="team__card reveal">
+                    <div class="team__avatar team__avatar--photo">
+                        <img src="/images/alexey.jpg" alt="Dr. Alexey Gulyuk">
+                    </div>
+                    <h3 class="team__name">Dr. Alexey Gulyuk</h3>
+                    <span class="team__role">Materials Science Expert · Founding Team</span>
+                    <p class="team__bio">Ph.D. in Materials Science and Engineering. Faculty at NC State who makes
+                        sure our sensor and hardware work is grounded in real, validated science.</p>
+                    <a href="https://www.linkedin.com/in/alexey-gulyuk/" target="_blank" rel="noopener noreferrer"
+                        class="team__link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <!-- Dr. Ramesh Lakshmi Ratan -->
+                <div class="team__card reveal reveal-delay-1">
+                    <div class="team__avatar team__avatar--photo">
+                        <img src="/images/ramesh.webp" alt="Dr. Ramesh Lakshmi Ratan">
+                    </div>
+                    <h3 class="team__name">Dr. Ramesh Lakshmi Ratan</h3>
+                    <span class="team__role">Board Advisor · Founding Team</span>
+                    <p class="team__bio">Board Director and retired PE CEO. Has spent decades leading digital and
+                        tech companies, and brings real-world experience in scaling products and getting them to
+                        market.</p>
+                    <a href="https://www.linkedin.com/in/rameshratan/" target="_blank" rel="noopener noreferrer"
+                        class="team__link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       10. CTA
+       ============================================================ -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2 class="section-headline reveal">Ready to stop guessing?</h2>
+            <p class="cta-section__body reveal">We're bringing on our first 2026 pilot partners: farms, water
+                utilities, AgTech companies, and research groups.</p>
+            <div class="cta-section__buttons reveal">
+                <button class="btn btn--white btn--large" data-modal="contact">Become a Pilot Partner</button>
+                <a href="./demo.html" class="btn btn--outline-white btn--large">Launch Demo</a>
+            </div>
+            <p class="cta-section__note reveal">Now looking for partner pilots - Summer 2026.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       11. FOOTER
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <a href="#" class="footer__brand">
+                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <circle cx="16" cy="16" r="14" stroke="#2a5c38" stroke-width="1.5" fill="rgba(42,92,56,0.08)" />
+                        <path d="M16 22V12M11 16l5-5 5 5" stroke="#2a5c38" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <circle cx="16" cy="24" r="1.5" fill="#4db866" />
+                    </svg>
+                    SustainAI
+                </a>
+                <ul class="footer__nav" role="list">
+                    <li><a href="./story.html">Story</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#proof">Proof</a></li>
+                    <li><a href="#team">Team</a></li>
+                </ul>
+                <div class="footer__meta">
+                    Raleigh, NC · Built at NC State<br>
+                    © 2026 SustainAI. All rights reserved.
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- Contact Modal -->
-    <div class="modal-overlay" id="contactModal">
-        <div class="modal" style="position:relative">
-            <button class="modal-close" id="modalClose" aria-label="Close form">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    <!-- ============================================================
+       CONTACT MODAL
+       ============================================================ -->
+    <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+        <div class="modal">
+            <button class="modal__close" aria-label="Close modal" data-close-modal>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round">
                     <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
             </button>
-            <h3>Start a Pilot Conversation</h3>
-            <p class="modal-sub">Tell us about your operational reality.</p>
-            <form id="contactForm">
-                <div class="cf-group"><label for="cf-name">Your Name</label><input type="text" id="cf-name" name="name"
-                        required minlength="1" maxlength="200" placeholder="e.g. John Carter"></div>
-                <div class="cf-group"><label for="cf-email">Email</label><input type="email" id="cf-email" name="email"
-                        required placeholder="john@example.com"></div>
-                <div class="cf-group"><label for="cf-org">Farm / Organization</label><input type="text" id="cf-org"
-                        name="organization" maxlength="300" placeholder="Carter Family Farm"></div>
-                <div class="cf-group"><label for="cf-msg">What are your primary data challenges?</label><textarea
-                        id="cf-msg" name="message" required minlength="10" maxlength="5000"
-                        placeholder="E.g., We have water sensors but can't aggregate the reports in time for treatments..."></textarea>
+
+            <div id="contactForm">
+                <h3 class="modal__title" id="contactTitle">Let's talk.</h3>
+                <p class="modal__subtitle">Tell us what you're working on. We'll get back within 24 hours.</p>
+
+                <form id="contactFormEl" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="7e476710-fc59-46ee-a995-93f49b2444c0">
+                    <input type="hidden" name="subject" value="SustainAI: New Contact">
+                    <input type="hidden" name="from_name" value="SustainAI Website">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+                    <div class="form__group">
+                        <label class="form__label" for="contactName">Name</label>
+                        <input class="form__input" type="text" id="contactName" name="name" required
+                            placeholder="Your name">
+                    </div>
+
+                    <div class="form__group">
+                        <label class="form__label" for="contactEmail">Email</label>
+                        <input class="form__input" type="email" id="contactEmail" name="email" required
+                            placeholder="you@company.com">
+                    </div>
+
+                    <div class="form__group">
+                        <label class="form__label" for="contactRole">I am a...</label>
+                        <select class="form__select" id="contactRole" name="role" required>
+                            <option value="" disabled selected>Select your role</option>
+                            <option value="farmer">Farmer / Field Operator</option>
+                            <option value="water">Water Utility Operator</option>
+                            <option value="agtech">AgTech Company</option>
+                            <option value="sensor">Sensor Manufacturer</option>
+                            <option value="research">Research Institution</option>
+                            <option value="investor">Investor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group">
+                        <label class="form__label" for="contactMessage">Message</label>
+                        <textarea class="form__textarea" id="contactMessage" name="message" required
+                            placeholder="What are you working on? What problem are you trying to solve?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--large form__submit" id="contactSubmit">Send
+                        Message</button>
+                </form>
+            </div>
+
+            <div id="contactSuccess" class="form__success hidden">
+                <div class="form__success-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6L9 17l-5-5" />
+                    </svg>
                 </div>
-                <button type="submit" class="cf-submit" id="cf-submit">Submit Request</button>
-                <div class="cf-status" id="cf-status"></div>
-            </form>
+                <h3 class="form__success-title">Message sent.</h3>
+                <p class="form__success-text">We'll get back to you within 24 hours.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Demo Waitlist Modal -->
-    <div class="modal-overlay" id="demoModal">
-        <div class="modal" style="position:relative">
-            <button class="modal-close" id="demoModalClose" aria-label="Close form">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-            </button>
-            <h3>Join the Demo Waitlist</h3>
-            <p class="modal-sub">Complete this form to access the interactive demo.</p>
-            <form id="demoForm" novalidate>
-                <div class="cf-group">
-                    <label for="df-name">Full Name <span style="color:#c83232">*</span></label>
-                    <input type="text" id="df-name" name="name" required minlength="2" maxlength="200"
-                        placeholder="e.g. John Carter" autocomplete="name">
-                    <div class="cf-error" id="df-name-err"></div>
-                </div>
-                <div class="cf-group">
-                    <label for="df-email">Email Address <span style="color:#c83232">*</span></label>
-                    <input type="email" id="df-email" name="email" required placeholder="john@example.com"
-                        autocomplete="email">
-                    <div class="cf-error" id="df-email-err"></div>
-                </div>
-                <div class="cf-group">
-                    <label for="df-org">Farm / Organization</label>
-                    <input type="text" id="df-org" name="organization" maxlength="300" placeholder="Carter Family Farm">
-                </div>
-                <div class="cf-group">
-                    <label for="df-msg">What are you looking to explore? <span style="color:#c83232">*</span></label>
-                    <textarea id="df-msg" name="message" required minlength="10" maxlength="5000"
-                        placeholder="e.g., I'd like to see how sensor anomaly detection works for water quality..."></textarea>
-                    <div class="cf-error" id="df-msg-err"></div>
-                </div>
-                <button type="submit" class="cf-submit" id="df-submit">Submit &amp; Access Demo</button>
-                <div class="cf-status" id="df-status"></div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Scroll Top -->
-    <a href="#" class="stt" id="scrollTop" aria-label="Scroll to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
-            <path d="M12 19V5M5 12l7-7 7 7" />
-        </svg>
-    </a>
-
-    <script src="/js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

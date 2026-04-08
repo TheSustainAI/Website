@@ -37,6 +37,7 @@ app.mount("/images", StaticFiles(directory=os.path.join(BASE_DIR, "images")), na
 
 # ── HTML pages ──────────────────────────────────────────────
 @app.get("/", response_class=FileResponse, include_in_schema=False)
+@app.get("/index.html", response_class=FileResponse, include_in_schema=False)
 async def serve_index():
     return FileResponse(os.path.join(BASE_DIR, "index.html"))
 
@@ -45,6 +46,18 @@ async def serve_index():
 @app.get("/demo.html", response_class=FileResponse, include_in_schema=False)
 async def serve_demo():
     return FileResponse(os.path.join(BASE_DIR, "demo.html"))
+
+
+@app.get("/story", response_class=FileResponse, include_in_schema=False)
+@app.get("/story.html", response_class=FileResponse, include_in_schema=False)
+async def serve_story():
+    return FileResponse(os.path.join(BASE_DIR, "story.html"))
+
+
+@app.get("/story2", response_class=FileResponse, include_in_schema=False)
+@app.get("/story2.html", response_class=FileResponse, include_in_schema=False)
+async def serve_story2():
+    return FileResponse(os.path.join(BASE_DIR, "story2.html"))
 
 
 # ── Data models ─────────────────────────────────────────────

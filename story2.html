@@ -1,0 +1,3401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Nitrogen Problem — SustainAI</title>
+  <meta name="description"
+    content="How one growing season changed an entire industry. The story of how SustainAI connected 47 farms, a fertilizer company, sensor engineers, and county regulators into one coordinated intelligence network.">
+  <meta property="og:title" content="The Nitrogen Problem — SustainAI">
+  <meta property="og:description"
+    content="One county. One season. One intelligence layer for the entire agricultural ecosystem. Scroll to read the story.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232a5c38'/%3E%3Cpath d='M16 8 L16 20 M10 14 L16 8 L22 14' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --dark: #0c1f12;
+      --dark2: #1b3a23;
+      --primary: #2a5c38;
+      --accent: #4db866;
+      --light: #f5fbf6;
+      --danger: #c83232;
+      --amber: #b8860b;
+      --amber-light: #f5c842;
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --blue-dark: #1e3a8a;
+      --gray: #64748b;
+      --dawn: #e8a84a;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--dark);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+       ============================================================ */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #7fffb2);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(77, 184, 102, 0.8);
+    }
+
+    /* ============================================================
+       TIMELINE DOTS (12 acts)
+       ============================================================ */
+    #timeline {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .tl-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      transition: background 0.3s, transform 0.3s, border-color 0.3s;
+      cursor: pointer;
+    }
+
+    .tl-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.5);
+      box-shadow: 0 0 6px rgba(77, 184, 102, 0.8);
+    }
+
+    .tl-dot.visited {
+      background: rgba(77, 184, 102, 0.4);
+      border-color: rgba(77, 184, 102, 0.6);
+    }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    #story-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 998;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+
+    #story-nav.scrolled {
+      background: rgba(12, 31, 18, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(77, 184, 102, 0.15);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-back {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-back:hover {
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       ACT BASE
+       ============================================================ */
+    .act {
+      position: relative;
+      min-height: 68vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .act--tall {
+      min-height: 109vh;
+    }
+
+    .act--xtra {
+      min-height: 136vh;
+    }
+
+    .act--hub {
+      min-height: 150vh;
+    }
+
+    .act__inner {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 100px 32px 80px;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    /* ============================================================
+       FADE-IN ELEMENTS
+       ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1s var(--ease-out);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+    }
+
+    /* ============================================================
+       ACT 1: SPRING, WAKE COUNTY
+       ============================================================ */
+    #act1 {
+      background: var(--dark);
+      min-height: 102vh;
+    }
+
+    #farmlandSVG {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: center center;
+      transition: transform 0.1s linear;
+    }
+
+    .act1-season {
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 1.2s var(--ease-out) 0.2s;
+      text-transform: uppercase;
+    }
+
+    .act1-season.visible {
+      opacity: 1;
+    }
+
+    .act1-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: white;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s var(--ease-out) 0.4s, transform 1.2s var(--ease-out) 0.4s;
+      text-shadow: 0 0 80px rgba(77, 184, 102, 0.25);
+    }
+
+    .act1-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .act1-stats {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 24px;
+      opacity: 0;
+      transition: opacity 1.5s var(--ease-out) 0.8s;
+      letter-spacing: 0.04em;
+    }
+
+    .act1-stats.visible {
+      opacity: 1;
+    }
+
+    .act1-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.2vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 48px;
+      opacity: 0;
+      transition: opacity 1.5s var(--ease-out) 1.2s;
+    }
+
+    .act1-tagline.visible {
+      opacity: 1;
+    }
+
+    /* ============================================================
+       ACT 2: THE PLAYERS
+       ============================================================ */
+    #act2 {
+      background: linear-gradient(180deg, #0c1f12 0%, #f5fbf6 12%);
+      min-height: 150vh;
+    }
+
+    .act2-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .act2-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--primary);
+      margin-top: 12px;
+      font-weight: 400;
+    }
+
+    .players-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 64px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .player-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 4px 32px rgba(42, 92, 56, 0.1);
+      border: 1px solid rgba(42, 92, 56, 0.08);
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out), box-shadow 0.3s;
+      text-align: left;
+    }
+
+    .player-card:nth-child(even) {
+      transform: translateX(60px);
+    }
+
+    .player-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .player-card:hover {
+      box-shadow: 0 8px 48px rgba(42, 92, 56, 0.15);
+    }
+
+    .player-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .player-info {
+      flex: 1;
+    }
+
+    .player-role {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .player-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+
+    .player-desc {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: #444;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .player-icon {
+      width: 40px;
+      height: 40px;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    /* Disconnection card */
+    .disconnect-card {
+      background: var(--dark);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+
+    .disconnect-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .disconnect-diagram {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .dc-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dc-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .dc-name {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .dc-divider {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.2);
+      margin: 0 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .disconnect-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      color: white;
+    }
+
+    .disconnect-sub {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       ACT 3: THE OLD WAY
+       ============================================================ */
+    #act3 {
+      background: linear-gradient(180deg, #f5fbf6 0%, #1a1008 6%, #2c1a06 50%, #1a0c0c 100%);
+      min-height: 136vh;
+    }
+
+    .act3-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .act3-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .act3-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: rgba(255, 240, 200, 0.95);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .failure-timeline {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      padding-left: 40px;
+    }
+
+    .failure-timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--amber) 0%, var(--danger) 100%);
+      opacity: 0.3;
+    }
+
+    .failure-node {
+      position: relative;
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+
+    .failure-node.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .failure-node::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--amber);
+      border: 2px solid rgba(255, 200, 80, 0.3);
+      box-shadow: 0 0 8px rgba(184, 134, 11, 0.5);
+    }
+
+    .failure-week {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--amber);
+      margin-bottom: 4px;
+    }
+
+    .failure-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: rgba(255, 240, 200, 0.85);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .failure-x {
+      display: inline-block;
+      margin-left: 8px;
+      color: var(--danger);
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.3s 0.3s;
+    }
+
+    .failure-node.visible .failure-x {
+      opacity: 1;
+    }
+
+    .act3-verdict {
+      text-align: center;
+      margin-top: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+
+    .act3-verdict.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .verdict-number {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 900;
+      color: var(--danger);
+      letter-spacing: -0.05em;
+      line-height: 1;
+      text-shadow: 0 0 60px rgba(200, 50, 50, 0.4);
+    }
+
+    .verdict-label {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: rgba(255, 200, 180, 0.8);
+      margin-top: 8px;
+    }
+
+    /* ============================================================
+       ACT 4: THE MISSING LAYER
+       ============================================================ */
+    #act4 {
+      background: linear-gradient(180deg, #1a0c0c 0%, #1b3a23 6%);
+      min-height: 122vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(77, 184, 102, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 184, 102, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .act4-question {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.9rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    #ecosystemDiagram {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      display: block;
+    }
+
+    .act4-reveal {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.3;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+    }
+
+    .act4-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .act4-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 14px;
+      font-weight: 300;
+    }
+
+    /* ============================================================
+       ACT 5: THE INSTALLATION
+       ============================================================ */
+    #act5 {
+      background: linear-gradient(180deg, #1b3a23 0%, #0d2218 6%, #1b3a23 40%, #0a1a10 100%);
+      min-height: 136vh;
+    }
+
+    .act5-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0;
+      transition: opacity 1s var(--ease-out);
+    }
+
+    .act5-eyebrow.visible {
+      opacity: 1;
+    }
+
+    .act5-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .install-panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .install-panel {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(77, 184, 102, 0.15);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .install-panel.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .install-panel:nth-child(2) {
+      transition-delay: 0.15s;
+    }
+
+    .install-panel:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .panel-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .panel-body {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+    }
+
+    .sensor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .sensor-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      background: rgba(77, 184, 102, 0.12);
+      border: 1px solid rgba(77, 184, 102, 0.2);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .doc-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .doc-icon {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ============================================================
+       ACT 6: MARCUS'S MORNING
+       ============================================================ */
+    #act6 {
+      background: linear-gradient(180deg, #0a1a10 0%, #2d1a06 6%, #4a2e0a 35%, #b8680a 65%, #e8a84a 100%);
+      min-height: 109vh;
+    }
+
+    .act6-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: rgba(255, 248, 220, 0.95);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .act6-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: rgba(255, 235, 180, 0.7);
+      margin-top: 12px;
+      font-weight: 300;
+    }
+
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 52px auto 0;
+    }
+
+    .phone-mockup {
+      width: 280px;
+      background: #0f0f0f;
+      border-radius: 38px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 40px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(230, 160, 60, 0.15);
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+
+    .phone-mockup.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .phone-screen {
+      background: var(--dark);
+      border-radius: 28px;
+      padding: 24px 20px;
+      min-height: 460px;
+    }
+
+    .phone-status {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.3);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .phone-greeting {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .phone-item {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-left: 3px solid transparent;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+    }
+
+    .phone-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .phone-item.green {
+      border-left-color: var(--accent);
+    }
+
+    .phone-item.amber {
+      border-left-color: var(--amber-light);
+    }
+
+    .phone-item.blue {
+      border-left-color: var(--blue-light);
+    }
+
+    .phone-item-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 3px;
+    }
+
+    .phone-item-text {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.4;
+    }
+
+    .act6-caption {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      color: rgba(255, 248, 220, 0.95);
+      margin-top: 48px;
+      line-height: 1.3;
+    }
+
+    .act6-caption-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: rgba(255, 235, 180, 0.65);
+      margin-top: 10px;
+    }
+
+    /* ============================================================
+       ACT 7: ELENA'S DASHBOARD
+       ============================================================ */
+    #act7 {
+      background: linear-gradient(180deg, #e8a84a 0%, #f0f6ff 6%, #e8f0fe 100%);
+      min-height: 122vh;
+    }
+
+    .act7-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: #1e3a8a;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .act7-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: #3b5ba5;
+      margin-top: 12px;
+      font-weight: 400;
+    }
+
+    .dashboard-container {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 64px rgba(37, 99, 235, 0.12);
+      overflow: hidden;
+      margin-top: 48px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+
+    .dashboard-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dashboard-header {
+      background: #1e3a8a;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dashboard-title {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .dashboard-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      background: rgba(77, 184, 102, 0.2);
+      color: #7fffb2;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(77, 184, 102, 0.3);
+    }
+
+    .dashboard-body {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      min-height: 340px;
+    }
+
+    .map-area {
+      position: relative;
+      background: #f0f4ff;
+      overflow: hidden;
+    }
+
+    #farmMapCanvas {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+    }
+
+    .map-legend {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: #333;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dash-sidebar {
+      background: #fafbff;
+      border-left: 1px solid rgba(37, 99, 235, 0.08);
+      padding: 20px;
+    }
+
+    .dash-metric {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(37, 99, 235, 0.06);
+    }
+
+    .dash-metric-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .dash-metric-value {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+
+    .dash-metric-sub {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .status-seg {
+      height: 8px;
+      border-radius: 4px;
+      transition: width 1s var(--ease-out);
+    }
+
+    .act7-insight {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-top: 40px;
+      line-height: 1.3;
+    }
+
+    .act7-insight-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: #3b5ba5;
+      margin-top: 10px;
+    }
+
+    /* ============================================================
+       ACT 8: THE STORM
+       ============================================================ */
+    #act8 {
+      background: linear-gradient(180deg, #e8f0fe 0%, #0a0d1a 5%, #0e1628 40%, #141e35 100%);
+      min-height: 136vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #rainCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    #rainCanvas.active {
+      opacity: 1;
+    }
+
+    .lightning-flash {
+      position: absolute;
+      inset: 0;
+      background: rgba(200, 220, 255, 0.08);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    .act8-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: #7ba5ff;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .act8-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-shadow: 0 0 60px rgba(100, 150, 255, 0.3);
+    }
+
+    .act8-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: rgba(200, 220, 255, 0.7);
+      margin-top: 16px;
+    }
+
+    .storm-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 64px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .compare-side {
+      padding: 36px 30px;
+    }
+
+    .compare-side.bad {
+      background: rgba(200, 50, 50, 0.1);
+      border: 1px solid rgba(200, 50, 50, 0.2);
+    }
+
+    .compare-side.good {
+      background: rgba(77, 184, 102, 0.08);
+      border: 1px solid rgba(77, 184, 102, 0.2);
+    }
+
+    .compare-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .compare-label.bad {
+      color: var(--danger);
+    }
+
+    .compare-label.good {
+      color: var(--accent);
+    }
+
+    .compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+    }
+
+    .compare-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .compare-item .ci-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .compare-item .ci-text {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ============================================================
+       ACT 9: PATRICIA'S INBOX
+       ============================================================ */
+    #act9 {
+      background: linear-gradient(180deg, #141e35 0%, #f1f5f9 6%, #e8edf5 100%);
+      min-height: 109vh;
+    }
+
+    .act9-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: #1e293b;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .act9-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: #475569;
+      margin-top: 12px;
+    }
+
+    .compliance-dashboard {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 48px rgba(30, 41, 59, 0.12);
+      margin-top: 48px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+
+    .compliance-dashboard.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .comp-header {
+      background: #1e293b;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .comp-badge {
+      background: rgba(77, 184, 102, 0.2);
+      color: #4db866;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(77, 184, 102, 0.3);
+    }
+
+    .comp-title-text {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .comp-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4db866;
+      box-shadow: 0 0 6px rgba(77, 184, 102, 0.8);
+      margin-left: auto;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+      }
+    }
+
+    .comp-body {
+      padding: 24px;
+    }
+
+    .comp-alert {
+      background: rgba(200, 50, 50, 0.06);
+      border: 1px solid rgba(200, 50, 50, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .comp-alert-title {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--danger);
+      margin-bottom: 4px;
+    }
+
+    .comp-alert-text {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .comp-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .comp-action {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .comp-action-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .comp-action-text {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .comp-action-badge {
+      display: inline-block;
+      margin-top: 6px;
+      background: rgba(77, 184, 102, 0.1);
+      color: #16a34a;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(77, 184, 102, 0.2);
+    }
+
+    .act9-insight {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 40px;
+      line-height: 1.4;
+    }
+
+    .act9-insight-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: #64748b;
+      margin-top: 10px;
+    }
+
+    /* ============================================================
+       ACT 10: JAMES'S DATA
+       ============================================================ */
+    #act10 {
+      background: linear-gradient(180deg, #e8edf5 0%, #040d1a 5%, #0a1628 50%, #050f20 100%);
+      min-height: 109vh;
+    }
+
+    .act10-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .act10-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: rgba(150, 180, 255, 0.7);
+      margin-top: 12px;
+    }
+
+    .sensor-dashboard {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(100, 150, 255, 0.15);
+      border-radius: 20px;
+      padding: 28px;
+      margin-top: 48px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+
+    .sensor-dashboard.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .sensor-stat {
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .sensor-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: rgba(150, 180, 255, 0.6);
+      margin-bottom: 6px;
+    }
+
+    .sensor-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #7ba5ff;
+      letter-spacing: -0.03em;
+    }
+
+    .sensor-stat-sub {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: rgba(150, 180, 255, 0.5);
+      margin-top: 3px;
+    }
+
+    .firmware-bar {
+      background: rgba(37, 99, 235, 0.06);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .firmware-title {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .firmware-progress-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .firmware-progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--accent));
+      width: 0%;
+      transition: width 1.5s var(--ease-out) 0.3s;
+    }
+
+    .firmware-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(150, 180, 255, 0.5);
+      margin-top: 6px;
+    }
+
+    .act10-insight {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      color: white;
+      margin-top: 40px;
+      line-height: 1.3;
+    }
+
+    .act10-insight-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: rgba(150, 180, 255, 0.65);
+      margin-top: 10px;
+    }
+
+    /* ============================================================
+       ACT 11: THE NUMBERS
+       ============================================================ */
+    #act11 {
+      background: linear-gradient(180deg, #050f20 0%, #f5fbf6 6%);
+      min-height: 109vh;
+    }
+
+    .act11-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .act11-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 36px 24px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 2px 24px rgba(42, 92, 56, 0.08);
+      border: 1px solid rgba(42, 92, 56, 0.06);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+
+    .stat-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stat-card:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .stat-card:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    .stat-card:nth-child(4) {
+      transition-delay: 0.3s;
+    }
+
+    .stat-card:nth-child(5) {
+      transition-delay: 0.4s;
+    }
+
+    .stat-card:nth-child(6) {
+      transition-delay: 0.5s;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .stat-unit {
+      display: block;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 64px;
+    }
+
+    .quote-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 20px;
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 2px 20px rgba(42, 92, 56, 0.07);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .quote-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quote-card:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .quote-card:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    .quote-card:nth-child(4) {
+      transition-delay: 0.3s;
+    }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--dark);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .quote-author {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+    }
+
+    /* ============================================================
+       ACT 12: THE LAYER
+       ============================================================ */
+    #act12 {
+      background: var(--light);
+      min-height: 109vh;
+    }
+
+    .word-reveal {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .word {
+      display: inline;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+      margin-right: 0.25em;
+    }
+
+    .word.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .word.green {
+      color: var(--accent);
+    }
+
+    .word.dark {
+      color: var(--dark);
+    }
+
+    .act12-pause {
+      display: block;
+      height: 32px;
+    }
+
+    #finalDiagram {
+      width: 100%;
+      max-width: 520px;
+      margin: 56px auto 0;
+      display: block;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 56px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta-btn.primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 20px rgba(42, 92, 56, 0.3);
+    }
+
+    .cta-btn.primary:hover {
+      box-shadow: 0 8px 32px rgba(42, 92, 56, 0.4);
+    }
+
+    .cta-btn.secondary {
+      background: white;
+      color: var(--primary);
+      border: 1.5px solid rgba(42, 92, 56, 0.25);
+      box-shadow: 0 2px 12px rgba(42, 92, 56, 0.08);
+    }
+
+    .cta-btn.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid rgba(42, 92, 56, 0.2);
+    }
+
+    .act12-footer {
+      margin-top: 80px;
+      text-align: center;
+    }
+
+    .act12-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--dark);
+      opacity: 0.7;
+    }
+
+    .act12-back {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 12px 28px;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid rgba(77, 184, 102, 0.25);
+      border-radius: 8px;
+      opacity: 0.8;
+      transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    .act12-back:hover {
+      opacity: 1;
+      background: rgba(77, 184, 102, 0.06);
+      border-color: var(--primary);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 680px) {
+      .storm-compare {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-body {
+        grid-template-columns: 1fr;
+      }
+
+      .dash-sidebar {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sensor-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .comp-actions {
+        grid-template-columns: 1fr;
+      }
+
+      #timeline {
+        display: none;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================================================================
+     PROGRESS BAR
+     ================================================================ -->
+  <div id="progress-bar"></div>
+
+  <!-- ================================================================
+     TIMELINE DOTS (12 acts)
+     ================================================================ -->
+  <div id="timeline">
+    <div class="tl-dot" data-act="1" title="Spring, Wake County"></div>
+    <div class="tl-dot" data-act="2" title="The Players"></div>
+    <div class="tl-dot" data-act="3" title="The Old Way"></div>
+    <div class="tl-dot" data-act="4" title="The Missing Layer"></div>
+    <div class="tl-dot" data-act="5" title="The Installation"></div>
+    <div class="tl-dot" data-act="6" title="Marcus's Morning"></div>
+    <div class="tl-dot" data-act="7" title="Elena's Dashboard"></div>
+    <div class="tl-dot" data-act="8" title="The Storm"></div>
+    <div class="tl-dot" data-act="9" title="Patricia's Inbox"></div>
+    <div class="tl-dot" data-act="10" title="James's Data"></div>
+    <div class="tl-dot" data-act="11" title="The Numbers"></div>
+    <div class="tl-dot" data-act="12" title="The Layer"></div>
+  </div>
+
+  <!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+  <nav id="story-nav">
+    <a href="./index.html" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-label="SustainAI">
+        <circle cx="16" cy="16" r="14" fill="#2a5c38" />
+        <path d="M16 8 L16 20 M10 14 L16 8 L22 14" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+      SustainAI
+    </a>
+    <a href="./index.html" class="nav-back">
+      ← Back to Home
+    </a>
+  </nav>
+
+  <!-- ================================================================
+     ACT 1: SPRING, WAKE COUNTY
+     ================================================================ -->
+  <section class="act act--tall" id="act1">
+    <!-- Farmland aerial SVG -->
+    <svg id="farmlandSVG" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="skyGrad" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#0d2e18" />
+          <stop offset="100%" stop-color="#0c1f12" />
+        </radialGradient>
+        <filter id="farmBlur">
+          <feGaussianBlur stdDeviation="1.2" />
+        </filter>
+      </defs>
+      <!-- Sky/ground base -->
+      <rect width="1200" height="700" fill="url(#skyGrad)" />
+
+      <!-- Fields — varied greens -->
+      <rect x="80" y="100" width="200" height="160" rx="2" fill="#1e4d2a" opacity="0.9" />
+      <rect x="290" y="100" width="240" height="160" rx="2" fill="#2a5c38" opacity="0.85" />
+      <rect x="540" y="100" width="180" height="160" rx="2" fill="#1b3a23" opacity="0.95" />
+      <rect x="730" y="100" width="220" height="160" rx="2" fill="#2d6b3a" opacity="0.8" />
+      <rect x="960" y="100" width="200" height="160" rx="2" fill="#234d2e" opacity="0.9" />
+
+      <rect x="80" y="280" width="160" height="180" rx="2" fill="#264f30" opacity="0.88" />
+      <rect x="250" y="280" width="280" height="180" rx="2" fill="#1e4028" opacity="0.92" />
+      <rect x="540" y="280" width="200" height="180" rx="2" fill="#2a6040" opacity="0.82" />
+      <rect x="750" y="280" width="200" height="180" rx="2" fill="#1d3d24" opacity="0.9" />
+      <rect x="960" y="280" width="200" height="180" rx="2" fill="#285e37" opacity="0.85" />
+
+      <rect x="80" y="480" width="220" height="170" rx="2" fill="#1b4025" opacity="0.92" />
+      <rect x="310" y="480" width="220" height="170" rx="2" fill="#2a5c38" opacity="0.86" />
+      <rect x="540" y="480" width="180" height="170" rx="2" fill="#224d2e" opacity="0.88" />
+      <rect x="730" y="480" width="230" height="170" rx="2" fill="#1d4528" opacity="0.9" />
+      <rect x="970" y="480" width="190" height="170" rx="2" fill="#2a5535" opacity="0.84" />
+
+      <!-- Field row lines (crops) -->
+      <g opacity="0.12" stroke="#7fff90" stroke-width="0.8">
+        <line x1="80" y1="120" x2="280" y2="120" />
+        <line x1="80" y1="135" x2="280" y2="135" />
+        <line x1="80" y1="150" x2="280" y2="150" />
+        <line x1="80" y1="165" x2="280" y2="165" />
+        <line x1="80" y1="180" x2="280" y2="180" />
+        <line x1="80" y1="195" x2="280" y2="195" />
+        <line x1="80" y1="210" x2="280" y2="210" />
+        <line x1="80" y1="225" x2="280" y2="225" />
+
+        <line x1="290" y1="120" x2="530" y2="120" />
+        <line x1="290" y1="136" x2="530" y2="136" />
+        <line x1="290" y1="152" x2="530" y2="152" />
+        <line x1="290" y1="168" x2="530" y2="168" />
+        <line x1="290" y1="184" x2="530" y2="184" />
+        <line x1="290" y1="200" x2="530" y2="200" />
+        <line x1="290" y1="216" x2="530" y2="216" />
+        <line x1="290" y1="232" x2="530" y2="232" />
+
+        <line x1="540" y1="120" x2="720" y2="120" />
+        <line x1="540" y1="137" x2="720" y2="137" />
+        <line x1="540" y1="154" x2="720" y2="154" />
+        <line x1="540" y1="171" x2="720" y2="171" />
+        <line x1="540" y1="188" x2="720" y2="188" />
+        <line x1="540" y1="205" x2="720" y2="205" />
+        <line x1="540" y1="222" x2="720" y2="222" />
+      </g>
+
+      <!-- Roads -->
+      <rect x="78" y="260" width="1084" height="14" rx="2" fill="#2a2a2a" opacity="0.6" />
+      <rect x="78" y="460" width="1084" height="14" rx="2" fill="#2a2a2a" opacity="0.6" />
+      <rect x="276" y="90" width="14" height="570" rx="2" fill="#2a2a2a" opacity="0.5" />
+      <rect x="536" y="90" width="14" height="570" rx="2" fill="#2a2a2a" opacity="0.5" />
+      <rect x="730" y="90" width="14" height="570" rx="2" fill="#2a2a2a" opacity="0.5" />
+      <rect x="956" y="90" width="14" height="570" rx="2" fill="#2a2a2a" opacity="0.5" />
+
+      <!-- River / creek winding diagonally -->
+      <path d="M 0 650 Q 120 580, 280 520 Q 420 470, 540 440 Q 660 410, 760 380 Q 860 350, 960 310 Q 1060 280, 1200 240"
+        fill="none" stroke="#2563eb" stroke-width="14" opacity="0.55" />
+      <path d="M 0 650 Q 120 580, 280 520 Q 420 470, 540 440 Q 660 410, 760 380 Q 860 350, 960 310 Q 1060 280, 1200 240"
+        fill="none" stroke="#4a9eff" stroke-width="5" opacity="0.3" />
+
+      <!-- Sensor dots -->
+      <g opacity="0.45">
+        <circle cx="160" cy="180" r="3" fill="#4db866" />
+        <circle cx="200" cy="145" r="2.5" fill="#4db866" />
+        <circle cx="140" cy="220" r="3" fill="#4db866" />
+        <circle cx="360" cy="160" r="3" fill="#4db866" />
+        <circle cx="420" cy="195" r="2.5" fill="#4db866" />
+        <circle cx="460" cy="135" r="3" fill="#4db866" />
+        <circle cx="600" cy="170" r="3" fill="#4db866" />
+        <circle cx="650" cy="220" r="2.5" fill="#4db866" />
+        <circle cx="580" cy="145" r="2.5" fill="#4db866" />
+        <circle cx="800" cy="155" r="3" fill="#4db866" />
+        <circle cx="870" cy="200" r="2.5" fill="#4db866" />
+        <circle cx="300" cy="360" r="3" fill="#4db866" />
+        <circle cx="370" cy="420" r="2.5" fill="#4db866" />
+        <circle cx="650" cy="340" r="3" fill="#4db866" />
+        <circle cx="800" cy="350" r="2.5" fill="#4db866" />
+        <circle cx="160" cy="550" r="3" fill="#4db866" />
+        <circle cx="380" cy="560" r="2.5" fill="#4db866" />
+        <circle cx="600" cy="540" r="3" fill="#4db866" />
+        <circle cx="820" cy="570" r="2.5" fill="#4db866" />
+      </g>
+
+      <!-- Atmospheric overlay -->
+      <rect width="1200" height="700" fill="url(#skyGrad)" opacity="0.4" />
+
+      <!-- Vignette -->
+      <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="transparent" />
+        <stop offset="100%" stop-color="#0c1f12" stop-opacity="0.8" />
+      </radialGradient>
+      <rect width="1200" height="700" fill="url(#vignette)" />
+    </svg>
+
+    <div class="act__inner">
+      <p class="act1-season" id="act1Season">SPRING 2026 · WAKE COUNTY, NORTH CAROLINA</p>
+      <h1 class="act1-title" id="act1Title">Wake County.</h1>
+      <p class="act1-stats" id="act1Stats">47 farms. &nbsp;12,000 acres. &nbsp;One watershed.</p>
+      <p class="act1-tagline" id="act1Tagline">This is the story of a season that changed everything.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 2: THE PLAYERS
+     ================================================================ -->
+  <section class="act act--hub" id="act2">
+    <div class="act__inner" style="max-width:820px;">
+      <div class="fade-up" id="act2Header">
+        <h2 class="act2-headline">Meet the ecosystem.</h2>
+        <p class="act2-sub">Five stakeholders. One watershed. No shared intelligence — yet.</p>
+      </div>
+
+      <div class="players-grid">
+        <!-- Marcus -->
+        <div class="player-card" id="pcard1">
+          <div class="player-avatar" style="background:#2a5c38;">M</div>
+          <div class="player-info">
+            <p class="player-role">The Farmer</p>
+            <p class="player-name">Marcus</p>
+            <p class="player-desc">320 acres of corn and soybeans. Third-generation farm. Operates on thin margins and
+              institutional memory.</p>
+          </div>
+          <svg class="player-icon" viewBox="0 0 40 40" fill="none" stroke="#2a5c38" stroke-width="1.5">
+            <rect x="4" y="24" width="32" height="12" rx="2" />
+            <circle cx="10" cy="32" r="4" stroke="#2a5c38" />
+            <circle cx="30" cy="32" r="4" stroke="#2a5c38" />
+            <path d="M4 24 L10 14 L28 14 L36 24" />
+            <path d="M14 14 L14 8 L22 8 L22 14" />
+          </svg>
+        </div>
+
+        <!-- Elena -->
+        <div class="player-card" id="pcard2">
+          <div class="player-avatar" style="background:#b8860b;">E</div>
+          <div class="player-info">
+            <p class="player-role">The Agronomist</p>
+            <p class="player-name">Elena</p>
+            <p class="player-desc">NutriGrow Fertilizers. Manages application schedules for 200+ farms across the
+              region. Juggles spreadsheets and weather forecasts.</p>
+          </div>
+          <svg class="player-icon" viewBox="0 0 40 40" fill="none" stroke="#b8860b" stroke-width="1.5">
+            <path d="M16 6 L16 20 Q16 26 20 30 Q24 26 24 20 L24 6" />
+            <path d="M12 10 L16 10 M24 10 L28 10" />
+            <ellipse cx="20" cy="32" rx="8" ry="4" />
+            <path d="M16 22 Q18 24 20 22 Q22 20 24 22" />
+          </svg>
+        </div>
+
+        <!-- James -->
+        <div class="player-card" id="pcard3">
+          <div class="player-avatar" style="background:#2563eb;">J</div>
+          <div class="player-info">
+            <p class="player-role">The Sensor Engineer</p>
+            <p class="player-name">James</p>
+            <p class="player-desc">TerraSense IoT. Builds soil and water monitoring hardware deployed across Wake
+              County. His sensors have the data — but nobody's listening.</p>
+          </div>
+          <svg class="player-icon" viewBox="0 0 40 40" fill="none" stroke="#2563eb" stroke-width="1.5">
+            <circle cx="20" cy="20" r="5" />
+            <path d="M20 6 L20 12 M20 28 L20 34 M6 20 L12 20 M28 20 L34 20" />
+            <path d="M11 11 L15 15 M25 25 L29 29 M29 11 L25 15 M15 25 L11 29" />
+            <circle cx="20" cy="20" r="12" stroke-dasharray="4 4" opacity="0.5" />
+          </svg>
+        </div>
+
+        <!-- Patricia -->
+        <div class="player-card" id="pcard4">
+          <div class="player-avatar" style="background:#4a5568;">P</div>
+          <div class="player-info">
+            <p class="player-role">The Regulator</p>
+            <p class="player-name">Patricia</p>
+            <p class="player-desc">Wake County Environmental Services. Enforces water quality standards. Dreads
+              compliance season — 12 weeks of manual sampling and delayed lab results.</p>
+          </div>
+          <svg class="player-icon" viewBox="0 0 40 40" fill="none" stroke="#4a5568" stroke-width="1.5">
+            <path d="M20 4 L8 10 L8 22 Q8 32 20 36 Q32 32 32 22 L32 10 Z" />
+            <path d="M14 20 L18 24 L26 16" />
+          </svg>
+        </div>
+
+        <!-- Disconnected -->
+        <div class="disconnect-card" id="pcard5">
+          <div class="disconnect-diagram">
+            <div class="dc-node">
+              <div class="dc-avatar" style="background:#2a5c38;">M</div>
+              <span class="dc-name">MARCUS</span>
+            </div>
+            <div class="dc-divider">&#8901;&#8901;&#8901;</div>
+            <div class="dc-node">
+              <div class="dc-avatar" style="background:#b8860b;">E</div>
+              <span class="dc-name">ELENA</span>
+            </div>
+            <div class="dc-divider">&#8901;&#8901;&#8901;</div>
+            <div class="dc-node">
+              <div class="dc-avatar" style="background:#2563eb;">J</div>
+              <span class="dc-name">JAMES</span>
+            </div>
+            <div class="dc-divider">&#8901;&#8901;&#8901;</div>
+            <div class="dc-node">
+              <div class="dc-avatar" style="background:#4a5568;">P</div>
+              <span class="dc-name">PATRICIA</span>
+            </div>
+          </div>
+          <p class="disconnect-headline">4 stakeholders. 4 different systems.</p>
+          <p class="disconnect-sub">Zero coordination. Zero shared intelligence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 3: THE OLD WAY
+     ================================================================ -->
+  <section class="act act--hub" id="act3">
+    <div class="act__inner" style="max-width:800px; text-align:left;">
+      <div class="act3-header">
+        <p class="act3-eyebrow">Before SustainAI</p>
+        <h2 class="act3-title" style="text-align:center;">This is what happened every spring.</h2>
+      </div>
+
+      <div class="failure-timeline">
+        <div class="failure-node" id="fnode1">
+          <p class="failure-week">WEEK 1</p>
+          <p class="failure-text">NutriGrow applies nitrogen. Standard schedule — no field-level data. <span
+              class="failure-x">✕</span></p>
+        </div>
+        <div class="failure-node" id="fnode2">
+          <p class="failure-week">WEEK 3</p>
+          <p class="failure-text">Heavy rain. Runoff enters the creek. Nobody knows. <span class="failure-x">✕</span>
+          </p>
+        </div>
+        <div class="failure-node" id="fnode3">
+          <p class="failure-week">WEEK 5</p>
+          <p class="failure-text">Fish kill downstream. A resident calls the county to complain. <span
+              class="failure-x">✕</span></p>
+        </div>
+        <div class="failure-node" id="fnode4">
+          <p class="failure-week">WEEK 7</p>
+          <p class="failure-text">Patricia's team scrambles. Manual creek sampling. 2 weeks to get lab results back.
+            <span class="failure-x">✕</span></p>
+        </div>
+        <div class="failure-node" id="fnode5">
+          <p class="failure-week">WEEK 9</p>
+          <p class="failure-text">Results confirm contamination. Which farm? Which application? The data doesn't exist.
+            <span class="failure-x">✕</span></p>
+        </div>
+        <div class="failure-node" id="fnode6">
+          <p class="failure-week">WEEK 12</p>
+          <p class="failure-text">Regulatory fines. NutriGrow blamed without proof. Marcus loses a season. James's
+            sensors were there — disconnected, silent. <span class="failure-x">✕</span></p>
+        </div>
+      </div>
+
+      <div class="act3-verdict" id="act3Verdict">
+        <p class="verdict-number">$420,000</p>
+        <p class="verdict-label">in losses. 12 weeks of chaos. And nobody had the answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 4: THE MISSING LAYER
+     ================================================================ -->
+  <section class="act act--tall" id="act4">
+    <div class="grid-bg"></div>
+    <div class="act__inner">
+      <p class="act4-question fade-up" id="act4Question">
+        They didn't need better sensors.<br>
+        They didn't need better fertilizer.<br>
+        They didn't need more reports.
+      </p>
+
+      <!-- Ecosystem diagram -->
+      <svg id="ecosystemDiagram" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4db866" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#4db866" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+
+        <!-- Stakeholder nodes -->
+        <!-- Marcus (top-left) -->
+        <circle id="nodeM" cx="100" cy="90" r="38" fill="#1b3a23" stroke="#2a5c38" stroke-width="1.5" />
+        <text x="100" y="85" text-anchor="middle" font-family="Fraunces, serif" font-size="18" font-weight="700"
+          fill="white">M</text>
+        <text x="100" y="104" text-anchor="middle" font-family="Outfit, sans-serif" font-size="9"
+          fill="rgba(255,255,255,0.5)">Marcus</text>
+
+        <!-- Elena (top-right) -->
+        <circle id="nodeE" cx="460" cy="90" r="38" fill="#2d1a05" stroke="#b8860b" stroke-width="1.5" />
+        <text x="460" y="85" text-anchor="middle" font-family="Fraunces, serif" font-size="18" font-weight="700"
+          fill="white">E</text>
+        <text x="460" y="104" text-anchor="middle" font-family="Outfit, sans-serif" font-size="9"
+          fill="rgba(255,255,255,0.5)">Elena</text>
+
+        <!-- James (bottom-left) -->
+        <circle id="nodeJ" cx="100" cy="330" r="38" fill="#0f1e38" stroke="#2563eb" stroke-width="1.5" />
+        <text x="100" y="325" text-anchor="middle" font-family="Fraunces, serif" font-size="18" font-weight="700"
+          fill="white">J</text>
+        <text x="100" y="344" text-anchor="middle" font-family="Outfit, sans-serif" font-size="9"
+          fill="rgba(255,255,255,0.5)">James</text>
+
+        <!-- Patricia (bottom-right) -->
+        <circle id="nodeP" cx="460" cy="330" r="38" fill="#1a1f2e" stroke="#4a5568" stroke-width="1.5" />
+        <text x="460" y="325" text-anchor="middle" font-family="Fraunces, serif" font-size="18" font-weight="700"
+          fill="white">P</text>
+        <text x="460" y="344" text-anchor="middle" font-family="Outfit, sans-serif" font-size="9"
+          fill="rgba(255,255,255,0.5)">Patricia</text>
+
+        <!-- Connection lines TO center -->
+        <line id="lineM" x1="138" y1="118" x2="250" y2="185" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="6 4" />
+        <line id="lineE" x1="422" y1="118" x2="310" y2="185" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="6 4" />
+        <line id="lineJ" x1="138" y1="302" x2="250" y2="235" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="6 4" />
+        <line id="lineP" x1="422" y1="302" x2="310" y2="235" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="6 4" />
+
+        <!-- Center circle -->
+        <circle id="centerCircle" cx="280" cy="210" r="60" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"
+          stroke-dasharray="8 6" />
+        <circle id="centerGlowCircle" cx="280" cy="210" r="60" fill="url(#centerGlow)" opacity="0" />
+
+        <!-- Question mark -->
+        <text id="centerQ" x="280" y="224" text-anchor="middle" font-family="Fraunces, serif" font-size="48"
+          font-weight="700" fill="rgba(255,255,255,0.3)" opacity="1">?</text>
+
+        <!-- SustainAI logo at center (hidden until reveal) -->
+        <g id="sustainaiCenter" opacity="0">
+          <circle cx="280" cy="210" r="60" fill="#1b3a23" stroke="#4db866" stroke-width="2" />
+          <circle cx="280" cy="210" r="14" fill="#2a5c38" />
+          <path d="M280 198 L280 210 M274 204 L280 198 L286 204" stroke="#4db866" stroke-width="2.5" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" />
+          <text x="280" y="238" text-anchor="middle" font-family="Outfit, sans-serif" font-size="8" font-weight="600"
+            fill="#4db866" letter-spacing="1">SUSTAINAI</text>
+        </g>
+      </svg>
+
+      <p class="act4-reveal" id="act4Reveal">They needed an intelligence layer.</p>
+      <p class="act4-sub" id="act4Sub" style="opacity:0; transition: opacity 1s var(--ease-out) 0.3s;">
+        One brain connecting every stakeholder. SustainAI sits between data and action — for everyone.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 5: THE INSTALLATION
+     ================================================================ -->
+  <section class="act act--hub" id="act5">
+    <div class="act__inner">
+      <p class="act5-eyebrow fade-in" id="act5Eyebrow">SUMMER 2026 · THE PILOT BEGINS</p>
+      <h2 class="act5-title fade-up" id="act5Title">Installing the intelligence.</h2>
+
+      <div class="install-panels">
+        <!-- Panel 1 -->
+        <div class="install-panel" id="ipanel1">
+          <p class="panel-number">01 / THE FARM</p>
+          <p class="panel-title">Marcus</p>
+          <svg viewBox="0 0 180 120" fill="none" style="width:100%;margin-bottom:12px;"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Field blocks -->
+            <rect x="10" y="10" width="75" height="50" rx="3" fill="#1e4028" opacity="0.7" />
+            <rect x="95" y="10" width="75" height="50" rx="3" fill="#2a5c38" opacity="0.6" />
+            <rect x="10" y="70" width="160" height="42" rx="3" fill="#1b3a23" opacity="0.7" />
+            <!-- Sensor posts -->
+            <g>
+              <circle cx="30" cy="28" r="4" fill="#4db866" />
+              <line x1="30" y1="32" x2="30" y2="58" stroke="#4db866" stroke-width="1" opacity="0.7" />
+              <circle cx="60" cy="45" r="4" fill="#4db866" />
+              <line x1="60" y1="49" x2="60" y2="58" stroke="#4db866" stroke-width="1" opacity="0.7" />
+              <circle cx="120" cy="30" r="4" fill="#4db866" />
+              <line x1="120" y1="34" x2="120" y2="58" stroke="#4db866" stroke-width="1" opacity="0.7" />
+              <circle cx="155" cy="42" r="4" fill="#4db866" />
+              <line x1="155" y1="46" x2="155" y2="58" stroke="#4db866" stroke-width="1" opacity="0.7" />
+              <circle cx="50" cy="85" r="4" fill="#4db866" />
+              <circle cx="110" cy="90" r="4" fill="#4db866" />
+              <!-- Hub -->
+              <rect x="78" y="52" width="24" height="16" rx="3" fill="#4db866" />
+              <circle cx="90" cy="60" r="5" fill="white" opacity="0.8" />
+              <!-- Lines to hub -->
+              <line x1="30" y1="32" x2="78" y2="58" stroke="#4db866" stroke-width="0.8" stroke-dasharray="3 2"
+                opacity="0.5" />
+              <line x1="60" y1="49" x2="78" y2="58" stroke="#4db866" stroke-width="0.8" stroke-dasharray="3 2"
+                opacity="0.5" />
+              <line x1="120" y1="34" x2="102" y2="58" stroke="#4db866" stroke-width="0.8" stroke-dasharray="3 2"
+                opacity="0.5" />
+            </g>
+          </svg>
+          <p class="panel-body">TerraSense deploys 24 soil sensors across Marcus's 320 acres — measuring every variable
+            in real time.</p>
+          <div class="sensor-tags">
+            <span class="sensor-tag">Conductivity</span>
+            <span class="sensor-tag">Moisture</span>
+            <span class="sensor-tag">pH</span>
+            <span class="sensor-tag">N-P-K</span>
+            <span class="sensor-tag">Temperature</span>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div class="install-panel" id="ipanel2">
+          <p class="panel-number">02 / THE HUB</p>
+          <p class="panel-title">On-Site Intelligence</p>
+          <svg viewBox="0 0 180 120" fill="none" style="width:100%;margin-bottom:12px;"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Server box -->
+            <rect x="65" y="35" width="50" height="50" rx="6" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <rect x="72" y="42" width="36" height="8" rx="2" fill="#4db866" opacity="0.3" />
+            <rect x="72" y="54" width="36" height="8" rx="2" fill="#4db866" opacity="0.2" />
+            <rect x="72" y="66" width="36" height="8" rx="2" fill="#4db866" opacity="0.15" />
+            <circle cx="103" cy="46" r="3" fill="#4db866" />
+            <circle cx="103" cy="58" r="3" fill="#4db866" opacity="0.5" />
+            <!-- Incoming docs -->
+            <rect x="10" y="20" width="28" height="22" rx="3" fill="#2563eb" opacity="0.5" />
+            <rect x="10" y="50" width="28" height="22" rx="3" fill="#b8860b" opacity="0.5" />
+            <rect x="10" y="80" width="28" height="22" rx="3" fill="#2a5c38" opacity="0.5" />
+            <rect x="142" y="20" width="28" height="22" rx="3" fill="#4a5568" opacity="0.5" />
+            <rect x="142" y="50" width="28" height="22" rx="3" fill="#c83232" opacity="0.4" />
+            <rect x="142" y="80" width="28" height="22" rx="3" fill="#2563eb" opacity="0.4" />
+            <!-- Arrows -->
+            <line x1="38" y1="31" x2="64" y2="55" stroke="rgba(77,184,102,0.4)" stroke-width="1.2"
+              stroke-dasharray="3 2" />
+            <line x1="38" y1="61" x2="64" y2="60" stroke="rgba(77,184,102,0.4)" stroke-width="1.2"
+              stroke-dasharray="3 2" />
+            <line x1="38" y1="91" x2="64" y2="70" stroke="rgba(77,184,102,0.4)" stroke-width="1.2"
+              stroke-dasharray="3 2" />
+            <line x1="142" y1="31" x2="116" y2="55" stroke="rgba(77,184,102,0.4)" stroke-width="1.2"
+              stroke-dasharray="3 2" />
+            <line x1="142" y1="61" x2="116" y2="60" stroke="rgba(77,184,102,0.4)" stroke-width="1.2"
+              stroke-dasharray="3 2" />
+          </svg>
+          <p class="panel-body">SustainAI Hub installed on-site. Runs independently with no internet required. Ingests
+            all data streams.</p>
+          <div class="doc-icons">
+            <span class="doc-icon">📡 Sensor data</span>
+            <span class="doc-icon">🌤 Weather</span>
+            <span class="doc-icon">🧪 Soil reports</span>
+            <span class="doc-icon">📋 County advisories</span>
+            <span class="doc-icon">🌱 NutriGrow schedules</span>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="install-panel" id="ipanel3">
+          <p class="panel-number">03 / THE NETWORK</p>
+          <p class="panel-title">County-Wide Grid</p>
+          <svg viewBox="0 0 180 120" fill="none" style="width:100%;margin-bottom:12px;"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Network nodes -->
+            <circle id="hub1" cx="90" cy="60" r="10" fill="#2a5c38" stroke="#4db866" stroke-width="2" />
+            <circle cx="30" cy="25" r="7" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <circle cx="150" cy="25" r="7" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <circle cx="20" cy="75" r="7" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <circle cx="160" cy="75" r="7" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <circle cx="60" cy="105" r="7" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <circle cx="120" cy="105" r="7" fill="#1b3a23" stroke="#4db866" stroke-width="1.5" />
+            <circle cx="55" cy="15" r="6" fill="#1b3a23" stroke="#4db866" stroke-width="1.2" />
+            <circle cx="125" cy="15" r="6" fill="#1b3a23" stroke="#4db866" stroke-width="1.2" />
+            <circle cx="15" cy="45" r="6" fill="#1b3a23" stroke="#4db866" stroke-width="1.2" />
+            <circle cx="165" cy="45" r="6" fill="#1b3a23" stroke="#4db866" stroke-width="1.2" />
+            <circle cx="90" cy="112" r="6" fill="#1b3a23" stroke="#4db866" stroke-width="1.2" />
+            <!-- Lines -->
+            <line x1="37" y1="25" x2="80" y2="55" stroke="#4db866" stroke-width="1" opacity="0.5" />
+            <line x1="143" y1="25" x2="100" y2="55" stroke="#4db866" stroke-width="1" opacity="0.5" />
+            <line x1="27" y1="75" x2="80" y2="63" stroke="#4db866" stroke-width="1" opacity="0.5" />
+            <line x1="153" y1="75" x2="100" y2="63" stroke="#4db866" stroke-width="1" opacity="0.5" />
+            <line x1="67" y1="105" x2="84" y2="70" stroke="#4db866" stroke-width="1" opacity="0.5" />
+            <line x1="113" y1="105" x2="96" y2="70" stroke="#4db866" stroke-width="1" opacity="0.5" />
+            <!-- Pulse -->
+            <circle id="pulse1" cx="90" cy="60" r="10" fill="none" stroke="#4db866" stroke-width="1.5" opacity="0.8">
+              <animate attributeName="r" values="10;28;10" dur="2.5s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.8;0;0.8" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+          <p class="panel-body">12 pilot farms connected. One shared intelligence network. Each hub runs independently —
+            syncs when online.</p>
+          <div class="doc-icons">
+            <span class="doc-icon" style="border-color:rgba(77,184,102,0.3);color:var(--accent);">12 hubs active</span>
+            <span class="doc-icon">Offline-first</span>
+            <span class="doc-icon">Shared graph</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 6: MARCUS'S MORNING
+     ================================================================ -->
+  <section class="act act--tall" id="act6">
+    <div class="act__inner">
+      <h2 class="act6-headline fade-up" id="act6Title">Marcus's morning, transformed.</h2>
+      <p class="act6-sub fade-up" id="act6Sub" style="transition-delay:0.1s;">One screen. Every answer. Every single
+        day.</p>
+
+      <div class="phone-wrap">
+        <div class="phone-mockup" id="phoneMockup">
+          <div class="phone-screen">
+            <p class="phone-status">9:41 AM · SustainAI · Wake County</p>
+            <p class="phone-greeting">Good morning, Marcus. ☀️</p>
+            <div class="phone-item green" id="pi1">
+              <p class="phone-item-label">IRRIGATION · TRACT B</p>
+              <p class="phone-item-text">Soil moisture at 24%. Recommend irrigation before noon today.</p>
+            </div>
+            <div class="phone-item amber" id="pi2">
+              <p class="phone-item-label">NITROGEN · TRACT A</p>
+              <p class="phone-item-text">Levels optimal. Next application scheduled April 28.</p>
+            </div>
+            <div class="phone-item blue" id="pi3">
+              <p class="phone-item-label">WEATHER ADVISORY</p>
+              <p class="phone-item-text">Rain expected Thursday. Deferring planned fertilizer application.</p>
+            </div>
+            <div class="phone-item green" id="pi4">
+              <p class="phone-item-label">COMPLIANCE STATUS</p>
+              <p class="phone-item-text">All filings current. Next county deadline: May 15.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="act6-caption fade-up" id="act6Caption" style="transition-delay:0.2s;">Every morning. One screen. Every
+        answer he needs.</p>
+      <p class="act6-caption-sub fade-up" id="act6CaptionSub" style="transition-delay:0.3s;">No dashboards. No
+        spreadsheets. No phone calls to the agronomist at 7 AM.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 7: ELENA'S DASHBOARD
+     ================================================================ -->
+  <section class="act act--tall" id="act7">
+    <div class="act__inner" style="max-width:920px;">
+      <h2 class="act7-headline fade-up" id="act7Title">Elena sees everything.</h2>
+      <p class="act7-sub fade-up" id="act7Sub" style="transition-delay:0.1s;">NutriGrow's new platform: 200+ farms, one
+        view, real-time intelligence.</p>
+
+      <div class="dashboard-container" id="dashboardContainer">
+        <div class="dashboard-header">
+          <span class="dashboard-title">NutriGrow Regional Dashboard — powered by SustainAI</span>
+          <span class="dashboard-badge">● LIVE</span>
+        </div>
+        <div class="dashboard-body">
+          <div class="map-area">
+            <canvas id="farmMapCanvas" width="600" height="340"></canvas>
+            <div class="map-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#4db866;"></div> Optimal
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#f5c842;"></div> Caution
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#c83232;"></div> Action needed
+              </div>
+            </div>
+          </div>
+          <div class="dash-sidebar">
+            <div class="dash-metric">
+              <p class="dash-metric-label">Region Summary</p>
+              <div class="status-bar">
+                <div class="status-seg" id="statusGreen" style="background:#4db866; width:0%"></div>
+                <div class="status-seg" id="statusYellow" style="background:#f5c842; width:0%"></div>
+                <div class="status-seg" id="statusRed" style="background:#c83232; width:0%"></div>
+              </div>
+              <p class="dash-metric-sub">87% optimal · 11% caution · 2% action</p>
+            </div>
+            <div class="dash-metric">
+              <p class="dash-metric-label">This Week's Schedule</p>
+              <p class="dash-metric-value">14</p>
+              <p class="dash-metric-sub">farms scheduled · 3 deferred (rain forecast)</p>
+            </div>
+            <div class="dash-metric">
+              <p class="dash-metric-label">Season Savings</p>
+              <p class="dash-metric-value" style="color:#16a34a;">$180K</p>
+              <p class="dash-metric-sub">prevented over-application</p>
+            </div>
+            <div class="dash-metric">
+              <p class="dash-metric-label">Active Alerts</p>
+              <p class="dash-metric-value" style="font-size:1.1rem; color:#1e3a8a;">3 farms</p>
+              <p class="dash-metric-sub">S. Creek watershed · monitoring</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="act7-insight fade-up" id="act7Insight" style="transition-delay:0.1s;">Elena doesn't guess anymore.</p>
+      <p class="act7-insight-sub fade-up" id="act7InsightSub" style="transition-delay:0.2s;">NutriGrow went from selling
+        product to selling precision. Their clients went from customers to partners.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 8: THE STORM
+     ================================================================ -->
+  <section class="act act--hub" id="act8">
+    <canvas id="rainCanvas"></canvas>
+    <div class="lightning-flash" id="lightningFlash"></div>
+
+    <div class="act__inner" style="z-index:10;">
+      <p class="act8-eyebrow fade-up" id="act8Eyebrow">SEPTEMBER 12, 2026</p>
+      <h2 class="act8-title fade-up" id="act8Title">The big one.</h2>
+      <p class="act8-subtitle fade-up" id="act8Subtitle">4.2 inches in 6 hours. The heaviest rainfall Wake County had
+        seen in a decade.</p>
+
+      <div class="storm-compare">
+        <div class="compare-side bad">
+          <p class="compare-label bad">WITHOUT SUSTAINAI</p>
+          <div class="compare-item" id="ci1">
+            <span class="ci-icon">✕</span>
+            <span class="ci-text">Runoff undetected for weeks</span>
+          </div>
+          <div class="compare-item" id="ci2">
+            <span class="ci-icon">✕</span>
+            <span class="ci-text">Manual creek sampling begins</span>
+          </div>
+          <div class="compare-item" id="ci3">
+            <span class="ci-icon">✕</span>
+            <span class="ci-text">Regulatory scramble, no data</span>
+          </div>
+          <div class="compare-item" id="ci4">
+            <span class="ci-icon">✕</span>
+            <span class="ci-text">Crop losses, fines, lawsuits</span>
+          </div>
+          <div class="compare-item" id="ci5">
+            <span class="ci-icon">✕</span>
+            <span class="ci-text">12 weeks to partial resolution</span>
+          </div>
+        </div>
+        <div class="compare-side good">
+          <p class="compare-label good">WITH SUSTAINAI</p>
+          <div class="compare-item" id="ci6">
+            <span class="ci-icon">✓</span>
+            <span class="ci-text">12 hubs detect anomalies simultaneously</span>
+          </div>
+          <div class="compare-item" id="ci7">
+            <span class="ci-icon">✓</span>
+            <span class="ci-text">All stakeholders alerted in &lt;5 seconds</span>
+          </div>
+          <div class="compare-item" id="ci8">
+            <span class="ci-icon">✓</span>
+            <span class="ci-text">Root cause identified: 3 fields, recent applications</span>
+          </div>
+          <div class="compare-item" id="ci9">
+            <span class="ci-icon">✓</span>
+            <span class="ci-text">Containment automated. Reports auto-filed.</span>
+          </div>
+          <div class="compare-item" id="ci10">
+            <span class="ci-icon">✓</span>
+            <span class="ci-text">Crisis resolved before morning meeting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 9: PATRICIA'S INBOX
+     ================================================================ -->
+  <section class="act act--tall" id="act9">
+    <div class="act__inner" style="max-width:820px;">
+      <h2 class="act9-headline fade-up" id="act9Title">Patricia gets the report before her coffee.</h2>
+      <p class="act9-sub fade-up" id="act9Sub" style="transition-delay:0.1s;">Wake County Environmental Services,
+        redefined.</p>
+
+      <div class="compliance-dashboard" id="compDashboard">
+        <div class="comp-header">
+          <span class="comp-title-text">Wake County Environmental Services — Real-Time Monitoring</span>
+          <span class="comp-badge">AUTO</span>
+          <div class="comp-status-dot"></div>
+        </div>
+        <div class="comp-body">
+          <div class="comp-alert">
+            <p class="comp-alert-title">⚠ Nitrogen Event Detected — 3 farms, South Creek watershed</p>
+            <p class="comp-alert-text">Event time: 04:17 AM · Sensors: SC-07, SC-11, SC-14 · Status: Automated
+              containment in progress</p>
+          </div>
+          <div class="comp-actions">
+            <div class="comp-action">
+              <p class="comp-action-label">CONTAINMENT STATUS</p>
+              <p class="comp-action-text">All 3 farms: automated response activated</p>
+              <span class="comp-action-badge">✓ IN PROGRESS</span>
+            </div>
+            <div class="comp-action">
+              <p class="comp-action-label">COMPLIANCE REPORT</p>
+              <p class="comp-action-text">Auto-generated with timestamps &amp; sensor readings</p>
+              <span class="comp-action-badge">✓ AUTO-FILED</span>
+            </div>
+            <div class="comp-action">
+              <p class="comp-action-label">ROOT CAUSE</p>
+              <p class="comp-action-text">Nitrogen application Oct 8 · Field SC-14 N-boundary</p>
+              <span class="comp-action-badge">✓ IDENTIFIED</span>
+            </div>
+            <div class="comp-action">
+              <p class="comp-action-label">MANUAL INTERVENTION</p>
+              <p class="comp-action-text">None required. All actions automated and logged.</p>
+              <span class="comp-action-badge" style="background:rgba(77,184,102,0.15);">✓ NOT NEEDED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="act9-insight fade-up" id="act9Insight" style="transition-delay:0.1s;">Patricia used to spend 12 weeks
+        investigating. Now she has a full report before her morning meeting.</p>
+      <p class="act9-insight-sub fade-up" id="act9InsightSub" style="transition-delay:0.2s;">When every stakeholder has
+        the same intelligence, regulation becomes collaboration — not confrontation.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 10: JAMES'S DATA
+     ================================================================ -->
+  <section class="act act--tall" id="act10">
+    <div class="act__inner" style="max-width:820px;">
+      <h2 class="act10-headline fade-up" id="act10Title">James's hardware, 10× more valuable.</h2>
+      <p class="act10-sub fade-up" id="act10Sub" style="transition-delay:0.1s;">TerraSense sensors. Inside the SustainAI
+        platform.</p>
+
+      <div class="sensor-dashboard" id="sensorDash">
+        <div class="sensor-grid">
+          <div class="sensor-stat">
+            <p class="sensor-stat-label">FLEET STATUS</p>
+            <p class="sensor-stat-value">288</p>
+            <p class="sensor-stat-sub">sensors across 12 farms</p>
+          </div>
+          <div class="sensor-stat">
+            <p class="sensor-stat-label">UPTIME</p>
+            <p class="sensor-stat-value">99.4%</p>
+            <p class="sensor-stat-sub">highest in company history</p>
+          </div>
+          <div class="sensor-stat">
+            <p class="sensor-stat-label">AVG LATENCY</p>
+            <p class="sensor-stat-value">18ms</p>
+            <p class="sensor-stat-sub">read-to-insight pipeline</p>
+          </div>
+          <div class="sensor-stat">
+            <p class="sensor-stat-label">DATA QUALITY</p>
+            <p class="sensor-stat-value">97.2%</p>
+            <p class="sensor-stat-sub">validated against knowledge graph</p>
+          </div>
+        </div>
+        <div class="firmware-bar">
+          <p class="firmware-title">Firmware v2.5.1 deployment — 240 / 288 sensors updated</p>
+          <div class="firmware-progress-track">
+            <div class="firmware-progress-fill" id="firmwareBar"></div>
+          </div>
+          <p class="firmware-label">83% complete · ETA: 4 hours</p>
+        </div>
+      </div>
+
+      <p class="act10-insight fade-up" id="act10Insight" style="transition-delay:0.1s;">James used to sell sensors. Now
+        he sells insight-ready infrastructure.</p>
+      <p class="act10-insight-sub fade-up" id="act10InsightSub" style="transition-delay:0.2s;">TerraSense retention
+        rate: 60% → 94% after SustainAI integration. Because the hardware finally has a brain.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 11: THE NUMBERS
+     ================================================================ -->
+  <section class="act act--hub" id="act11">
+    <div class="act__inner">
+      <p class="act11-eyebrow fade-up" id="act11Eyebrow">ONE SEASON · ONE COUNTY · THE RESULTS</p>
+      <h2 class="act11-title fade-up" id="act11Title" style="color:var(--dark); transition-delay:0.1s;">The numbers
+        don't lie.</h2>
+
+      <div class="stats-grid">
+        <div class="stat-card" id="sc1">
+          <p class="stat-number"><span id="sn1">$0</span></p>
+          <p class="stat-label">Prevented crop and environmental losses</p>
+        </div>
+        <div class="stat-card" id="sc2">
+          <p class="stat-number"><span id="sn2">0</span>%</p>
+          <p class="stat-label">Reduction in regulatory response time</p>
+        </div>
+        <div class="stat-card" id="sc3">
+          <p class="stat-number"><span id="sn3">0</span>%</p>
+          <p class="stat-label">Reduction in fertilizer over-application</p>
+        </div>
+        <div class="stat-card" id="sc4">
+          <p class="stat-number"><span id="sn4">12</span> → <span id="sn4b">12</span></p>
+          <p class="stat-label">Farms requesting installation by season end</p>
+        </div>
+        <div class="stat-card" id="sc5">
+          <p class="stat-number"><span id="sn5">0</span></p>
+          <p class="stat-label">Compliance fines for participating farms</p>
+        </div>
+        <div class="stat-card" id="sc6">
+          <p class="stat-number"><span id="sn6">--</span>s</p>
+          <p class="stat-label">Average detection-to-alert time</p>
+        </div>
+      </div>
+
+      <div class="quotes-grid">
+        <div class="quote-card" id="qc1">
+          <p class="quote-text">"I finally feel like I'm farming with a co-pilot."</p>
+          <p class="quote-author">MARCUS · CORN &amp; SOYBEANS, 320 ACRES</p>
+        </div>
+        <div class="quote-card" id="qc2">
+          <p class="quote-text">"We went from reactive to predictive. Our clients love us now."</p>
+          <p class="quote-author">ELENA · NUTRIGROW FERTILIZERS</p>
+        </div>
+        <div class="quote-card" id="qc3">
+          <p class="quote-text">"Our sensors are 10× more valuable inside this platform."</p>
+          <p class="quote-author">JAMES · TERRASENSE IOT</p>
+        </div>
+        <div class="quote-card" id="qc4">
+          <p class="quote-text">"First season in 15 years with zero escalated incidents."</p>
+          <p class="quote-author">PATRICIA · WAKE COUNTY ENV. SERVICES</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     ACT 12: THE LAYER
+     ================================================================ -->
+  <section class="act act--tall" id="act12">
+    <div class="act__inner">
+      <div class="word-reveal" style="color:var(--dark);">
+        <span class="word green" id="wr1">SustainAI</span>
+        <span class="word dark" id="wr2">is not just a product</span>
+        <span class="word dark" id="wr3">for farmers.</span>
+        <span class="act12-pause"></span>
+        <span class="word dark" id="wr4">It's the intelligence layer</span>
+        <span class="act12-pause"></span>
+        <span class="word dark" id="wr5">for the entire</span>
+        <span class="word green" id="wr6">agricultural ecosystem.</span>
+      </div>
+
+      <!-- Final ecosystem diagram — connected -->
+      <svg id="finalDiagram" viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="finalGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4db866" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#4db866" stop-opacity="0" />
+          </radialGradient>
+          <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#4db866" opacity="0.7" />
+          </marker>
+        </defs>
+
+        <!-- Glow at center -->
+        <circle cx="260" cy="190" r="80" fill="url(#finalGlow)" />
+
+        <!-- Connection lines — animated -->
+        <line id="fl1" x1="100" y1="80" x2="220" y2="165" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="200" stroke-dashoffset="200" />
+        <line id="fl2" x1="420" y1="80" x2="300" y2="165" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="200" stroke-dashoffset="200" />
+        <line id="fl3" x1="100" y1="300" x2="220" y2="215" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="200" stroke-dashoffset="200" />
+        <line id="fl4" x1="420" y1="300" x2="300" y2="215" stroke="#4db866" stroke-width="2" opacity="0"
+          stroke-dasharray="200" stroke-dashoffset="200" />
+
+        <!-- Data flow pulses (animated dots on lines) -->
+        <circle id="fp1" cx="100" cy="80" r="4" fill="#7fffb2" opacity="0" />
+        <circle id="fp2" cx="420" cy="80" r="4" fill="#7fffb2" opacity="0" />
+        <circle id="fp3" cx="100" cy="300" r="4" fill="#7fffb2" opacity="0" />
+        <circle id="fp4" cx="420" cy="300" r="4" fill="#7fffb2" opacity="0" />
+
+        <!-- Stakeholder nodes -->
+        <circle cx="100" cy="80" r="38" fill="#1b3a23" stroke="#2a5c38" stroke-width="2" />
+        <text x="100" y="75" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="700"
+          fill="white">M</text>
+        <text x="100" y="94" text-anchor="middle" font-family="Outfit, sans-serif" font-size="8"
+          fill="rgba(255,255,255,0.5)">FARMER</text>
+
+        <circle cx="420" cy="80" r="38" fill="#2d1a05" stroke="#b8860b" stroke-width="2" />
+        <text x="420" y="75" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="700"
+          fill="white">E</text>
+        <text x="420" y="94" text-anchor="middle" font-family="Outfit, sans-serif" font-size="8"
+          fill="rgba(255,255,255,0.5)">AGRONOMIST</text>
+
+        <circle cx="100" cy="300" r="38" fill="#0f1e38" stroke="#2563eb" stroke-width="2" />
+        <text x="100" y="295" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="700"
+          fill="white">J</text>
+        <text x="100" y="314" text-anchor="middle" font-family="Outfit, sans-serif" font-size="8"
+          fill="rgba(255,255,255,0.5)">ENGINEER</text>
+
+        <circle cx="420" cy="300" r="38" fill="#1a1f2e" stroke="#4a5568" stroke-width="2" />
+        <text x="420" y="295" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="700"
+          fill="white">P</text>
+        <text x="420" y="314" text-anchor="middle" font-family="Outfit, sans-serif" font-size="8"
+          fill="rgba(255,255,255,0.5)">REGULATOR</text>
+
+        <!-- Center SustainAI node -->
+        <circle cx="260" cy="190" r="52" fill="#1b3a23" stroke="#4db866" stroke-width="2.5" />
+        <circle cx="260" cy="190" r="16" fill="#2a5c38" />
+        <path d="M260 178 L260 190 M254 184 L260 178 L266 184" stroke="#4db866" stroke-width="2.5" fill="none"
+          stroke-linecap="round" stroke-linejoin="round" />
+        <text x="260" y="215" text-anchor="middle" font-family="Outfit, sans-serif" font-size="7" font-weight="600"
+          fill="#4db866" letter-spacing="1.5">SUSTAINAI</text>
+      </svg>
+
+      <div class="cta-group">
+        <a href="./demo.html" class="cta-btn primary">For Farmers → Try the Demo</a>
+        <a href="./index.html" class="cta-btn secondary">For AgTech Companies → Talk to Us</a>
+        <a href="./story.html" class="cta-btn ghost">Watch Our Farm Story →</a>
+      </div>
+
+      <div class="act12-footer">
+        <p class="act12-tagline">SustainAI — One clear answer. For everyone.</p>
+        <a href="./index.html" class="act12-back">← Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+     JAVASCRIPT
+     ================================================================ -->
+  <script>
+    (() => {
+      const $ = id => document.getElementById(id);
+      const $$ = sel => document.querySelectorAll(sel);
+
+      /* ── UTILS ─────────────────────────────────────────────────── */
+      function isInView(el, threshold = 0.4) {
+        if (!el) return false;
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight * threshold && r.bottom > 0;
+      }
+
+      function getActProgress(el) {
+        const r = el.getBoundingClientRect();
+        const entered = -r.top;
+        return Math.max(0, Math.min(1, entered / el.offsetHeight));
+      }
+
+      /* ── PROGRESS BAR ───────────────────────────────────────────── */
+      function updateProgress() {
+        const total = document.body.scrollHeight - window.innerHeight;
+        const pct = (window.scrollY / total) * 100;
+        $('progress-bar').style.width = pct + '%';
+      }
+
+      /* ── TIMELINE DOTS ──────────────────────────────────────────── */
+      const acts = Array.from({ length: 12 }, (_, i) => $('act' + (i + 1)));
+      const dots = $$('.tl-dot');
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          if (acts[i]) acts[i].scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      function updateTimeline() {
+        let activeIdx = 0;
+        acts.forEach((act, i) => {
+          if (!act) return;
+          const r = act.getBoundingClientRect();
+          if (r.top < window.innerHeight * 0.55) activeIdx = i;
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.remove('active');
+          if (i < activeIdx) dot.classList.add('visited');
+          else dot.classList.remove('visited');
+        });
+        if (dots[activeIdx]) dots[activeIdx].classList.add('active');
+      }
+
+      /* ── NAV ────────────────────────────────────────────────────── */
+      function updateNav() {
+        const nav = $('story-nav');
+        if (window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      }
+
+      /* ── FARMLAND PARALLAX ──────────────────────────────────────── */
+      function updateFarmland() {
+        const act1 = $('act1');
+        const p = getActProgress(act1);
+        const scale = 1 + p * 0.08;
+        $('farmlandSVG').style.transform = `scale(${scale})`;
+      }
+
+      /* ── INTERSECTION OBSERVER FADE-UPS ─────────────────────────── */
+      const fadeObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      $$('.fade-up, .fade-in').forEach(el => fadeObs.observe(el));
+
+      /* ── ACT 1: ENTRANCE ANIMATIONS ──────────────────────────────── */
+      setTimeout(() => {
+        const s = $('act1Season'), t = $('act1Title'), st = $('act1Stats'), tl = $('act1Tagline');
+        if (s) s.classList.add('visible');
+        setTimeout(() => t && t.classList.add('visible'), 300);
+        setTimeout(() => st && st.classList.add('visible'), 600);
+        setTimeout(() => tl && tl.classList.add('visible'), 1000);
+      }, 400);
+
+      /* ── ACT 2: PLAYER CARDS ─────────────────────────────────────── */
+      const pcards = ['pcard1', 'pcard2', 'pcard3', 'pcard4', 'pcard5'];
+      const pcardObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.15 });
+      pcards.forEach(id => { const el = $(id); if (el) pcardObs.observe(el); });
+
+      /* ── ACT 3: FAILURE NODES ────────────────────────────────────── */
+      const fnodes = ['fnode1', 'fnode2', 'fnode3', 'fnode4', 'fnode5', 'fnode6'];
+      let failureDelays = [0, 100, 200, 300, 400, 500];
+      const fnodeObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const idx = fnodes.indexOf(e.target.id);
+            setTimeout(() => e.target.classList.add('visible'), failureDelays[idx] || 0);
+          }
+        });
+      }, { threshold: 0.3 });
+      fnodes.forEach(id => { const el = $(id); if (el) fnodeObs.observe(el); });
+
+      const verdictObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.3 });
+      const v = $('act3Verdict'); if (v) verdictObs.observe(v);
+
+      /* ── ACT 4: ECOSYSTEM DIAGRAM REVEAL ────────────────────────── */
+      let act4Revealed = false;
+      const act4El = $('act4');
+
+      function revealAct4Diagram() {
+        if (act4Revealed) return;
+        act4Revealed = true;
+
+        // Show question mark first, then reveal SustainAI
+        const lines = ['lineM', 'lineE', 'lineJ', 'lineP'];
+        lines.forEach((id, i) => {
+          setTimeout(() => {
+            const el = $(id);
+            if (el) { el.setAttribute('opacity', '0.6'); }
+          }, i * 200);
+        });
+
+        setTimeout(() => {
+          const q = $('centerQ');
+          if (q) {
+            q.style.transition = 'opacity 0.6s';
+            q.style.opacity = '0';
+          }
+          const center = $('sustainaiCenter');
+          if (center) {
+            center.style.transition = 'opacity 0.8s';
+            setTimeout(() => {
+              center.setAttribute('opacity', '1');
+              const glow = $('centerGlowCircle');
+              if (glow) { glow.style.transition = 'opacity 0.8s'; glow.setAttribute('opacity', '1'); }
+            }, 200);
+          }
+          // Make lines solid
+          lines.forEach(id => {
+            const el = $(id);
+            if (el) {
+              el.removeAttribute('stroke-dasharray');
+              el.setAttribute('stroke-width', '2.5');
+              el.setAttribute('opacity', '0.8');
+            }
+          });
+        }, lines.length * 200 + 400);
+
+        // Reveal text
+        setTimeout(() => {
+          const r = $('act4Reveal');
+          const s = $('act4Sub');
+          if (r) r.classList.add('visible');
+          setTimeout(() => { if (s) s.style.opacity = '1'; }, 400);
+        }, lines.length * 200 + 1200);
+      }
+
+      const act4Obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) revealAct4Diagram(); });
+      }, { threshold: 0.4 });
+      if (act4El) act4Obs.observe(act4El);
+
+      /* ── ACT 5: INSTALL PANELS ──────────────────────────────────── */
+      const panelObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.15 });
+      ['ipanel1', 'ipanel2', 'ipanel3'].forEach(id => {
+        const el = $(id); if (el) panelObs.observe(el);
+      });
+
+      /* ── ACT 6: PHONE ITEMS ──────────────────────────────────────── */
+      let phoneTriggered = false;
+      const phone = $('phoneMockup');
+      const act6Obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !phoneTriggered) {
+            phoneTriggered = true;
+            phone.classList.add('visible');
+            const items = ['pi1', 'pi2', 'pi3', 'pi4'];
+            items.forEach((id, i) => {
+              setTimeout(() => {
+                const el = $(id);
+                if (el) el.classList.add('visible');
+              }, 600 + i * 300);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      if ($('act6')) act6Obs.observe($('act6'));
+
+      /* ── ACT 7: FARM MAP CANVAS ──────────────────────────────────── */
+      let mapDrawn = false;
+      const farmMapObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !mapDrawn) {
+            mapDrawn = true;
+            drawFarmMap();
+            animateStatusBars();
+          }
+        });
+      }, { threshold: 0.3 });
+      const dc = $('dashboardContainer');
+      if (dc) {
+        farmMapObs.observe(dc);
+      }
+
+      function drawFarmMap() {
+        const canvas = $('farmMapCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width, H = canvas.height;
+
+        // Background
+        ctx.fillStyle = '#e8eef8';
+        ctx.fillRect(0, 0, W, H);
+
+        // Field grid lines
+        ctx.strokeStyle = '#d0d8e8';
+        ctx.lineWidth = 0.5;
+        for (let x = 0; x < W; x += 40) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        }
+        for (let y = 0; y < H; y += 40) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+
+        // Creek
+        ctx.beginPath();
+        ctx.moveTo(0, H * 0.8);
+        ctx.quadraticCurveTo(W * 0.25, H * 0.65, W * 0.5, H * 0.55);
+        ctx.quadraticCurveTo(W * 0.75, H * 0.45, W, H * 0.35);
+        ctx.strokeStyle = 'rgba(37,99,235,0.4)';
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        ctx.strokeStyle = 'rgba(100,180,255,0.3)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Farm dots
+        const farms = [];
+        // 87% green, 11% yellow, 2% red — 220 total visible dots
+        for (let i = 0; i < 220; i++) {
+          const x = 15 + Math.random() * (W - 30);
+          const y = 15 + Math.random() * (H - 30);
+          let color;
+          const r = Math.random();
+          if (r < 0.87) color = '#4db866';
+          else if (r < 0.98) color = '#f5c842';
+          else color = '#c83232';
+          farms.push({ x, y, color, r: 3 + Math.random() * 2 });
+        }
+
+        // Animate dots appearing
+        let count = 0;
+        const animate = () => {
+          if (count >= farms.length) return;
+          const batch = Math.min(8, farms.length - count);
+          for (let i = 0; i < batch; i++) {
+            const f = farms[count + i];
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = f.color;
+            ctx.globalAlpha = 0.85;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r + 2, 0, Math.PI * 2);
+            ctx.fillStyle = f.color;
+            ctx.globalAlpha = 0.15;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          }
+          count += batch;
+          requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      }
+
+      function animateStatusBars() {
+        setTimeout(() => {
+          const g = $('statusGreen'), y = $('statusYellow'), r = $('statusRed');
+          if (g) g.style.width = '87%';
+          if (y) y.style.width = '11%';
+          if (r) r.style.width = '2%';
+        }, 300);
+      }
+
+      const dashObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.2 });
+      if (dc) dashObs.observe(dc);
+
+      /* ── ACT 8: RAIN CANVAS & STORM ─────────────────────────────── */
+      let rainActive = false;
+      const rainCanvas = $('rainCanvas');
+      const rainCtx = rainCanvas ? rainCanvas.getContext('2d') : null;
+      let rainDrops = [];
+
+      function initRain() {
+        if (!rainCanvas || !rainCtx) return;
+        rainCanvas.width = window.innerWidth;
+        rainCanvas.height = window.innerHeight;
+        rainDrops = [];
+        for (let i = 0; i < 200; i++) {
+          rainDrops.push({
+            x: Math.random() * rainCanvas.width,
+            y: Math.random() * rainCanvas.height,
+            len: 10 + Math.random() * 20,
+            speed: 8 + Math.random() * 12,
+            opacity: 0.2 + Math.random() * 0.4,
+            width: 0.5 + Math.random() * 1
+          });
+        }
+      }
+
+      function drawRain() {
+        if (!rainActive || !rainCtx) return;
+        rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+        rainDrops.forEach(d => {
+          rainCtx.beginPath();
+          rainCtx.moveTo(d.x, d.y);
+          rainCtx.lineTo(d.x - d.len * 0.15, d.y + d.len);
+          rainCtx.strokeStyle = `rgba(150,200,255,${d.opacity})`;
+          rainCtx.lineWidth = d.width;
+          rainCtx.stroke();
+          d.y += d.speed;
+          d.x -= d.speed * 0.1;
+          if (d.y > rainCanvas.height) {
+            d.y = -d.len;
+            d.x = Math.random() * rainCanvas.width;
+          }
+        });
+        requestAnimationFrame(drawRain);
+      }
+
+      // Lightning flashes
+      let lightningInterval = null;
+      function startLightning() {
+        if (lightningInterval) return;
+        const flash = $('lightningFlash');
+        lightningInterval = setInterval(() => {
+          if (Math.random() < 0.15) {
+            flash.style.opacity = '1';
+            setTimeout(() => { flash.style.opacity = '0'; }, 80);
+            setTimeout(() => {
+              flash.style.opacity = '0.5';
+              setTimeout(() => { flash.style.opacity = '0'; }, 60);
+            }, 120);
+          }
+        }, 800);
+      }
+
+      const act8Obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !rainActive) {
+            rainActive = true;
+            initRain();
+            rainCanvas.classList.add('active');
+            drawRain();
+            startLightning();
+            // Trigger compare items
+            const items = ['ci1', 'ci2', 'ci3', 'ci4', 'ci5', 'ci6', 'ci7', 'ci8', 'ci9', 'ci10'];
+            items.forEach((id, i) => {
+              setTimeout(() => {
+                const el = $(id);
+                if (el) el.classList.add('visible');
+              }, 400 + i * 180);
+            });
+          }
+        });
+      }, { threshold: 0.25 });
+      const act8 = $('act8'); if (act8) act8Obs.observe(act8);
+
+      /* ── ACT 9: COMPLIANCE DASHBOARD ────────────────────────────── */
+      const compObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.2 });
+      const cd = $('compDashboard'); if (cd) compObs.observe(cd);
+
+      /* ── ACT 10: SENSOR DASHBOARD + FIRMWARE BAR ─────────────────── */
+      let firmwareAnimated = false;
+      const sensorObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            if (!firmwareAnimated) {
+              firmwareAnimated = true;
+              setTimeout(() => {
+                const fb = $('firmwareBar');
+                if (fb) fb.style.width = '83.3%';
+              }, 400);
+            }
+          }
+        });
+      }, { threshold: 0.2 });
+      const sd = $('sensorDash'); if (sd) sensorObs.observe(sd);
+
+      /* ── ACT 11: COUNT-UP STATS ──────────────────────────────────── */
+      let statsAnimated = false;
+
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function countUp(el, from, to, duration, prefix = '', suffix = '', decimals = 0) {
+        if (!el) return;
+        const start = performance.now();
+        const animate = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = from + (to - from) * easeOut(progress);
+          el.textContent = prefix + (decimals > 0 ? value.toFixed(decimals) : Math.round(value)) + suffix;
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      }
+
+      const statsObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !statsAnimated) {
+            statsAnimated = true;
+            countUp($('sn1'), 0, 1.2, 2000, '$', 'M');
+            countUp($('sn2'), 0, 94, 2200, '', '', 0);
+            countUp($('sn3'), 0, 38, 1800, '', '', 0);
+            countUp($('sn4b'), 12, 47, 2400, '', '', 0);
+            // sn5 stays 0
+            countUp($('sn6'), 20, 4.2, 1600, '', '', 1);
+          }
+        });
+      }, { threshold: 0.25 });
+      const sc1 = $('sc1'); if (sc1) statsObs.observe(sc1);
+
+      const cardObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.15 });
+      ['sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'qc1', 'qc2', 'qc3', 'qc4'].forEach(id => {
+        const el = $(id); if (el) cardObs.observe(el);
+      });
+
+      /* ── ACT 12: WORD REVEAL + FINAL DIAGRAM ─────────────────────── */
+      let wordsRevealed = false;
+      let finalLinesAnimated = false;
+
+      function revealWords() {
+        if (wordsRevealed) return;
+        wordsRevealed = true;
+        const words = ['wr1', 'wr2', 'wr3', 'wr4', 'wr5', 'wr6'];
+        const delays = [0, 400, 700, 1200, 1700, 2100];
+        words.forEach((id, i) => {
+          setTimeout(() => {
+            const el = $(id); if (el) el.classList.add('visible');
+          }, delays[i]);
+        });
+      }
+
+      function animateFinalLines() {
+        if (finalLinesAnimated) return;
+        finalLinesAnimated = true;
+        const lines = ['fl1', 'fl2', 'fl3', 'fl4'];
+        const pulses = ['fp1', 'fp2', 'fp3', 'fp4'];
+        lines.forEach((id, i) => {
+          setTimeout(() => {
+            const el = $(id);
+            if (!el) return;
+            el.style.transition = 'opacity 0.3s';
+            el.setAttribute('opacity', '0.8');
+            el.setAttribute('stroke-dashoffset', '0');
+            el.style.transition = 'stroke-dashoffset 0.8s ease-out, opacity 0.3s';
+            // Animate pulse dot
+            setTimeout(() => {
+              const p = $(pulses[i]);
+              if (!p) return;
+              p.setAttribute('opacity', '1');
+              // Move pulse from corner to center
+              const targets = [
+                { cx: 220, cy: 165 }, { cx: 300, cy: 165 },
+                { cx: 220, cy: 215 }, { cx: 300, cy: 215 }
+              ];
+              const starts = [
+                { cx: 100, cy: 80 }, { cx: 420, cy: 80 },
+                { cx: 100, cy: 300 }, { cx: 420, cy: 300 }
+              ];
+              let t = 0;
+              const pulseTick = () => {
+                t += 0.02;
+                if (t > 1) { t = 0; }
+                const cx = starts[i].cx + (targets[i].cx - starts[i].cx) * t;
+                const cy = starts[i].cy + (targets[i].cy - starts[i].cy) * t;
+                p.setAttribute('cx', cx);
+                p.setAttribute('cy', cy);
+                p.setAttribute('opacity', String(1 - t * 0.3));
+                requestAnimationFrame(pulseTick);
+              };
+              requestAnimationFrame(pulseTick);
+            }, 400);
+          }, i * 300);
+        });
+      }
+
+      const act12Obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            revealWords();
+            setTimeout(animateFinalLines, 2600);
+          }
+        });
+      }, { threshold: 0.3 });
+      const act12 = $('act12'); if (act12) act12Obs.observe(act12);
+
+      /* ── MAIN SCROLL LOOP ────────────────────────────────────────── */
+      let ticking = false;
+
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(frame);
+          ticking = true;
+        }
+      }
+
+      function frame() {
+        ticking = false;
+        updateProgress();
+        updateTimeline();
+        updateNav();
+        updateFarmland();
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      frame();
+
+      /* ── RESIZE ──────────────────────────────────────────────────── */
+      window.addEventListener('resize', () => {
+        if (rainCanvas) {
+          rainCanvas.width = window.innerWidth;
+          rainCanvas.height = window.innerHeight;
+          initRain();
+        }
+      });
+
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,2581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Morning at South Tract — SustainAI</title>
+  <meta name="description"
+    content="A cinematic story of how SustainAI turned a 5:30 AM contamination event into a 340-millisecond resolution. Follow one morning at South Tract farm in Raleigh, NC.">
+  <meta property="og:title" content="One Morning at South Tract — SustainAI">
+  <meta property="og:description"
+    content="A scroll-driven story of agricultural AI in action. One contamination event. One clear answer. 340 milliseconds.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232a5c38'/%3E%3Cpath d='M16 8 L16 20 M10 14 L16 8 L22 14' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --dark: #0c1f12;
+      --dark2: #1b3a23;
+      --primary: #2a5c38;
+      --accent: #4db866;
+      --light: #f5fbf6;
+      --danger: #c83232;
+      --amber: #b8860b;
+      --amber-light: #f5c842;
+      --dawn: #e8a84a;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--dark);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+       ============================================================ */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #7fffb2);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(77, 184, 102, 0.8);
+    }
+
+    /* ============================================================
+       TIMELINE DOTS
+       ============================================================ */
+    #timeline {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      transition: background 0.3s, transform 0.3s, border-color 0.3s;
+      cursor: pointer;
+    }
+
+    .tl-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.5);
+      box-shadow: 0 0 6px rgba(77, 184, 102, 0.8);
+    }
+
+    .tl-dot.visited {
+      background: rgba(77, 184, 102, 0.4);
+      border-color: rgba(77, 184, 102, 0.6);
+    }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    #story-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 998;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+
+    #story-nav.scrolled {
+      background: rgba(12, 31, 18, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(77, 184, 102, 0.15);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo svg {
+      flex-shrink: 0;
+    }
+
+    .nav-back {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-back:hover {
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       ACT BASE — FULL SCREEN SECTIONS
+       ============================================================ */
+    .act {
+      position: relative;
+      min-height: 68vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .act--tall {
+      min-height: 102vh;
+    }
+
+    .act--xtra {
+      min-height: 136vh;
+    }
+
+    .act__inner {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 80px 32px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* ============================================================
+       ACT 1: THE QUIET
+       ============================================================ */
+    #act1 {
+      background: var(--dark);
+      position: relative;
+    }
+
+    #starCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .act1-time {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: white;
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+      text-shadow: 0 0 80px rgba(77, 184, 102, 0.3);
+    }
+
+    .act1-time.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .act1-location {
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.5vw, 1rem);
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 16px;
+      opacity: 0;
+      transition: opacity 1.5s var(--ease-out) 0.4s;
+    }
+
+    .act1-location.visible {
+      opacity: 1;
+    }
+
+    .act1-caption {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 48px;
+      opacity: 0;
+      transition: opacity 1.5s var(--ease-out) 0.8s;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .act1-caption.visible {
+      opacity: 1;
+    }
+
+    /* Hills silhouette */
+    .hills-silhouette {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      z-index: 5;
+    }
+
+    /* Fireflies */
+    #fireflyCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       ACT 2: THE FARM WAKES
+       ============================================================ */
+    #act2 {
+      background: linear-gradient(180deg, #1b3a23 0%, #0c2a18 5%, #1c3a0d 30%, #3d6b1a 60%, #b8860b 100%);
+      position: relative;
+    }
+
+    .act2-scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .act2__inner {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 80px 32px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .act2-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: rgba(255, 248, 220, 0.95);
+      line-height: 1.3;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .act2-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255, 245, 200, 0.7);
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .phone-clear {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      background: rgba(42, 92, 56, 0.9);
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      box-shadow: 0 0 20px rgba(77, 184, 102, 0.2);
+    }
+
+    .phone-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-green {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+    }
+
+    /* ============================================================
+       ACT 3: UNDERGROUND
+       ============================================================ */
+    #act3 {
+      background: linear-gradient(180deg, #b8860b 0%, #3d2a14 5%, #2d1a0c 12%, #3d2a14 40%, #1a3a52 80%, #0d2a42 100%);
+      position: relative;
+    }
+
+    .act3-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      z-index: 5;
+      padding-top: 13.5%;
+      padding-right: 3vw;
+    }
+
+    .act3-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 480px;
+      line-height: 1.5;
+      text-align: left;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9);
+      padding: 24px 36px;
+      background: rgba(10, 25, 30, 0.45);
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ============================================================
+       ACT 4: THE SPIKE
+       ============================================================ */
+    #act4 {
+      background: linear-gradient(180deg, #0d2a42 0%, #1a0808 6%, #1a0505 30%, #0c0202 70%, #050000 100%);
+      position: relative;
+    }
+
+    .act4-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(200, 50, 50, 0.25) 100%);
+      pointer-events: none;
+      z-index: 2;
+      animation: vignette-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes vignette-pulse {
+
+      0%,
+      100% {
+        opacity: 0.8;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .act4-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      color: rgba(200, 50, 50, 0.7);
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+    }
+
+    .gauge-wrap {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    .act4-reading {
+      font-family: var(--font-mono);
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--danger);
+      margin-top: 24px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 30px rgba(200, 50, 50, 0.6);
+    }
+
+    .act4-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      color: rgba(255, 200, 200, 0.8);
+      margin-top: 16px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       ACT 5: THE SIGNAL
+       ============================================================ */
+    #act5 {
+      background: linear-gradient(180deg, #050000 0%, #040f08 6%, #061a0d 50%, #030d0a 100%);
+      position: relative;
+    }
+
+    #act5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(77, 184, 102, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 184, 102, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .act5-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      color: rgba(77, 184, 102, 0.6);
+      letter-spacing: 0.2em;
+      margin-bottom: 48px;
+    }
+
+    .speed-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--accent);
+      text-shadow: 0 0 40px rgba(77, 184, 102, 0.5);
+      letter-spacing: -0.04em;
+    }
+
+    .speed-unit {
+      font-size: 0.4em;
+      color: rgba(77, 184, 102, 0.6);
+      vertical-align: super;
+    }
+
+    .act5-caption {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 560px;
+      margin: 24px auto 0;
+      line-height: 1.6;
+    }
+
+    .data-packets {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .data-packet {
+      background: rgba(77, 184, 102, 0.08);
+      border: 1px solid rgba(77, 184, 102, 0.3);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-family: var(--font-mono);
+      font-size: clamp(0.65rem, 1.3vw, 0.8rem);
+      color: var(--accent);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+
+    .data-packet.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       ACT 6: THE BRAIN
+       ============================================================ */
+    #act6 {
+      background: linear-gradient(180deg, #030d0a 0%, #030f08 6%, #020b06 100%);
+      position: relative;
+    }
+
+    #act6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(77, 184, 102, 0.06) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    /* Sticky inner for tall acts (6) */
+    .act--xtra .act__inner {
+      position: sticky;
+      top: 40px;
+      padding-top: 60px;
+      padding-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .act6-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      color: rgba(77, 184, 102, 0.5);
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+    }
+
+    .typewriter-block {
+      background: rgba(0, 20, 8, 0.8);
+      border: 1px solid rgba(77, 184, 102, 0.2);
+      border-radius: 12px;
+      padding: 24px 28px;
+      text-align: left;
+      max-width: 560px;
+      margin: 40px auto 0;
+    }
+
+    .typewriter-line {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+      color: var(--accent);
+      line-height: 2;
+      min-height: 1.6em;
+    }
+
+    .typewriter-line .label {
+      color: rgba(77, 184, 102, 0.5);
+    }
+
+    .act6-caption {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 520px;
+      margin: 24px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       ACT 7: THE ALERT
+       ============================================================ */
+    #act7 {
+      background: linear-gradient(180deg, #020b06 0%, #091a0e 6%, #0c2214 60%, #111c0f 100%);
+      position: relative;
+    }
+
+    .act7-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      color: rgba(200, 50, 50, 0.7);
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+    }
+
+    .phone-mockup {
+      display: inline-block;
+      width: clamp(200px, 35vw, 280px);
+      background: #0a0a0a;
+      border-radius: 36px;
+      border: 2px solid #2a2a2a;
+      padding: 16px;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      animation: phone-idle 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes phone-idle {
+
+      0%,
+      100% {
+        transform: rotate(-1deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(1deg) translateY(-4px);
+      }
+    }
+
+    .phone-mockup.vibrate {
+      animation: phone-vibrate 0.4s ease-in-out;
+    }
+
+    @keyframes phone-vibrate {
+
+      0%,
+      100% {
+        transform: translateX(0) rotate(0);
+      }
+
+      20% {
+        transform: translateX(-6px) rotate(-2deg);
+      }
+
+      40% {
+        transform: translateX(6px) rotate(2deg);
+      }
+
+      60% {
+        transform: translateX(-4px) rotate(-1deg);
+      }
+
+      80% {
+        transform: translateX(4px) rotate(1deg);
+      }
+    }
+
+    .phone-screen {
+      background: #111;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-notch {
+      width: 80px;
+      height: 20px;
+      background: #0a0a0a;
+      border-radius: 0 0 14px 14px;
+      margin: 0 auto 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .phone-alert-bar {
+      background: var(--danger);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .phone-alert-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .phone-alert-title {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: white;
+      line-height: 1.3;
+    }
+
+    .phone-body {
+      padding: 12px 14px;
+    }
+
+    .phone-stat {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: rgba(255, 100, 100, 0.9);
+      margin-bottom: 4px;
+    }
+
+    .phone-cause {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 12px;
+    }
+
+    .phone-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .phone-btn {
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .phone-btn--primary {
+      background: var(--danger);
+      color: white;
+    }
+
+    .phone-btn--secondary {
+      background: rgba(77, 184, 102, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(77, 184, 102, 0.3);
+    }
+
+    .phone-btn--ghost {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .pulse-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      border: 1.5px solid rgba(200, 50, 50, 0.4);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+      animation: ring-expand 3s ease-out infinite;
+    }
+
+    .pulse-ring:nth-child(1) {
+      width: 160px;
+      height: 160px;
+      animation-delay: 0s;
+    }
+
+    .pulse-ring:nth-child(2) {
+      width: 260px;
+      height: 260px;
+      animation-delay: 0.6s;
+    }
+
+    .pulse-ring:nth-child(3) {
+      width: 360px;
+      height: 360px;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes ring-expand {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .act7-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: white;
+      margin-top: 40px;
+      line-height: 1.4;
+    }
+
+    .act7-sub {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(77, 184, 102, 0.8);
+      margin-top: 12px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================================
+       ACT 8: THE ACTION
+       ============================================================ */
+    #act8 {
+      background: linear-gradient(180deg, #111c0f 0%, #030b05 6%, #04120a 100%);
+      position: relative;
+    }
+
+    .act8-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      color: rgba(77, 184, 102, 0.5);
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+    }
+
+    .cascade {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cascade-step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+    }
+
+    .cascade-step.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .cascade-node {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(77, 184, 102, 0.1);
+      border: 1.5px solid rgba(77, 184, 102, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .cascade-node.lit {
+      background: rgba(77, 184, 102, 0.2);
+      border-color: var(--accent);
+      box-shadow: 0 0 16px rgba(77, 184, 102, 0.4);
+    }
+
+    .cascade-connector {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(180deg, rgba(77, 184, 102, 0.4), rgba(77, 184, 102, 0.1));
+      margin-left: 21px;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: opacity 0.4s, transform 0.4s var(--ease-out);
+    }
+
+    .cascade-connector.visible {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    .cascade-label {
+      text-align: left;
+    }
+
+    .cascade-label-title {
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      color: white;
+      font-weight: 500;
+    }
+
+    .cascade-label-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+      color: rgba(77, 184, 102, 0.6);
+      margin-top: 2px;
+    }
+
+    .act8-big {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: white;
+      margin-top: 48px;
+      line-height: 1;
+    }
+
+    .act8-big span {
+      color: var(--accent);
+    }
+
+    .act8-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 12px;
+    }
+
+    .checkmark-wrap {
+      margin-top: 40px;
+    }
+
+    .check-svg {
+      opacity: 0;
+      transform: scale(0.3);
+      transition: opacity 0.6s var(--ease-out), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .check-svg.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ============================================================
+       ACT 9: THE AFTERMATH
+       ============================================================ */
+    #act9 {
+      background: linear-gradient(180deg, #04120a 0%, #0f1f06 6%, #1a3510 30%, #2a4a18 60%, #b8860b 100%);
+      position: relative;
+    }
+
+    .act9-time {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+      color: rgba(245, 200, 66, 0.7);
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+    }
+
+    .act9-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: rgba(255, 248, 200, 0.95);
+      line-height: 1.3;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .outcomes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 640px) {
+      .outcomes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .outcome-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 28px 20px;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+
+    .outcome-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .outcome-icon {
+      margin-bottom: 16px;
+    }
+
+    .outcome-title {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 8px;
+    }
+
+    .outcome-detail {
+      font-family: var(--font-mono);
+      font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .act9-close {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255, 248, 200, 0.75);
+      margin-top: 48px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       ACT 10: THE DIFFERENCE
+       ============================================================ */
+    #act10 {
+      background: linear-gradient(180deg, #b8860b 0%, #f5fbf6 8%);
+      position: relative;
+    }
+
+    .act10__inner {
+      text-align: center;
+      padding: 80px 32px;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .word-reveal {
+      display: inline-block;
+      overflow: hidden;
+      margin: 0 8px;
+    }
+
+    .word-inner {
+      display: inline-block;
+      transform: translateY(100%);
+      transition: transform 0.7s var(--ease-out);
+    }
+
+    .word-inner.visible {
+      transform: translateY(0);
+    }
+
+    .big-words {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+
+    .strikethrough {
+      position: relative;
+      color: rgba(12, 31, 18, 0.45);
+      display: inline-block;
+    }
+
+    .strikethrough::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 100%;
+      top: 52%;
+      height: 5px;
+      background: var(--danger);
+      transition: right 0.8s var(--ease-out);
+      border-radius: 2px;
+    }
+
+    .strikethrough.active-strike::after {
+      right: 0;
+    }
+
+    .cta-wrap {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 56px;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(42, 92, 56, 0.4);
+    }
+
+    .cta-primary:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(77, 184, 102, 0.5);
+    }
+
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--dark);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 50px;
+      border: 2px solid var(--primary);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .cta-secondary:hover {
+      background: rgba(42, 92, 56, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .act10-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 300;
+      color: var(--primary);
+      margin-top: 48px;
+      letter-spacing: -0.01em;
+    }
+
+    .act10-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      text-decoration: none;
+      color: rgba(12, 31, 18, 0.5);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 500;
+      border: 1px solid rgba(12, 31, 18, 0.12);
+      border-radius: 8px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .act10-back:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: rgba(77, 184, 102, 0.04);
+    }
+
+    /* ============================================================
+       SHARED HELPERS
+       ============================================================ */
+    .act-label {
+      font-family: var(--font-mono);
+      font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+      letter-spacing: 0.2em;
+      color: rgba(77, 184, 102, 0.4);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .scroll-fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+
+    .scroll-fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile timeline */
+    @media (max-width: 640px) {
+      #timeline {
+        right: 8px;
+      }
+
+      .tl-dot {
+        width: 6px;
+        height: 6px;
+      }
+
+      #story-nav {
+        padding: 12px 16px;
+      }
+    }
+
+    /* ============================================================
+       SIGNAL VISUALIZER (Act 5)
+       ============================================================ */
+    .signal-vis {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 48px auto;
+      max-width: 600px;
+      flex-wrap: nowrap;
+    }
+
+    .sig-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .sig-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid rgba(77, 184, 102, 0.4);
+      background: rgba(77, 184, 102, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .sig-circle.pulse {
+      animation: sig-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes sig-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(77, 184, 102, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 12px rgba(77, 184, 102, 0);
+      }
+    }
+
+    .sig-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: rgba(77, 184, 102, 0.6);
+      text-align: center;
+      max-width: 60px;
+    }
+
+    .sig-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(77, 184, 102, 0.6), rgba(77, 184, 102, 0.2));
+      position: relative;
+      overflow: hidden;
+      min-width: 40px;
+    }
+
+    .sig-dot-travel {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 8px rgba(77, 184, 102, 0.8);
+      animation: travel 1.5s linear infinite;
+    }
+
+    @keyframes travel {
+      0% {
+        left: -4px;
+        opacity: 1;
+      }
+
+      100% {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+
+    /* ============================================================
+       KNOWLEDGE GRAPH (Act 6)
+       ============================================================ */
+    #knowledgeCanvas {
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       ACT 3 — Cross-section SVG
+       ============================================================ */
+    .cross-section-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Particle animations */
+    .n-particle {
+      animation: drift-down linear infinite;
+    }
+
+    @keyframes drift-down {
+      0% {
+        transform: translateY(0);
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translateY(200px);
+        opacity: 0;
+      }
+    }
+
+    /* ============================================================
+       COFFEE STEAM
+       ============================================================ */
+    .steam-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .steam-line {
+      animation: steam 2.5s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    .steam-line:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .steam-line:nth-child(3) {
+      animation-delay: 0.8s;
+    }
+
+    @keyframes steam {
+      0% {
+        transform: translateY(0) scaleX(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: translateY(-16px) scaleX(1.4);
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(-32px) scaleX(0.8);
+        opacity: 0;
+      }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar"></div>
+
+  <!-- TIMELINE DOTS -->
+  <nav id="timeline" aria-label="Story acts">
+    <div class="tl-dot active" data-act="1" title="Act 1: The Quiet"></div>
+    <div class="tl-dot" data-act="2" title="Act 2: The Farm Wakes"></div>
+    <div class="tl-dot" data-act="3" title="Act 3: Underground"></div>
+    <div class="tl-dot" data-act="4" title="Act 4: The Spike"></div>
+    <div class="tl-dot" data-act="5" title="Act 5: The Signal"></div>
+    <div class="tl-dot" data-act="6" title="Act 6: The Brain"></div>
+    <div class="tl-dot" data-act="7" title="Act 7: The Alert"></div>
+    <div class="tl-dot" data-act="8" title="Act 8: The Action"></div>
+    <div class="tl-dot" data-act="9" title="Act 9: The Aftermath"></div>
+    <div class="tl-dot" data-act="10" title="Act 10: The Difference"></div>
+  </nav>
+
+  <!-- NAV -->
+  <nav id="story-nav" aria-label="Story navigation">
+    <a href="./index.html" class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="#4db866" stroke-width="1.5" fill="rgba(77,184,102,0.1)" />
+        <path d="M16 22V12M11 16l5-5 5 5" stroke="#4db866" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <circle cx="16" cy="24" r="1.5" fill="#4db866" />
+      </svg>
+      SustainAI
+    </a>
+    <a href="./index.html" class="nav-back">
+      ← Back to Home
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       ACT 1: THE QUIET
+       ============================================================ -->
+  <section class="act act--tall" id="act1" data-act="1">
+    <canvas id="starCanvas" aria-hidden="true"></canvas>
+    <canvas id="fireflyCanvas" aria-hidden="true"></canvas>
+
+    <!-- Hills silhouette -->
+    <svg class="hills-silhouette" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,180 L0,120 Q120,60 240,100 Q360,140 480,80 Q600,20 720,70 Q840,120 960,90 Q1080,60 1200,100 Q1320,140 1440,110 L1440,180 Z"
+        fill="#0f2a18" opacity="0.8" />
+      <path d="M0,180 L0,140 Q180,100 360,130 Q540,160 720,120 Q900,80 1080,120 Q1260,160 1440,140 L1440,180 Z"
+        fill="#0c1f12" opacity="0.9" />
+    </svg>
+
+    <div class="act__inner">
+      <div class="act1-time" id="act1Time">5:30 AM</div>
+      <div class="act1-location">South Tract · Raleigh, NC · 35.7796° N</div>
+      <div class="act1-caption">"Everything is quiet.<br>The sensors are watching."</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 2: THE FARM WAKES
+       ============================================================ -->
+  <section class="act" id="act2" data-act="2">
+    <!-- Farm scene SVG -->
+    <div class="act2-scene" aria-hidden="true">
+      <svg width="100%" height="100%" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
+        <!-- Ground -->
+        <rect x="0" y="420" width="1440" height="180" fill="#1a3010" />
+        <!-- Field rows -->
+        <g stroke="#2a5020" stroke-width="2" opacity="0.5">
+          <line x1="0" y1="450" x2="1440" y2="450" />
+          <line x1="0" y1="470" x2="1440" y2="470" />
+          <line x1="0" y1="490" x2="1440" y2="490" />
+          <line x1="0" y1="510" x2="1440" y2="510" />
+          <line x1="0" y1="530" x2="1440" y2="530" />
+        </g>
+        <!-- Farmhouse -->
+        <g transform="translate(180, 300)">
+          <!-- House body -->
+          <rect x="0" y="80" width="140" height="100" fill="#1a2a10" />
+          <!-- Roof -->
+          <polygon points="-20,80 70,-10 160,80" fill="#0f1c0a" />
+          <!-- Door -->
+          <rect x="50" y="130" width="40" height="50" fill="#0a1505" rx="3" />
+          <!-- Window - warm glow -->
+          <rect x="15" y="100" width="35" height="28" fill="#b8860b" rx="2" opacity="0.0" id="farmWindow" />
+          <rect x="15" y="100" width="35" height="28" fill="transparent" stroke="#2a4010" stroke-width="1" rx="2" />
+          <!-- Chimney -->
+          <rect x="100" y="-30" width="18" height="60" fill="#0c1508" />
+        </g>
+        <!-- Water tower -->
+        <g transform="translate(1180, 200)">
+          <polygon points="0,120 60,120 50,0 10,0" fill="#0f2015" />
+          <rect x="-5" y="120" width="70" height="12" fill="#0c1a10" />
+          <line x1="0" y1="120" x2="-15" y2="200" stroke="#0f2015" stroke-width="4" />
+          <line x1="60" y1="120" x2="75" y2="200" stroke="#0f2015" stroke-width="4" />
+          <line x1="30" y1="120" x2="30" y2="200" stroke="#0f2015" stroke-width="4" />
+        </g>
+        <!-- Rooster weathervane on house roof -->
+        <g transform="translate(250, 280)" id="roosterVane">
+          <line x1="0" y1="0" x2="0" y2="-20" stroke="#4db866" stroke-width="1.5" />
+          <path d="M-8,-20 L0,-30 L8,-20 L0,-22 Z" fill="#4db866" opacity="0.7" />
+        </g>
+        <!-- Stars fading out -->
+        <circle cx="400" cy="80" r="1.5" fill="white" opacity="0.4" />
+        <circle cx="600" cy="50" r="1" fill="white" opacity="0.3" />
+        <circle cx="850" cy="90" r="1.5" fill="white" opacity="0.2" />
+        <circle cx="1100" cy="60" r="1" fill="white" opacity="0.3" />
+        <!-- Dawn glow on horizon -->
+        <ellipse cx="720" cy="420" rx="600" ry="80" fill="#b8860b" opacity="0.25" />
+      </svg>
+    </div>
+
+    <div class="act2__inner">
+      <div class="act2-text scroll-fade-in">
+        Marcus checks his phone.<br>No alerts. Coffee first.
+      </div>
+      <div class="act2-sub scroll-fade-in" style="transition-delay:0.2s">
+        The farm wakes to another morning. Everything normal.
+      </div>
+      <div class="phone-clear scroll-fade-in" style="transition-delay:0.4s">
+        <div class="phone-dot"></div>
+        <span>All Clear — 0 Active Alerts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 3: UNDERGROUND
+       ============================================================ -->
+  <section class="act act--tall" id="act3" data-act="3">
+    <!-- Cross-section SVG -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1" viewBox="0 0 1000 800"
+      preserveAspectRatio="none" aria-hidden="true">
+      <!-- Sky -->
+      <rect x="0" y="0" width="1000" height="180" fill="#091808" />
+      <!-- Rain clouds -->
+      <ellipse cx="200" cy="60" rx="80" ry="35" fill="#0c2a10" opacity="0.8" />
+      <ellipse cx="270" cy="50" rx="70" ry="30" fill="#0f3015" opacity="0.7" />
+      <ellipse cx="750" cy="70" rx="90" ry="38" fill="#0c2a10" opacity="0.7" />
+      <!-- Rain arrows -->
+      <g stroke="#4db866" stroke-width="1.5" opacity="0.5" id="rainGroup">
+        <line x1="150" y1="90" x2="140" y2="140" />
+        <line x1="190" y1="95" x2="180" y2="145" />
+        <line x1="230" y1="88" x2="220" y2="138" />
+        <line x1="270" y1="92" x2="260" y2="142" />
+        <line x1="700" y1="100" x2="690" y2="150" />
+        <line x1="740" y1="95" x2="730" y2="145" />
+        <line x1="780" y1="100" x2="770" y2="150" />
+        <polygon points="140,140 144,130 136,130" fill="#4db866" opacity="0.5" />
+        <polygon points="180,145 184,135 176,135" fill="#4db866" opacity="0.5" />
+        <polygon points="220,138 224,128 216,128" fill="#4db866" opacity="0.5" />
+        <polygon points="260,142 264,132 256,132" fill="#4db866" opacity="0.5" />
+        <polygon points="690,145 694,135 686,135" fill="#4db866" opacity="0.5" />
+        <polygon points="730,145 734,135 726,135" fill="#4db866" opacity="0.5" />
+        <polygon points="770,145 774,135 766,135" fill="#4db866" opacity="0.5" />
+      </g>
+      <!-- Surface: grass -->
+      <rect x="0" y="150" width="1000" height="50" fill="#1a4a10" />
+      <!-- Fertilizer granules on surface -->
+      <g id="fertilizerDots" fill="#b8860b" opacity="0.8">
+        <circle cx="120" cy="165" r="4" />
+        <circle cx="160" cy="170" r="3" />
+        <circle cx="200" cy="162" r="4" />
+        <circle cx="240" cy="168" r="3" />
+        <circle cx="300" cy="165" r="5" />
+        <circle cx="340" cy="170" r="3" />
+        <circle cx="380" cy="163" r="4" />
+        <circle cx="420" cy="168" r="3" />
+        <circle cx="460" cy="165" r="4" />
+      </g>
+      <!-- Topsoil layer -->
+      <rect x="0" y="200" width="1000" height="120" fill="#3d2010" />
+      <text x="20" y="265" fill="rgba(255,255,255,0.2)" font-family="JetBrains Mono" font-size="11"
+        letter-spacing="2">TOPSOIL</text>
+      <!-- Subsoil layer -->
+      <rect x="0" y="320" width="1000" height="160" fill="#2a1508" />
+      <text x="20" y="400" fill="rgba(255,255,255,0.2)" font-family="JetBrains Mono" font-size="11"
+        letter-spacing="2">SUBSOIL</text>
+      <!-- Aquifer layer -->
+      <rect x="0" y="480" width="1000" height="200" fill="#0d2a42" />
+      <text x="20" y="560" fill="rgba(77,184,102,0.4)" font-family="JetBrains Mono" font-size="11"
+        letter-spacing="2">AQUIFER</text>
+      <!-- Water ripple in aquifer -->
+      <ellipse cx="500" cy="560" rx="200" ry="20" fill="none" stroke="#4db866" stroke-width="1" opacity="0.2" />
+      <ellipse cx="500" cy="560" rx="150" ry="14" fill="none" stroke="#4db866" stroke-width="1" opacity="0.15" />
+      <!-- Well pipe going down -->
+      <rect x="490" y="140" width="20" height="420" fill="#1a3a5a" stroke="#2a5a7a" stroke-width="1" />
+      <circle cx="500" cy="140" r="12" fill="#1a4a6a" stroke="#4db866" stroke-width="1.5" />
+      <text x="520" y="145" fill="rgba(77,184,102,0.6)" font-family="JetBrains Mono" font-size="10">SOUTH WELL</text>
+      <!-- Runoff path arrows (nitrogen moving down) -->
+      <path d="M 250,200 Q 300,260 350,320 Q 400,380 450,440 Q 470,500 490,540" fill="none"
+        stroke="rgba(184,134,11,0.5)" stroke-width="2" stroke-dasharray="6 4" />
+      <polygon points="487,548 493,548 490,558" fill="rgba(184,134,11,0.5)" />
+      <!-- Animated nitrogen particles will be added by JS -->
+      <g id="nParticles"></g>
+    </svg>
+
+    <div class="act3-overlay" style="pointer-events:none">
+      <div class="act3-text scroll-fade-in">
+        Last night's rain carried nitrogen from the field into the aquifer.<br>
+        <span style="color:rgba(184,134,11,0.9)">Nobody saw it happen.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 4: THE SPIKE
+       ============================================================ -->
+  <section class="act act--tall" id="act4" data-act="4">
+    <div class="act4-vignette"></div>
+
+    <div class="act__inner" style="z-index:10">
+      <div class="act4-time">⬤ LIVE · 5:31 AM · SOUTH WELL SENSOR</div>
+
+      <!-- Gauge SVG -->
+      <div class="gauge-wrap" aria-label="Conductivity gauge reading 1180 µS/cm">
+        <svg width="320" height="320" viewBox="0 0 280 280" id="gaugesvg" style="max-width:90vw">
+          <!-- Background ring -->
+          <circle cx="140" cy="140" r="110" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="20" />
+          <!-- Safe zone arc (green, ~0-70% of circle) -->
+          <circle cx="140" cy="140" r="110" fill="none" stroke="#2a5c38" stroke-width="20" stroke-dasharray="484 692"
+            stroke-dashoffset="173" stroke-linecap="round" opacity="0.5" />
+          <!-- Danger zone arc (red, ~70-100%) -->
+          <circle cx="140" cy="140" r="110" fill="none" stroke="rgba(200,50,50,0.7)" stroke-width="20"
+            stroke-dasharray="208 692" stroke-dashoffset="-311" stroke-linecap="round" />
+          <!-- Threshold marker -->
+          <line x1="140" y1="30" x2="140" y2="50" stroke="rgba(200,50,50,0.8)" stroke-width="2"
+            transform="rotate(108, 140, 140)" />
+          <!-- Pulse ring -->
+          <circle cx="140" cy="140" r="124" fill="none" stroke="rgba(200,50,50,0.3)" stroke-width="2" id="gaugeRing">
+            <animate attributeName="r" values="110;130;110" dur="1.8s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.3;0;0.3" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+          <!-- Needle -->
+          <g id="gaugeNeedle" transform="rotate(-130, 140, 140)">
+            <line x1="140" y1="140" x2="140" y2="45" stroke="white" stroke-width="3" stroke-linecap="round" />
+            <circle cx="140" cy="45" r="4" fill="white" />
+          </g>
+          <!-- Center hub -->
+          <circle cx="140" cy="140" r="14" fill="#0c0202" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+          <!-- Labels -->
+          <text x="50" y="230" fill="rgba(77,184,102,0.7)" font-family="JetBrains Mono" font-size="10"
+            text-anchor="middle">840</text>
+          <text x="230" y="230" fill="rgba(200,50,50,0.8)" font-family="JetBrains Mono" font-size="10"
+            text-anchor="middle">1180</text>
+          <text x="140" y="32" fill="rgba(255,255,255,0.3)" font-family="JetBrains Mono" font-size="9"
+            text-anchor="middle">µS/cm</text>
+        </svg>
+      </div>
+
+      <div class="act4-reading" id="conductivityNum">840 µS/cm</div>
+      <div class="act4-headline scroll-fade-in">
+        The South Well sensor detects a conductivity spike.<br>
+        <strong style="color:rgba(255,100,100,0.9)">40% above the safety threshold.</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 5: THE SIGNAL
+       ============================================================ -->
+  <section class="act act--tall" id="act5" data-act="5">
+    <div class="act__inner">
+      <div class="act5-time">⬤ TRANSMITTING · 5:31 AM · +340ms</div>
+
+      <!-- Signal visualization -->
+      <div class="signal-vis" aria-hidden="true">
+        <div class="sig-node">
+          <div class="sig-circle pulse">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="4" fill="#4db866" />
+              <circle cx="12" cy="12" r="8" stroke="#4db866" stroke-width="1" opacity="0.4" />
+            </svg>
+          </div>
+          <div class="sig-label">Sensor Node</div>
+        </div>
+        <div class="sig-line">
+          <div class="sig-dot-travel"></div>
+        </div>
+        <div class="sig-node">
+          <div class="sig-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2 L12 10 M6 6 L12 2 L18 6 M3 14 L12 9 L21 14" stroke="#4db866" stroke-width="1.5"
+                stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="sig-label">LoRa Antenna</div>
+        </div>
+        <div class="sig-line">
+          <div class="sig-dot-travel" style="animation-delay:0.5s"></div>
+        </div>
+        <div class="sig-node">
+          <div class="sig-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="4" y="6" width="16" height="12" rx="2" stroke="#4db866" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="3" stroke="#4db866" stroke-width="1" fill="rgba(77,184,102,0.2)" />
+              <circle cx="12" cy="12" r="1.5" fill="#4db866" />
+            </svg>
+          </div>
+          <div class="sig-label">SustainAI Hub</div>
+        </div>
+      </div>
+
+      <div class="speed-badge">340<span class="speed-unit">ms</span></div>
+      <div class="act5-caption scroll-fade-in">
+        In 340 milliseconds, the signal reaches the edge hub.<br>
+        <span style="color:rgba(77,184,102,0.7)">No cloud. No internet needed.</span>
+      </div>
+
+      <div class="data-packets" aria-label="Data packets transmitted">
+        <div class="data-packet">Conductivity: 1180 µS/cm</div>
+        <div class="data-packet">pH: 6.4 (dropping)</div>
+        <div class="data-packet">Flow: abnormal pattern</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 6: THE BRAIN
+       ============================================================ -->
+  <section class="act act--xtra" id="act6" data-act="6">
+    <div class="act__inner">
+      <div class="act6-time">⬤ PROCESSING · 5:31 AM · +2.4s</div>
+      <span class="act-label">On-site AI · No cloud required</span>
+
+      <!-- Knowledge graph canvas -->
+      <canvas id="knowledgeCanvas" width="1200" height="800" style="width:100%;max-width:900px"
+        aria-label="AI knowledge graph visualization"></canvas>
+
+      <!-- Typewriter reasoning block -->
+      <div class="typewriter-block" aria-live="polite">
+        <div class="typewriter-line"><span class="label">[ANALYZING] </span><span id="tw1"></span></div>
+        <div class="typewriter-line"><span class="label">[MATCH] </span><span id="tw2"></span></div>
+        <div class="typewriter-line"><span class="label">[ROOT CAUSE] </span><span id="tw3"></span></div>
+      </div>
+
+      <div class="act6-caption scroll-fade-in" style="transition-delay:0.4s">
+        The on-site AI cross-references thousands of documents in 2.4 seconds.<br>
+        <span style="color:rgba(77,184,102,0.6)">No cloud required.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 7: THE ALERT
+       ============================================================ -->
+  <section class="act act--tall" id="act7" data-act="7">
+    <div class="act__inner">
+      <div class="act7-time">⬤ ALERT SENT · 5:32 AM</div>
+
+      <!-- Pulse rings around phone -->
+      <div style="position:relative; display:inline-block">
+        <div class="pulse-rings" aria-hidden="true">
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+          <div class="pulse-ring"></div>
+        </div>
+
+        <div class="phone-mockup" id="phoneMockup" role="img" aria-label="SustainAI alert on phone screen">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-alert-bar">
+              <span class="phone-alert-icon">⚠</span>
+              <div class="phone-alert-title">CRITICAL: South Well Contamination</div>
+            </div>
+            <div class="phone-body">
+              <div class="phone-stat">Conductivity spike: 1180 µS/cm</div>
+              <div class="phone-cause">Cause: Fertilizer runoff (98% confidence)</div>
+              <div class="phone-actions">
+                <div class="phone-btn phone-btn--primary" id="shutValveBtn">Shut Valve</div>
+                <div class="phone-btn phone-btn--secondary">View Details</div>
+                <div class="phone-btn phone-btn--ghost">Dismiss</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="act7-text scroll-fade-in">
+        Marcus's phone buzzes.<br>One notification. Not a dashboard — a decision.
+      </div>
+      <div class="act7-sub scroll-fade-in" style="transition-delay:0.3s">
+        "People don't want dashboards. They want one clear answer."
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 8: THE ACTION
+       ============================================================ -->
+  <section class="act act--tall" id="act8" data-act="8">
+    <div class="act__inner">
+      <div class="act8-time">⬤ EXECUTING · 5:32 AM</div>
+
+      <div class="cascade" role="list">
+        <!-- Step 1 -->
+        <div class="cascade-step" id="cs1" role="listitem">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div class="cascade-node lit" id="cn1">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="4" fill="#4db866" />
+              </svg>
+            </div>
+            <div class="cascade-connector" id="cc1"></div>
+          </div>
+          <div class="cascade-label">
+            <div class="cascade-label-title">Command sent</div>
+            <div class="cascade-label-time">0 ms</div>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="cascade-step" id="cs2" role="listitem">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div class="cascade-node" id="cn2">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="4" y="6" width="12" height="8" rx="1.5" stroke="#4db866" stroke-width="1.5" />
+                <circle cx="10" cy="10" r="1.5" fill="#4db866" />
+              </svg>
+            </div>
+            <div class="cascade-connector" id="cc2"></div>
+          </div>
+          <div class="cascade-label">
+            <div class="cascade-label-title">Hub relay</div>
+            <div class="cascade-label-time">12 ms</div>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="cascade-step" id="cs3" role="listitem">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div class="cascade-node" id="cn3">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="5" stroke="#4db866" stroke-width="1.5" />
+                <path d="M6 10 L10 6 L14 10" stroke="#4db866" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="cascade-connector" id="cc3"></div>
+          </div>
+          <div class="cascade-label">
+            <div class="cascade-label-title">Edge received</div>
+            <div class="cascade-label-time">180 ms</div>
+          </div>
+        </div>
+        <!-- Step 4 -->
+        <div class="cascade-step" id="cs4" role="listitem">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <div class="cascade-node" id="cn4">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 4 L10 16 M4 10 L10 4 L16 10" stroke="#4db866" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+          <div class="cascade-label">
+            <div class="cascade-label-title">Valve closed</div>
+            <div class="cascade-label-time">340 ms</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="act8-big scroll-fade-in" style="transition-delay:0.5s">
+        <span>340</span> milliseconds.<br>Valve closed.
+      </div>
+      <div class="act8-sub scroll-fade-in" style="transition-delay:0.7s">No cloud. No latency. No waiting.</div>
+
+      <div class="checkmark-wrap">
+        <svg class="check-svg" id="bigCheck" width="80" height="80" viewBox="0 0 80 80" fill="none"
+          aria-label="Success">
+          <circle cx="40" cy="40" r="36" fill="rgba(77,184,102,0.15)" stroke="#4db866" stroke-width="2" />
+          <path d="M24 40 L35 51 L56 30" stroke="#4db866" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 9: THE AFTERMATH
+       ============================================================ -->
+  <section class="act act--tall" id="act9" data-act="9">
+    <div class="act__inner">
+      <div class="act9-time">☀ 5:50 AM · RESOLUTION</div>
+      <h2 class="act9-headline scroll-fade-in">
+        Twenty minutes later.<br>
+        <span style="color:rgba(245,200,66,0.9)">The crisis is over.</span>
+      </h2>
+
+      <div class="outcomes">
+        <div class="outcome-card" id="oc1">
+          <div class="outcome-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <rect x="8" y="4" width="32" height="40" rx="4" fill="rgba(77,184,102,0.08)" stroke="rgba(77,184,102,0.4)"
+                stroke-width="1.5" />
+              <path d="M16 16 L32 16 M16 22 L32 22 M16 28 L26 28" stroke="rgba(77,184,102,0.6)" stroke-width="1.5"
+                stroke-linecap="round" />
+              <circle cx="36" cy="36" r="10" fill="#0f2a18" stroke="#4db866" stroke-width="1.5" />
+              <path d="M31 36 L34.5 39.5 L41 33" stroke="#4db866" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="outcome-title">Compliance report auto-filed</div>
+          <div class="outcome-detail">County submission · EPA CA-2026-031 · 05:51 AM</div>
+        </div>
+        <div class="outcome-card" id="oc2" style="transition-delay:0.15s">
+          <div class="outcome-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <circle cx="24" cy="24" r="18" fill="rgba(184,134,11,0.08)" stroke="rgba(184,134,11,0.4)"
+                stroke-width="1.5" />
+              <path d="M24 12 C24 12 16 20 16 26 C16 30.4 19.6 34 24 34 C28.4 34 32 30.4 32 26 C32 20 24 12 24 12Z"
+                fill="rgba(77,184,102,0.15)" stroke="rgba(77,184,102,0.5)" stroke-width="1.5" />
+              <path d="M20 26 L24 22 L28 26" stroke="#4db866" stroke-width="1.5" stroke-linecap="round" />
+              <rect x="30" y="8" width="12" height="14" rx="2" fill="rgba(184,134,11,0.08)"
+                stroke="rgba(184,134,11,0.4)" stroke-width="1.2" />
+              <path d="M33 12 L39 12 M33 15 L37 15" stroke="rgba(184,134,11,0.6)" stroke-width="1"
+                stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="outcome-title">Irrigation adjusted for the day</div>
+          <div class="outcome-detail">East lateral offline · Schedule revised · -18% water usage</div>
+        </div>
+        <div class="outcome-card" id="oc3" style="transition-delay:0.3s">
+          <div class="outcome-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <rect x="6" y="8" width="36" height="32" rx="4" fill="rgba(77,184,102,0.08)" stroke="rgba(77,184,102,0.4)"
+                stroke-width="1.5" />
+              <circle cx="24" cy="24" r="8" fill="rgba(77,184,102,0.05)" stroke="rgba(77,184,102,0.4)"
+                stroke-width="1" />
+              <circle cx="24" cy="24" r="3" fill="rgba(77,184,102,0.4)" />
+              <path d="M24 16 L24 21 M24 27 L24 32 M16 24 L21 24 M27 24 L32 24" stroke="rgba(77,184,102,0.4)"
+                stroke-width="1" stroke-linecap="round" />
+              <rect x="33" y="6" width="12" height="7" rx="1.5" fill="#4db866" opacity="0.9" />
+              <text x="39" y="11.5" fill="white" font-family="JetBrains Mono" font-size="5.5"
+                text-anchor="middle">✓</text>
+            </svg>
+          </div>
+          <div class="outcome-title">Event logged with full trace</div>
+          <div class="outcome-detail">ID: EVT-2026-0408-0531 · 847 data points · Immutable</div>
+        </div>
+      </div>
+
+      <div class="act9-close scroll-fade-in">
+        By the time Marcus finishes his coffee, the crisis is handled, documented,<br>and the farm is running optimally.
+      </div>
+
+      <!-- Coffee cup with steam -->
+      <div class="steam-wrap" aria-hidden="true">
+        <svg width="80" height="90" viewBox="0 0 80 90">
+          <!-- Steam lines -->
+          <path class="steam-line" d="M28 30 Q24 22 28 14 Q32 6 28 0" fill="none" stroke="rgba(255,255,255,0.25)"
+            stroke-width="2" stroke-linecap="round" />
+          <path class="steam-line" d="M40 30 Q36 20 40 12 Q44 4 40 0" fill="none" stroke="rgba(255,255,255,0.25)"
+            stroke-width="2" stroke-linecap="round" />
+          <path class="steam-line" d="M52 30 Q48 22 52 14 Q56 6 52 0" fill="none" stroke="rgba(255,255,255,0.25)"
+            stroke-width="2" stroke-linecap="round" />
+          <!-- Cup body -->
+          <path d="M15 35 L20 80 L60 80 L65 35 Z" fill="#1a3010" stroke="rgba(77,184,102,0.4)" stroke-width="1.5" />
+          <!-- Handle -->
+          <path d="M65 45 Q80 45 80 60 Q80 75 65 75" fill="none" stroke="rgba(77,184,102,0.4)" stroke-width="1.5" />
+          <!-- Coffee surface -->
+          <ellipse cx="40" cy="37" rx="25" ry="6" fill="#2a1508" />
+          <!-- Saucer -->
+          <ellipse cx="40" cy="82" rx="30" ry="5" fill="rgba(77,184,102,0.15)" stroke="rgba(77,184,102,0.3)"
+            stroke-width="1" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACT 10: THE DIFFERENCE
+       ============================================================ -->
+  <section class="act act--tall" id="act10" data-act="10">
+    <div class="act10__inner">
+      <div class="big-words" id="bigWords" aria-label="That's the difference between a dashboard and a decision.">
+        <div style="margin-bottom:16px">
+          <span class="word-reveal"><span class="word-inner" id="w1">That's</span></span>
+          <span class="word-reveal"><span class="word-inner" id="w2">the</span></span>
+          <span class="word-reveal"><span class="word-inner" id="w3">difference</span></span>
+        </div>
+        <div style="margin-bottom:16px">
+          <span class="word-reveal"><span class="word-inner" id="w4">between</span></span>
+          <span class="word-reveal"><span class="word-inner" id="w5">a</span></span>
+          <span class="word-reveal strikethrough" id="w6strike"><span class="word-inner" id="w6">dashboard</span></span>
+        </div>
+        <div>
+          <span class="word-reveal"><span class="word-inner" id="w7">and</span></span>
+          <span class="word-reveal"><span class="word-inner" id="w8">a</span></span>
+          <span class="word-reveal"><span class="word-inner" id="w9">decision.</span></span>
+        </div>
+      </div>
+
+      <div class="cta-wrap">
+        <a href="./demo.html" class="cta-primary scroll-fade-in">
+          Try the Demo →
+        </a>
+        <a href="mailto:hello@sustain-ai.net" class="cta-secondary scroll-fade-in" style="transition-delay:0.15s">
+          Talk to Us
+        </a>
+      </div>
+
+      <div class="act10-tagline scroll-fade-in" style="transition-delay:0.3s">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;margin-right:8px"
+          aria-hidden="true">
+          <circle cx="16" cy="16" r="14" stroke="#2a5c38" stroke-width="1.5" fill="rgba(42,92,56,0.08)" />
+          <path d="M16 22V12M11 16l5-5 5 5" stroke="#2a5c38" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <circle cx="16" cy="24" r="1.5" fill="#4db866" />
+        </svg>
+        SustainAI — One clear answer.
+      </div>
+
+      <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:32px;"
+        class="scroll-fade-in">
+        <a href="./index.html" class="act10-back">
+          ← Back to Home
+        </a>
+        <a href="./story2.html" class="act10-back"
+          style="background:rgba(42,92,56,0.08);border-color:rgba(42,92,56,0.3);">
+          The Ecosystem Story →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       JAVASCRIPT ENGINE
+       ============================================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ── UTILITY ──────────────────────────────────────────────────
+      const $ = id => document.getElementById(id);
+      const isMobile = window.innerWidth <= 640;
+      let ticking = false;
+      let scrollY = 0;
+
+      // ── SCROLL PROGRESS ──────────────────────────────────────────
+      const progressBar = $('progress-bar');
+
+      function updateProgress() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (scrollY / max) * 100 : 0;
+        progressBar.style.width = pct + '%';
+      }
+
+      // ── TIMELINE DOTS ────────────────────────────────────────────
+      const acts = document.querySelectorAll('[data-act]');
+      const dots = document.querySelectorAll('.tl-dot');
+
+      function updateTimeline() {
+        let currentAct = 1;
+        acts.forEach(act => {
+          const rect = act.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.5) {
+            currentAct = parseInt(act.dataset.act);
+          }
+        });
+        dots.forEach((dot, i) => {
+          const actNum = i + 1;
+          dot.classList.toggle('active', actNum === currentAct);
+          dot.classList.toggle('visited', actNum < currentAct);
+        });
+      }
+
+      // Dot click scroll
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const actEl = document.querySelector(`[data-act="${dot.dataset.act}"]`);
+          if (actEl) actEl.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // ── NAV SCROLL ────────────────────────────────────────────────
+      const nav = $('story-nav');
+
+      function updateNav() {
+        nav.classList.toggle('scrolled', scrollY > 80);
+      }
+
+      // ── INTERSECTION OBSERVER ─────────────────────────────────────
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.scroll-fade-in, .data-packet, .outcome-card').forEach(el => io.observe(el));
+
+      // ── ACT 1: STARFIELD CANVAS ───────────────────────────────────
+      const starCanvas = $('starCanvas');
+      const starCtx = starCanvas.getContext('2d');
+      let stars = [];
+      const STAR_COUNT = isMobile ? 80 : 180;
+
+      function resizeStarCanvas() {
+        starCanvas.width = starCanvas.offsetWidth;
+        starCanvas.height = starCanvas.offsetHeight;
+        initStars();
+      }
+
+      function initStars() {
+        stars = [];
+        for (let i = 0; i < STAR_COUNT; i++) {
+          stars.push({
+            x: Math.random() * starCanvas.width,
+            y: Math.random() * starCanvas.height * 0.75,
+            r: Math.random() * 1.8 + 0.3,
+            a: Math.random(),
+            da: (Math.random() - 0.5) * 0.005,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      let starFrame = 0;
+      function drawStars(t) {
+        if (!starCtx) return;
+        starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+        stars.forEach(s => {
+          s.phase += s.da;
+          const alpha = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(s.phase + t * 0.0008));
+          starCtx.beginPath();
+          starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          starCtx.fillStyle = `rgba(255,255,255,${alpha * 0.85})`;
+          starCtx.fill();
+        });
+      }
+
+      resizeStarCanvas();
+      window.addEventListener('resize', resizeStarCanvas);
+
+      // ── ACT 1: FIREFLY CANVAS ─────────────────────────────────────
+      const ffCanvas = $('fireflyCanvas');
+      const ffCtx = ffCanvas.getContext('2d');
+      let fireflies = [];
+      const FF_COUNT = isMobile ? 6 : 14;
+
+      function resizeFFCanvas() {
+        ffCanvas.width = ffCanvas.offsetWidth;
+        ffCanvas.height = ffCanvas.offsetHeight;
+        initFF();
+      }
+
+      function initFF() {
+        fireflies = [];
+        for (let i = 0; i < FF_COUNT; i++) {
+          fireflies.push({
+            x: Math.random() * ffCanvas.width,
+            y: ffCanvas.height * 0.3 + Math.random() * ffCanvas.height * 0.4,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.3,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.012 + Math.random() * 0.01
+          });
+        }
+      }
+
+      function drawFF(t) {
+        if (!ffCtx) return;
+        ffCtx.clearRect(0, 0, ffCanvas.width, ffCanvas.height);
+        fireflies.forEach(f => {
+          f.x += f.vx;
+          f.y += f.vy;
+          f.phase += f.speed;
+          if (f.x < 0) f.x = ffCanvas.width;
+          if (f.x > ffCanvas.width) f.x = 0;
+          if (f.y < ffCanvas.height * 0.2) f.vy *= -1;
+          if (f.y > ffCanvas.height * 0.85) f.vy *= -1;
+          const glow = 0.5 + 0.5 * Math.sin(f.phase);
+          const r = 2 + glow * 2;
+          const grad = ffCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, r * 4);
+          grad.addColorStop(0, `rgba(150,255,100,${0.8 * glow})`);
+          grad.addColorStop(1, 'rgba(150,255,100,0)');
+          ffCtx.beginPath();
+          ffCtx.arc(f.x, f.y, r * 4, 0, Math.PI * 2);
+          ffCtx.fillStyle = grad;
+          ffCtx.fill();
+          ffCtx.beginPath();
+          ffCtx.arc(f.x, f.y, r * 0.6, 0, Math.PI * 2);
+          ffCtx.fillStyle = `rgba(200,255,180,${glow})`;
+          ffCtx.fill();
+        });
+      }
+
+      resizeFFCanvas();
+      window.addEventListener('resize', resizeFFCanvas);
+
+      // ── ACT 1: Fade-in text ────────────────────────────────────────
+      setTimeout(() => {
+        $('act1Time').classList.add('visible');
+        document.querySelector('.act1-location').classList.add('visible');
+        document.querySelector('.act1-caption').classList.add('visible');
+      }, 300);
+
+      // ── ACT 4: GAUGE ANIMATION ─────────────────────────────────────
+      let gaugeAnimated = false;
+      let conductivityVal = 840;
+      const conductivityEl = $('conductivityNum');
+      const gaugeNeedle = $('gaugeNeedle');
+
+      function animateGauge() {
+        if (gaugeAnimated) return;
+        gaugeAnimated = true;
+        const start = 840;
+        const end = 1180;
+        const duration = 2200;
+        const startTime = performance.now();
+
+        function tick(now) {
+          const elapsed = now - startTime;
+          const t = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          const val = Math.round(start + (end - start) * ease);
+          conductivityEl.textContent = val + ' µS/cm';
+          // Needle: -130deg at start (840), +20deg at end (1180)
+          // Total range: 150deg for 340 units
+          const angle = -130 + (val - start) / (end - start) * 150;
+          gaugeNeedle.setAttribute('transform', `rotate(${angle}, 140, 140)`);
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // ── ACT 6: KNOWLEDGE GRAPH ─────────────────────────────────────
+      const kCanvas = $('knowledgeCanvas');
+      const kCtx = kCanvas.getContext('2d');
+      let graphAnimated = false;
+      let graphProgress = 0;
+
+      const nodes = [
+        { label: 'SustainAI Hub', x: 0.5, y: 0.5, r: 120, color: '#4db866', center: true },
+        { label: 'Weather Data', x: 0.2, y: 0.18, r: 88, color: 'rgba(77,184,102,0.7)', sub: 'Rain: +1.2 in' },
+        { label: 'Soil History', x: 0.78, y: 0.18, r: 88, color: 'rgba(77,184,102,0.7)', sub: 'Nitrogen: elevated' },
+        { label: 'County Advisory', x: 0.1, y: 0.58, r: 88, color: 'rgba(77,184,102,0.7)', sub: 'CA-2026-031' },
+        { label: 'Sensor Logs', x: 0.88, y: 0.58, r: 88, color: 'rgba(77,184,102,0.7)', sub: '1180 µS/cm' },
+        { label: 'Crop Calendar', x: 0.5, y: 0.86, r: 88, color: 'rgba(77,184,102,0.7)', sub: 'Harvest: Oct' },
+      ];
+
+      function drawGraph(progress) {
+        if (!kCtx) return;
+        const W = kCanvas.width, H = kCanvas.height;
+        kCtx.clearRect(0, 0, W, H);
+
+        const cx = W * 0.5, cy = H * 0.5;
+
+        // Draw connections (1 per orbital node, revealed in sequence)
+        for (let i = 1; i < nodes.length; i++) {
+          const revealStart = (i - 1) / (nodes.length - 1);
+          const t = Math.max(0, Math.min(1, (progress - revealStart) / (1 / (nodes.length - 1))));
+          if (t <= 0) continue;
+          const n = nodes[i];
+          const nx = W * n.x, ny = H * n.y;
+          kCtx.save();
+          kCtx.globalAlpha = t;
+          kCtx.beginPath();
+          kCtx.moveTo(cx, cy);
+          kCtx.lineTo(cx + (nx - cx) * t, cy + (ny - cy) * t);
+          kCtx.strokeStyle = 'rgba(77,184,102,0.45)';
+          kCtx.lineWidth = 3;
+          kCtx.setLineDash([4, 4]);
+          kCtx.stroke();
+          kCtx.setLineDash([]);
+          kCtx.restore();
+        }
+
+        // Draw orbital nodes
+        for (let i = 1; i < nodes.length; i++) {
+          const revealStart = (i - 1) / (nodes.length - 1);
+          const t = Math.max(0, Math.min(1, (progress - revealStart) / (1 / (nodes.length - 1))));
+          if (t <= 0) continue;
+          const n = nodes[i];
+          const nx = W * n.x, ny = H * n.y;
+          kCtx.save();
+          kCtx.globalAlpha = t;
+          // Glow
+          const grd = kCtx.createRadialGradient(nx, ny, 0, nx, ny, n.r * 2);
+          grd.addColorStop(0, 'rgba(77,184,102,0.3)');
+          grd.addColorStop(1, 'transparent');
+          kCtx.beginPath();
+          kCtx.arc(nx, ny, n.r * 2, 0, Math.PI * 2);
+          kCtx.fillStyle = grd;
+          kCtx.fill();
+          // Circle
+          kCtx.beginPath();
+          kCtx.arc(nx, ny, n.r, 0, Math.PI * 2);
+          kCtx.fillStyle = 'rgba(12,31,18,0.9)';
+          kCtx.fill();
+          kCtx.strokeStyle = n.color;
+          kCtx.lineWidth = 1.5;
+          kCtx.stroke();
+          // Label — inside circle
+          kCtx.fillStyle = 'rgba(255,255,255,0.9)';
+          kCtx.font = `bold 17px 'Outfit', sans-serif`;
+          kCtx.textAlign = 'center';
+          const hasSubLabel = !!n.sub;
+          kCtx.fillText(n.label, nx, hasSubLabel ? ny - 5 : ny + 6);
+          if (n.sub) {
+            kCtx.fillStyle = 'rgba(77,184,102,0.8)';
+            kCtx.font = `13px 'JetBrains Mono', monospace`;
+            kCtx.fillText(n.sub, nx, ny + 16);
+          }
+          kCtx.restore();
+        }
+
+        // Draw center node (always visible)
+        const grd2 = kCtx.createRadialGradient(cx, cy, 0, cx, cy, nodes[0].r * 3);
+        grd2.addColorStop(0, 'rgba(77,184,102,0.4)');
+        grd2.addColorStop(1, 'transparent');
+        kCtx.beginPath();
+        kCtx.arc(cx, cy, nodes[0].r * 3, 0, Math.PI * 2);
+        kCtx.fillStyle = grd2;
+        kCtx.fill();
+        // Rotating orbit ring
+        kCtx.save();
+        kCtx.translate(cx, cy);
+        kCtx.rotate(performance.now() * 0.0005);
+        kCtx.beginPath();
+        kCtx.arc(0, 0, nodes[0].r + 10, 0, Math.PI * 2);
+        kCtx.strokeStyle = 'rgba(77,184,102,0.2)';
+        kCtx.lineWidth = 1;
+        kCtx.setLineDash([3, 8]);
+        kCtx.stroke();
+        kCtx.setLineDash([]);
+        kCtx.restore();
+        kCtx.beginPath();
+        kCtx.arc(cx, cy, nodes[0].r, 0, Math.PI * 2);
+        kCtx.fillStyle = '#0c1f12';
+        kCtx.fill();
+        kCtx.strokeStyle = '#4db866';
+        kCtx.lineWidth = 2;
+        kCtx.stroke();
+        kCtx.fillStyle = 'white';
+        kCtx.font = `bold 26px 'Outfit', sans-serif`;
+        kCtx.textAlign = 'center';
+        kCtx.fillText('SustainAI', cx, cy - 8);
+        kCtx.font = `18px 'Outfit', sans-serif`;
+        kCtx.fillStyle = 'rgba(77,184,102,0.8)';
+        kCtx.fillText('Hub', cx, cy + 20);
+      }
+
+      // ── ACT 6: TYPEWRITER ──────────────────────────────────────────
+      const twLines = [
+        { el: $('tw1'), text: 'Cross-referencing 5,127 documents...' },
+        { el: $('tw2'), text: 'Fertilizer runoff pattern — 98% confidence' },
+        { el: $('tw3'), text: 'Heavy rain + surface nitrogen → aquifer contamination' },
+      ];
+      let twStarted = false;
+
+      function typewriterEffect() {
+        if (twStarted) return;
+        twStarted = true;
+        twLines.forEach((line, idx) => {
+          const delay = idx * 900;
+          let charIdx = 0;
+          setTimeout(function step() {
+            if (charIdx <= line.text.length) {
+              line.el.textContent = line.text.slice(0, charIdx);
+              charIdx++;
+              setTimeout(step, 28);
+            }
+          }, delay);
+        });
+      }
+
+      // ── ACT 8: CASCADE ─────────────────────────────────────────────
+      let cascadeStarted = false;
+
+      function startCascade() {
+        if (cascadeStarted) return;
+        cascadeStarted = true;
+        const steps = [
+          { step: 'cs1', conn: 'cc1', node: 'cn2', delay: 0 },
+          { step: 'cs2', conn: 'cc2', node: 'cn3', delay: 400 },
+          { step: 'cs3', conn: 'cc3', node: 'cn4', delay: 900 },
+          { step: 'cs4', conn: null, node: null, delay: 1500 },
+        ];
+        steps.forEach((s, i) => {
+          setTimeout(() => {
+            $(s.step).classList.add('visible');
+            if (s.conn) $(s.conn).classList.add('visible');
+            if (s.node) $(s.node).classList.add('lit');
+          }, s.delay);
+        });
+        setTimeout(() => {
+          $('bigCheck').classList.add('visible');
+        }, 2200);
+      }
+
+      // ── ACT 10: WORD REVEAL ────────────────────────────────────────
+      let wordsRevealed = false;
+
+      function revealWords() {
+        if (wordsRevealed) return;
+        wordsRevealed = true;
+        const words = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8', 'w9'];
+        words.forEach((id, i) => {
+          setTimeout(() => {
+            const el = $(id);
+            if (el) el.classList.add('visible');
+          }, i * 160);
+        });
+        setTimeout(() => {
+          $('w6strike').classList.add('visible');
+        }, words.length * 160 + 200);
+      }
+
+      // ── SCROLL-DRIVEN TRIGGERS ─────────────────────────────────────
+      const act4El = $('act4');
+      const act5El = $('act5');
+      const act6El = $('act6');
+      const act8El = $('act8');
+      const act10El = $('act10');
+
+      function isInView(el, threshold = 0.4) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight * threshold && rect.bottom > 0;
+      }
+
+      function getActProgress(el) {
+        const rect = el.getBoundingClientRect();
+        const h = el.offsetHeight;
+        const entered = -rect.top;
+        return Math.max(0, Math.min(1, entered / h));
+      }
+
+      // ── NITROGEN PARTICLES ─────────────────────────────────────────
+      function initNitrogenParticles() {
+        const group = $('nParticles');
+        if (!group || group.children.length > 0) return;
+        for (let i = 0; i < 8; i++) {
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          const startX = 100 + i * 50;
+          const dur = 3 + Math.random() * 2;
+          circle.setAttribute('cx', startX);
+          circle.setAttribute('cy', 180 + Math.random() * 20);
+          circle.setAttribute('r', 4 + Math.random() * 2);
+          circle.setAttribute('fill', '#b8860b');
+          circle.setAttribute('opacity', '0.75');
+          const anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
+          anim.setAttribute('attributeName', 'transform');
+          anim.setAttribute('type', 'translate');
+          anim.setAttribute('values', `0,0; ${(Math.random() - 0.5) * 60},${200 + Math.random() * 100}`);
+          anim.setAttribute('dur', dur + 's');
+          anim.setAttribute('repeatCount', 'indefinite');
+          anim.setAttribute('begin', (Math.random() * dur) + 's');
+          const animOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+          animOpacity.setAttribute('attributeName', 'opacity');
+          animOpacity.setAttribute('values', '0.75;0.1;0');
+          animOpacity.setAttribute('dur', dur + 's');
+          animOpacity.setAttribute('repeatCount', 'indefinite');
+          animOpacity.setAttribute('begin', (Math.random() * dur) + 's');
+          circle.appendChild(anim);
+          circle.appendChild(animOpacity);
+          group.appendChild(circle);
+        }
+      }
+
+      // Trigger on act3 visibility
+      const act3IO = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) initNitrogenParticles(); });
+      }, { threshold: 0.1 });
+      act3IO.observe($('act3'));
+
+      // ── MAIN LOOP ─────────────────────────────────────────────────
+      let lastScrollY = 0;
+
+      function onScroll() {
+        scrollY = window.scrollY;
+        if (!ticking) {
+          requestAnimationFrame(frame);
+          ticking = true;
+        }
+      }
+
+      function frame(t) {
+        ticking = false;
+        updateProgress();
+        updateTimeline();
+        updateNav();
+
+        // Act 4 gauge
+        if (isInView(act4El, 0.5)) animateGauge();
+
+        // Act 6 graph progress — trigger from first entry into viewport
+        if (isInView(act6El, 1.0)) {
+          const rect6 = act6El.getBoundingClientRect();
+          const entered6 = window.innerHeight - rect6.top;
+          const total6 = window.innerHeight + act6El.offsetHeight;
+          const rawP = Math.max(0, Math.min(1, entered6 / total6));
+          graphProgress = Math.min(1, rawP * 3.0);
+          drawGraph(graphProgress);
+          typewriterEffect();
+        }
+
+        // Act 8 cascade
+        if (isInView(act8El, 0.5)) startCascade();
+
+        // Act 10 words
+        if (isInView(act10El, 0.6)) {
+          revealWords();
+          // Trigger strikethrough after words are revealed
+          setTimeout(() => {
+            const strikeEl = $('w6strike');
+            if (strikeEl) strikeEl.classList.add('active-strike');
+          }, 10 * 160 + 400);
+        }
+
+        // Star canvas update
+        drawStars(t);
+        drawFF(t);
+
+        requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      requestAnimationFrame(frame);
+
+      // ── PHONE VIBRATE ON ACT 7 ────────────────────────────────────
+      const act7IO = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            setTimeout(() => {
+              const phone = $('phoneMockup');
+              phone.classList.add('vibrate');
+              setTimeout(() => phone.classList.remove('vibrate'), 600);
+            }, 600);
+          }
+        });
+      }, { threshold: 0.5 });
+      act7IO.observe($('act7'));
+
+      // ── ROOSTER WEATHERVANE ────────────────────────────────────────
+      const rooster = $('roosterVane');
+      if (rooster) {
+        let angle = 0, dir = 1;
+        setInterval(() => {
+          angle += dir * (0.5 + Math.random() * 0.3);
+          if (Math.abs(angle) > 25) dir *= -1;
+          rooster.setAttribute('transform', `translate(250, 280) rotate(${angle}, 0, -20)`);
+        }, 80);
+      }
+
+      // ── FARMHOUSE WINDOW LIGHT ─────────────────────────────────────
+      const farmWindow = $('farmWindow');
+      if (farmWindow) {
+        const act2IO = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              farmWindow.style.transition = 'opacity 2s ease';
+              farmWindow.style.opacity = '0.7';
+            }
+          });
+        }, { threshold: 0.3 });
+        act2IO.observe($('act2'));
+      }
+
+      // Knowledge graph continuous animation
+      function graphLoop(t) {
+        if (graphProgress > 0) drawGraph(graphProgress);
+        requestAnimationFrame(graphLoop);
+      }
+      requestAnimationFrame(graphLoop);
+
+    })();
+  </script>
+</body>
+
+</html>
