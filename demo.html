@@ -147,17 +147,17 @@
         </div>
         <div class="scenario-cards">
           <button class="scenario-btn" id="scenario1Btn" data-scenario="1">
-            <span class="scenario-icon scenario-icon-red">⚠</span>
+            <span class="scenario-icon scenario-icon-red"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg></span>
             <span class="scenario-title">Contamination Event</span>
             <span class="scenario-desc">Conductivity spike + valve shutoff</span>
           </button>
           <button class="scenario-btn" id="scenario2Btn" data-scenario="2">
-            <span class="scenario-icon scenario-icon-amber">💧</span>
+            <span class="scenario-icon scenario-icon-amber"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg></span>
             <span class="scenario-title">Irrigation Decision</span>
             <span class="scenario-desc">Soil moisture critical + AI scheduling</span>
           </button>
           <button class="scenario-btn" id="scenario3Btn" data-scenario="3">
-            <span class="scenario-icon scenario-icon-gray">📡</span>
+            <span class="scenario-icon scenario-icon-gray"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="22" y1="2" y2="22"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c.44-.11.89-.2 1.34-.28"/><path d="M22 8.82a15 15 0 0 0-4.17-2.65"/><path d="M5 13a10 10 0 0 1 5.24-2.76"/><path d="M14.76 10.24A10 10 0 0 1 19 13"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg></span>
             <span class="scenario-title">Sensor Failure</span>
             <span class="scenario-desc">Node offline + data gap analysis</span>
           </button>
@@ -376,6 +376,9 @@
             </div>
             <div class="ai-chat-row">
               <input type="text" class="ai-chat-input" id="aiChatInput" placeholder="Ask SustainAI anything about your farm..." autocomplete="off">
+              <button class="ai-chat-mic" id="aiChatMic" aria-label="Voice input">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+              </button>
               <button class="ai-chat-send" id="aiChatSend" aria-label="Send">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </button>

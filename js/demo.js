@@ -747,13 +747,19 @@
 
   // ============ TOAST SYSTEM ============
   function showToast(type, title, message, duration = 5000) {
-    const icons = { critical: '🚨', warning: '⚠', success: '✓', info: 'ℹ' };
+    const icons = {
+      critical: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>',
+      warning: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>',
+      success: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>',
+      info: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>'
+    };
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
-      <div class="toast-content">
-        <span class="toast-icon">${icons[type] || '•'}</span>
-        <div class="toast-body">
+      <div class="toast-indicator toast-${type}">
+        <span class="toast-icon" style="display:flex;align-items:center;justify-content:center;">${icons[type] || '•'}</span>
+      </div>
+      <div class="toast-body">
           <div class="toast-title">${title}</div>
           <div class="toast-msg">${message}</div>
         </div>
@@ -1031,10 +1037,10 @@
     disableAllScenarios();
 
     buildTimeline([
-      { id: 'detect', name: 'Detection', icon: '🔍' },
-      { id: 'analyze', name: 'Analysis', icon: '🧠' },
-      { id: 'recommend', name: 'Recommend', icon: '💡' },
-      { id: 'action', name: 'Action', icon: '⚡' }
+      { id: 'detect', name: 'Detection', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>' },
+      { id: 'analyze', name: 'Analysis', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/></svg>' },
+      { id: 'recommend', name: 'Recommend', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>' },
+      { id: 'action', name: 'Action', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>' }
     ]);
     markTimelineStep('detect', 'active');
 
@@ -1150,10 +1156,10 @@
     disableAllScenarios();
 
     buildTimeline([
-      { id: 's2-detect', name: 'Soil Alert', icon: '💧' },
-      { id: 's2-analyze', name: 'Analysis', icon: '🧠' },
-      { id: 's2-weather', name: 'Forecast', icon: '🌤' },
-      { id: 's2-action', name: 'Decision', icon: '✅' }
+      { id: 's2-detect', name: 'Soil Alert', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>' },
+      { id: 's2-analyze', name: 'Analysis', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/></svg>' },
+      { id: 's2-weather', name: 'Forecast', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 8.765A6.002 6.002 0 0 0 4 11V14"/><path d="M11.993 13.522A4.996 4.996 0 0 1 20 17.5c0 1.38-.56 2.63-1.464 3.535"/><path d="M6 18h11"/></svg>' },
+      { id: 's2-action', name: 'Decision', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>' }
     ]);
     markTimelineStep('s2-detect', 'active');
 
@@ -1260,10 +1266,10 @@ Estimated cost: $240 · Yield protection value: ~$1,800.`;
     disableAllScenarios();
 
     buildTimeline([
-      { id: 's3-detect', name: 'Node Offline', icon: '📡' },
-      { id: 's3-analyze', name: 'Data Gap', icon: '🧠' },
-      { id: 's3-cross', name: 'Cross-Check', icon: '🔗' },
-      { id: 's3-action', name: 'Response', icon: '🔧' }
+      { id: 's3-detect', name: 'Signal Lost', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" x2="22" y1="2" y2="22"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c.44-.11.89-.2 1.34-.28"/><path d="M22 8.82a15 15 0 0 0-4.17-2.65"/><path d="M5 13a10 10 0 0 1 5.24-2.76"/><path d="M14.76 10.24A10 10 0 0 1 19 13"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>' },
+      { id: 's3-analyze', name: 'Diagnosis', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>' },
+      { id: 's3-mesh', name: 'Mesh Reroute', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>' },
+      { id: 's3-action', name: 'Resolution', icon: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m11.5 5.5.9-.9c1.2-1.2 3.1-1.2 4.2 0l.9.9c1.2 1.2 1.2 3.1 0 4.2l-.9.9c.7.3 1.4.7 1.9 1.4 1 1.5 1 3.5 0 5L15 20.5c-1.5 1-3.5 1-5 0-1.2-.8-1.5-2.2-1-3.5M6.5 18H5L1.5 21.5l1 1L6 19v-1.5M10.8 14.8l2.4-2.4"/></svg>' }
     ]);
     markTimelineStep('s3-detect', 'active');
 
