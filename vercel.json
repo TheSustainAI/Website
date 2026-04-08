@@ -13,6 +13,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "story.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "story2.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "css/**",
       "use": "@vercel/static"
     },
@@ -33,6 +41,14 @@
     {
       "source": "/demo",
       "destination": "/demo.html"
+    },
+    {
+      "source": "/story",
+      "destination": "/story.html"
+    },
+    {
+      "source": "/story2",
+      "destination": "/story2.html"
     }
   ],
   "headers": [
