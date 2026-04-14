@@ -61,10 +61,18 @@ async def serve_story2():
 
 
 @app.get("/elevation_video.mp4", include_in_schema=False)
-async def serve_video():
+async def serve_video_mp4():
     return FileResponse(
         os.path.join(BASE_DIR, "elevation_video.mp4"),
         media_type="video/mp4",
+    )
+
+
+@app.get("/elevation_video.webm", include_in_schema=False)
+async def serve_video_webm():
+    return FileResponse(
+        os.path.join(BASE_DIR, "elevation_video.webm"),
+        media_type="video/webm",
     )
 
 
@@ -102,7 +110,6 @@ async def health_check():
 async def submit_contact(payload: ContactRequest):
     try:
         submitted_at = datetime.now(timezone.utc).strftime("%B %d, %Y at %I:%M %p UTC")
-        org_line = f"Organization: {payload.organization}\n" if payload.organization else ""
 
         # Build email content
         email_html = f"""
