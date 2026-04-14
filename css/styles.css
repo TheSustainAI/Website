@@ -269,16 +269,79 @@ button {
   right: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: rgba(245, 251, 246, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+  transition: border-color 0.4s var(--ease-out), background 0.4s var(--ease-out),
+              backdrop-filter 0.4s var(--ease-out);
 }
 
+/* Over video: logo + links go white */
+.nav__logo {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.nav__logo svg circle {
+  fill: rgba(255, 255, 255, 0.1);
+  stroke: rgba(255, 255, 255, 0.7);
+}
+
+.nav__logo svg path {
+  stroke: rgba(255, 255, 255, 0.9);
+}
+
+.nav__logo svg circle:last-child {
+  fill: var(--color-accent);
+}
+
+.nav__link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.nav__link:hover {
+  color: #ffffff;
+}
+
+.nav__hamburger span {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* After scroll: restore green-on-light style */
 .nav--scrolled {
   border-bottom-color: var(--color-border);
-  background: rgba(245, 251, 246, 0.95);
+  background: rgba(245, 251, 246, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav--scrolled .nav__logo {
+  color: var(--color-darkest);
+}
+
+.nav--scrolled .nav__logo svg circle {
+  fill: rgba(42, 92, 56, 0.08);
+  stroke: #2a5c38;
+}
+
+.nav--scrolled .nav__logo svg path {
+  stroke: #2a5c38;
+}
+
+.nav--scrolled .nav__logo svg circle:last-child {
+  fill: var(--color-accent);
+}
+
+.nav--scrolled .nav__link {
+  color: var(--color-text-muted);
+}
+
+.nav--scrolled .nav__link:hover {
+  color: var(--color-darkest);
+}
+
+.nav--scrolled .nav__hamburger span {
+  background: var(--color-darkest);
 }
 
 .nav__inner {
@@ -298,7 +361,8 @@ button {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-lg);
-  color: var(--color-darkest);
+  /* color set dynamically via scroll state above */
+  transition: color 0.4s var(--ease-out);
 }
 
 .nav__logo svg {
@@ -315,13 +379,8 @@ button {
 .nav__link {
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--color-text-muted);
   transition: color var(--transition-interactive);
   position: relative;
-}
-
-.nav__link:hover {
-  color: var(--color-darkest);
 }
 
 .nav__link::after {
@@ -367,9 +426,8 @@ button {
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--color-darkest);
   border-radius: 2px;
-  transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+  transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out), background 0.4s var(--ease-out);
 }
 
 .nav__hamburger.active span:nth-child(1) {
@@ -438,20 +496,87 @@ button {
   padding-top: var(--nav-height);
 }
 
-.hero__canvas {
+/* Video background */
+.hero__video {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
   z-index: 0;
+}
+
+/* Dark gradient overlay for text readability */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8, 20, 12, 0.55) 0%, transparent 100%),
+    linear-gradient(160deg, rgba(8, 20, 12, 0.68) 0%, rgba(12, 31, 18, 0.48) 50%, rgba(8, 20, 12, 0.72) 100%);
+}
+
+/* Sound toggle */
+.hero__sound-toggle {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-interactive), border-color var(--transition-interactive),
+              transform var(--transition-interactive);
+  opacity: 0;
+  animation: heroContentIn 0.6s var(--ease-out) 2.5s forwards;
+}
+
+.hero__sound-toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.08);
+}
+
+.hero__sound-icon--on {
+  display: none;
+}
+
+.hero__sound-toggle.unmuted .hero__sound-icon--muted {
+  display: none;
+}
+
+.hero__sound-toggle.unmuted .hero__sound-icon--on {
+  display: block;
 }
 
 .hero__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 900px;
   padding: var(--space-8) var(--space-6);
+  opacity: 0;
+  animation: heroContentIn 1s var(--ease-out) 1.5s forwards;
+}
+
+@keyframes heroContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero__headline {
@@ -459,19 +584,21 @@ button {
   font-size: var(--text-hero);
   font-weight: 700;
   font-style: italic;
-  color: var(--color-darkest);
+  color: #ffffff;
   line-height: 1.0;
   margin-bottom: var(--space-6);
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 8px 40px rgba(0,0,0,0.35);
 }
 
 .hero__sub {
   font-size: var(--text-lg);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.92);
   max-width: 640px;
   margin: 0 auto var(--space-8);
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.45);
 }
 
 .hero__ctas {
@@ -561,7 +688,7 @@ button {
   gap: var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-text-faint);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
@@ -572,6 +699,21 @@ button {
   border-radius: 50%;
   background: var(--color-accent);
   flex-shrink: 0;
+}
+
+/* Light secondary button — for use on dark/video backgrounds */
+.btn--secondary-light {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn--secondary-light:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
 }
 
 /* ============================================================

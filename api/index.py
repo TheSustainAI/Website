@@ -60,6 +60,14 @@ async def serve_story2():
     return FileResponse(os.path.join(BASE_DIR, "story2.html"))
 
 
+@app.get("/elevation_video.mp4", include_in_schema=False)
+async def serve_video():
+    return FileResponse(
+        os.path.join(BASE_DIR, "elevation_video.mp4"),
+        media_type="video/mp4",
+    )
+
+
 # ── Data models ─────────────────────────────────────────────
 class ContactRequest(BaseModel):
     name: str = Field(..., min_length=1, max_length=200)

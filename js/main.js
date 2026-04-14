@@ -6,6 +6,24 @@
 (function () {
   'use strict';
 
+  // --- Hero video: play once, hold last frame + sound toggle ---
+  const heroVideo = document.getElementById('heroVideo');
+  const heroSoundToggle = document.getElementById('heroSoundToggle');
+
+  if (heroVideo) {
+    heroVideo.addEventListener('ended', () => {
+      heroVideo.pause();
+    });
+  }
+
+  if (heroVideo && heroSoundToggle) {
+    heroSoundToggle.addEventListener('click', () => {
+      heroVideo.muted = !heroVideo.muted;
+      heroSoundToggle.classList.toggle('unmuted', !heroVideo.muted);
+      heroSoundToggle.setAttribute('aria-label', heroVideo.muted ? 'Unmute video' : 'Mute video');
+    });
+  }
+
   // --- Reduced motion check ---
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
