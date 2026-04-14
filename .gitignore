@@ -35,5 +35,5 @@ env/
 *.log
 npm-debug.log*
 
-# Video files (large — store separately if needed)
-# elevation_video.mp4
+# Original/backup video files
+elevation_video_original.mp4
