@@ -20,7 +20,7 @@ Website/
 ├── js/
 │   ├── main.js           # Main site JS (animations, forms, modals)
 │   └── demo.js           # Demo dashboard logic (simulations, charts)
-├── images/               # Team photos (Deepak, Yingling, Nahed, etc.)
+├── images/               # Team photos (Deepak, Yingling, Alexey, Ben, Ramesh, Matt)
 ├── New/                  # Backup/dev directory — do not touch unless asked
 ├── index.html            # Main marketing site (856 lines)
 ├── demo.html             # Interactive product dashboard demo (491 lines)
